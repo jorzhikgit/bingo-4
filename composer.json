@@ -11,6 +11,8 @@
 	"require-dev": {
 		"way/generators": "2.6.1",
 		"fzaninotto/faker": "v1.4.0",
+		"mockery/mockery": "~0.9",
+        "phpunit/phpunit": "~4.0",
 		"doctrine/dbal": "~2.3"
 	},
 	"autoload": {
@@ -26,7 +28,7 @@
 			"app/helpers.php"
 		],
 		"psr-4": {
-			
+			"SedpMis\\Bingo\\": "src/"
 		}
 	},
 	"scripts": {
