@@ -2,9 +2,11 @@
 
 namespace SedpMis\Bingo\Models;
 
-class Card extends BaseModel
+class Card extends Pattern
 {
     const NUM_DELIM = ',';
+
+    protected $fillable = ['b', 'i', 'n', 'g', 'o'];
 
     public static function columns()
     {
