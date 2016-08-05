@@ -11,3 +11,4 @@
 |
 */
 
+Artisan::resolve('SedpMis\Bingo\Commands\BingoMakeCardsCommand');

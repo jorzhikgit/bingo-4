@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.2.11",
 		"laracasts/utilities": "1.0.1",
-		"vlucas/phpdotenv": "^2.3"
+		"vlucas/phpdotenv": "^2.3",
+		"sedp-mis/lib": "dev-master"
 	},
 	"require-dev": {
 		"way/generators": "2.6.1",
@@ -25,7 +26,8 @@
 			"app/tests/TestCase.php"
 		],
 		"files": [
-			"app/helpers.php"
+			"app/helpers.php",
+			"src/helpers/path.php"
 		],
 		"psr-4": {
 			"SedpMis\\Bingo\\": "src/"
