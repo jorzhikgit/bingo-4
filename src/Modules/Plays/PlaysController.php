@@ -8,7 +8,14 @@ class PlaysController extends \BaseController
 {
     public function index()
     {
-        return Play::paginate();
+        $q = Play::query();
+
+        if ($status = \Input::get('status')) {
+            $q->where('status', $status);
+        }
+
+
+        return $q->paginate();
     }
 
     public function show($id)
