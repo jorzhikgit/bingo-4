@@ -18,7 +18,7 @@ class Card extends BaseModel
 
     public function arrayNumbers($column)
     {
-        return explode(static::NUM_DELIM, $this->{$column});
+        return explode(static::NUM_DELIM, $this->attributes[$column]);
     }
 
     public function allNumbers()
