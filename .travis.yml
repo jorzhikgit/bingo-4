@@ -11,6 +11,7 @@ services:
   - mysql
 
 before_script: 
+  - php write_env.php
   - composer install
   - mysql -u root -e "CREATE USER 'homestead'@'localhost' IDENTIFIED BY 'secret'; GRANT ALL PRIVILEGES ON * . * TO 'homestead'@'localhost'; FLUSH PRIVILEGES;"
   
