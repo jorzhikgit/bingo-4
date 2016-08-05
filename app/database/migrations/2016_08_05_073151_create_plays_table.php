@@ -16,6 +16,7 @@ class CreatePlaysTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('numbers')->comment('Picked or drawn numbers. Comma separated numbers');
+			$table->enum('status', ['o', 'c'])->default('o')->comment('Open, Closed');
 			$table->timestamps();
 		});
 	}
