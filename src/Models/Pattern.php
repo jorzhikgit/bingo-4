@@ -4,7 +4,7 @@ namespace SedpMis\Bingo\Models;
 
 class Pattern extends BaseModel
 {
-    protected $positions;
+    protected $fillable = ['plots'];
 
     public function __construct($positions)
     {

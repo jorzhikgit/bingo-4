@@ -4,6 +4,8 @@ namespace SedpMis\Bingo\Models;
 
 class Card extends BaseModel
 {
+    const NUM_DELIM = ',';
+
     public static function columns()
     {
         return ['b', 'i', 'n', 'g', 'o'];
@@ -16,7 +18,7 @@ class Card extends BaseModel
 
     public function arrayNumbers($column)
     {
-        return explode(' ', $this->{$column});
+        return explode(static::NUM_DELIM, $this->{$column});
     }
 
     public function allNumbers()
@@ -32,6 +34,6 @@ class Card extends BaseModel
 
     public function setColumn($column, $numbers)
     {
-        $this->{$column} = join(' ', $numbers);
+        $this->{$column} = join(static::NUM_DELIM, $numbers);
     }
 }
