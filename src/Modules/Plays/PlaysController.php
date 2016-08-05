@@ -14,8 +14,7 @@ class PlaysController extends \BaseController
             $q->where('status', $status);
         }
 
-
-        return $q->paginate();
+        return $q->paginate(\Input::get('per_page', 15));
     }
 
     public function show($id)
