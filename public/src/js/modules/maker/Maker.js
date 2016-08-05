@@ -5,12 +5,12 @@ define(['app', 'angular', 'html2canvas', 'canvas2image'], function(app, angular,
         '$scope',
         '$timeout',
         '$interval',
-        '$stateParams',
         'commonService',
+        'Restangular',
         'GLOBAL',
         
-        function($scope, $timeout, $interval, Common, GLOBAL) {
-            var getCanvas; // global variable
+        function($scope, $timeout, $interval, Common, Restangular, GLOBAL) {
+            var cardsToMake = 0, workingPage = 1, totalPage = 0, cardsMade = 0;
 
             var saveCard = function (filename) {
                 var element = $("#bingo"); // global variable
@@ -25,9 +25,9 @@ define(['app', 'angular', 'html2canvas', 'canvas2image'], function(app, angular,
                      },
                      taintTest: false
                  });
-
-                $timeout.cancel(t);
             };
+
+            $scope.isMakingCard = false;
 
             $scope.bingoLetters = {
                 b: ["S"],
@@ -37,64 +37,59 @@ define(['app', 'angular', 'html2canvas', 'canvas2image'], function(app, angular,
                 o: ["I", "nc."]
             };
 
-            $scope.selected = {
-                b: [0, 0, 0, 0, 1],
-                i: [0, 0, 0, 0, 1],
-                n: [0, 0, 0, 0, 1],
-                g: [0, 0, 0, 0, 1],
-                o: [0, 0, 0, 0, 1]
+            var getCards = function () {
+                Restangular.one('cards').get({page: workingPage}).then(
+                    function (res) {
+                        $scope.bingos = res.data;
+                        cardsToMake = res.total;
+
+                        if (workingPage > 1) {
+                            $scope.start();
+                        }
+
+                        workingPage++;
+
+                        if (!totalPage) {
+                            totalPage = res.last_page;
+                        }
+                    }
+                );
             };
 
-            $scope.bingos = [
-                {
-                    id: "00001",
-                    b: [1, 2, 3, 4, 5],
-                    i: [16, 17, 18, 19, 20],
-                    n: [31, 32, 33, 34, 35],
-                    g: [46, 47, 48, 49, 50],
-                    o: [61, 62, 63, 64, 65]
-                }, {
-                    id: "00002",
-                    b: [5, 2, 3, 4, 1],
-                    i: [20, 17, 18, 19, 15],
-                    n: [35, 32, 33, 34, 31],
-                    g: [50, 47, 48, 49, 46],
-                    o: [65, 62, 63, 64, 61]
+            $scope.startCaption = function () {
+                if ($scope.isMakingCard) {
+                    return 'Making Cards ' + (cardsMade + 1) + ' of ' + cardsToMake;
                 }
-            ];
+
+                return 'Start';
+            }
 
             $scope.start = function () {
+                $scope.isMakingCard = true;
                 var i = $interval(function () {
                     $scope.bingo = $scope.bingos.shift();
 
                     var t = $timeout(function () {
-                        saveCard($scope.bingo.id);    
+                        saveCard($scope.bingo.id);
+
+                        cardsMade++;
+                        
                         $timeout.cancel(t);
                     }, 500);
 
                     if (!$scope.bingos.length) {
+                        $scope.isMakingCard = false;
+                        
+                        if (workingPage <= totalPage) {
+                            getCards();
+                        }
+
                         $interval.cancel(i);
                     }
-                }, 2000);
+                }, 1500);
             };
 
-            $scope.previewImage = function () {
-                var element = $("#bingo"); // global variable
-                
-                html2canvas(element, {
-                 onrendered: function (canvas) {
-                        var a = document.createElement('a');
-                        // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
-                        a.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-                        a.download = 'somefilename.jpg';
-                        a.click();
-                        
-                        /*$("#previewImage").append(canvas);
-                        getCanvas = canvas;*/
-                     },
-                     taintTest: false
-                 });
-            };
+            getCards();
         }
     ]);
 });
