@@ -73,4 +73,6 @@ Route::group(['before' => 'auth'], function () {
 
     Route::resource('user', 'UserController', ['only' => ['index', 'store', 'update', 'destroy']]);
 
+    Route::get('cards', 'SedpMis\Bingo\Modules\Cards\CardsController@index');
+
 }); // End of Authenticated get
