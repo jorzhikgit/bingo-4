@@ -54,11 +54,18 @@ class BingoMakeCardsCommand extends Command
 
         $spaces = explode(',', $this->option('spaces'));
 
-        $cards = $this->cardMaker->make($this->argument('number'), $spaces);
+        DB::beginTransaction();
+
+        $cards = $this->cardMaker->make($n = $this->argument('number'), $spaces);
+
 
         $cards->each(function ($card) {
             $card->save();
         });
+
+        DB::commit();
+
+        $this->info("Successfully generated {$n} cards!");
     }
 
     /**
