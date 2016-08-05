@@ -30,7 +30,7 @@ class PlaysController extends \BaseController
 
     public function pickANumber($playId)
     {
-        $play = Play::findOrFail($id);
+        $play = Play::findOrFail($playId);
         $numbers = range(1, 75);
 
         $numbers = array_filter($numbers, function ($number) use ($play) {
