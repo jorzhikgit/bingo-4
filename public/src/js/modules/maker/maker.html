@@ -1,0 +1,60 @@
+<style>
+    td, th {
+        vertical-align: middle !important;
+        text-align: center !important;
+        width: 50px !important;
+        height: 50px !important;
+        background-color: white !important;
+    }
+
+    td {
+        font-weight: bolder;
+        font-size: 40px;
+    }
+
+    img {
+        width: 40px;
+        height: 45px;   
+    }
+
+    .badge {
+        border-radius: 0px;
+    }
+
+    td.card-number {
+        font-weight: normal;
+        font-size: 15px !important;
+        height: 15px !important;
+        text-align: right !important;
+        padding: 0 2px 0 0 !important;
+    }
+</style>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Card Maker
+        <small>Make a Bingo Cards</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a ui-sref="app"><i class="fa fa-home"></i> Home</a></li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content no-outline" tabindex="-1">
+	<div class="row">
+        <div class="col-md-4">
+            <div id="bingo">
+                <card numbers="bingo" letters="bingoLetters" selected="selected"></card>
+            </div>
+        </div>
+    </div> <!-- ./row -->
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <button class="btn btn-primary" ng-click="start()">Start</button>
+            <div id="previewImage"></div>
+        </div>  
+    </div>
+</section><!-- /.content -->
