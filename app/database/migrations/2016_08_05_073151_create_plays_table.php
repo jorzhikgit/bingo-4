@@ -15,7 +15,7 @@ class CreatePlaysTable extends Migration {
 		Schema::create('plays', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('draw_numbers')->comment('Comma separated numbers');
+			$table->string('numbers')->comment('Picked or drawn numbers. Comma separated numbers');
 			$table->timestamps();
 		});
 	}
