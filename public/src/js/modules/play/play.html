@@ -1,0 +1,178 @@
+<style type="text/css">
+#play{
+    border: none;
+    font-size: 22px;
+    height: 40px;
+    -webkit-appearance: none;
+    background: #fbfbfb;
+}
+
+.pattern-img, .bingo-ball-img {
+    margin: 0 auto;
+    max-width: 70%;
+    margin-bottom: 20px;
+}
+.bingo-ball-img {
+    height: 30%;
+    background: url(/images/bingo_ball_blank.png); 
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.pattern-img {
+    height: 200px;
+    width: 250px;
+}
+.drawed-balls .bingo-balls:first-child {
+    /*border: 1px solid green;*/
+    height: 120px;
+    width: 120px;
+    margin-top: -20px;
+}
+
+.drawed-balls .bingo-balls:first-child .drawed-column {
+    font-size: 2em;
+    padding-top: 18px;
+}
+.drawed-balls .bingo-balls:first-child .drawed-number {
+    font-size: 4em;
+    margin-top: -26px; 
+}
+
+.bingo-balls {
+    height: 100px; 
+    width: 100px;
+    margin: 10;
+}
+.latest-column {
+    font-size: 4em;
+    color: #000;
+    float: inherit;
+    padding-top: 18px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    font-weight: bolder;
+}
+.latest-number {
+    font-size: 6em;
+    margin-top: -48px;
+    color: #000;
+    font-weight: bolder;
+}
+
+.drawed-column {
+    font-size: 2em;
+    color: #000;
+    float: inherit;
+    padding-top: 9px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    font-weight: bolder;
+}
+.drawed-number {
+    font-size: 3.5em;
+    margin-top: -26px;
+    color: #000;
+    font-weight: bolder;
+}
+.letter-S {
+    background: url(/images/bingo_ball_blue.png); 
+}
+.letter-E {
+    background: url(/images/bingo_ball_green.png); 
+}
+.letter-D {
+    background: url(/images/bingo_ball_yellow.png); 
+}
+.letter-P {
+    background: url(/images/bingo_ball_orange.png); 
+}
+.letter-Inc {
+    background: url(/images/bingo_ball_violet.png); 
+}
+.letter-S, .letter-E, .letter-D, .letter-P, .letter-Inc {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+</style>
+
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="row">
+            <div class="col-md-8">
+                <select id="play" class="form-control">
+                    <option>SELECT PLAY</option>
+                </select>   
+            </div>
+        </div>
+    </section>
+
+<!-- Main content -->
+<section class="content no-outline" tabindex="-1">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="box box-primary">
+                        <div class="box-body box-profile">
+                            <div class="bingo-ball-img img-responsive img-circle">
+                                <center ng-show="latestDraw.column && latestDraw.number">
+                                    <p class="latest-column">
+                                        {{latestDraw.column}}
+                                    </p>
+                                    <p class="latest-number">
+                                        {{latestDraw.number}}
+                                    </p>
+                                </center>
+                            </div>
+
+                            <button class="btn btn-primary btn-block" ng-click="drawNumber()">
+                                Draw Number
+                            </button>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                          <h3 class="box-title">Pattern</h3>
+                        </div>
+                        <div class="box-body box-profile">
+                            <!-- Pattern Image -->
+                            <img class="pattern-img img-responsive" src="/images/ns.gif">
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Drawed Number</h3>
+                    </div>
+                    <div class="box-body box-profile">
+                        <div class=" drawed-balls row">
+                            <div class="bingo-balls {{(n.column)? 'letter-'+n.column : ''}} col-md-2" ng-repeat="n in drawedNumbers">
+                                <center ng-show="latestDraw.column && latestDraw.number">
+                                    <p class="drawed-column">
+                                        {{n.column}}
+                                    </p>
+                                    <p class="drawed-number">
+                                        {{n.number}}
+                                    </p>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- /.content -->
+
+<!-- composer update -->
+<!-- pa migrate --seed -->
+<!-- pa bingo:make_cards #number -->
