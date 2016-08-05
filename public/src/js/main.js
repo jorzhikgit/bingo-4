@@ -42,7 +42,9 @@ require.config({
 		uploadVideo: 	'../../vendor/jquery-fileupload/jquery.fileupload-video.min',
 		uploadWidget:   '../../vendor/jquery-fileupload/vendor/jquery.ui.widget.min',
 		
-		html2canvas:   '../../vendor/html2canvas/html2canvas',
+		html2canvas:    '../../vendor/html2canvas/html2canvas',
+		canvas2image:   '../../vendor/canvas2image/canvas2image',
+		text:           '../../vendor/requirejs/require-text',
 
 	},
 	shim: {
@@ -77,6 +79,10 @@ require.config({
 		'html2canvas': {
             exports: 'html2canvas',
             deps: ['jquery']
+        },
+        'canvas2image': {
+        	exports: 'Canvas2Image',
+        	deps: ['html2canvas']
         },
 
 	},
