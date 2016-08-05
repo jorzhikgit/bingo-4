@@ -1,0 +1,51 @@
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Window Configuration
+            <small>add, edit, delete window information</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a ui-sref="app"><i class="fa fa-home"></i> Home</a></li>
+            <li class="active">Windows</li>
+            <!-- <li><a href="#">Examples</a></li>
+            <li class="active">Blank page</li> -->
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content no-outline" tabindex="-1">
+        
+        <div jwerty="ALT+A" key-event="add()"  key-name="windows.add" key-bind=".content"></div>
+        <div jwerty="ALT+E" key-event="edit()" key-name="windows.edit" key-bind=".content"></div>
+        <div jwerty="ALT+S" key-event="save()" key-name="windows.save" key-bind=".content"></div>
+        <div jwerty="CTRL+ALT+D" key-event="delete()" key-name="windows.delete" key-bind=".content"></div>
+
+        <div class="row">
+            <!-- jwerty shortcuts -->
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-cog blue"></i> Window List</h3>
+                    </div><!-- /.box-header -->
+
+                        <div class="box-body">
+                            
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div jqgrid
+                                        config="grid.config"
+                                        tb="grid.tb"
+                                        data="grid.data"
+                                        api="grid.api"
+                                        selection="grid.selection"
+                                        vapi="jqGrid"
+                                    ></div>
+                                </div>
+                            </div>
+                        </div><!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </section><!-- /.content -->
+
+    <div ng-repeat="template in templates" ng-include="template"></div>

@@ -1,0 +1,125 @@
+/* Modal */
+body.modal-open {
+  margin-right: 0;
+}
+
+.modal {
+  display: block;
+  overflow: hidden;
+  outline: none;
+}
+
+.modal-content {
+  border-radius: 0;
+}
+
+.modal-header {
+  cursor: move;
+  padding: 6px 0 8px 10px;
+  background-color: #478fca;
+  border-radius: 0;
+}
+
+.modal-header h4 {
+  margin: 0;
+}
+
+.modal-body {
+  padding: 10px 10px 0px 20px;
+}
+
+.modal-footer {
+  padding: 12px 20px 0px;
+  margin-top: 15px;
+}
+
+/* Confirmation Dialog Size */
+@media (min-width: 768px) {
+  .ask-sm .modal-dialog{
+    width: 60%
+  }
+}
+
+// Medium (md)
+@media (min-width: 992px) {
+  .ask-md .modal-dialog{
+    width: 30%
+  }
+}
+
+// Large (lg)
+@media (min-width: 1200px) {
+  .ask-lg .modal-dialog{
+    width: 20%
+  }
+}
+.ask .modal-dialog {
+  //width: 30%;
+  padding-top: 10%;
+}
+
+.ask .modal-header {
+  padding: 1px 8px;
+}
+
+.ask .modal-body {
+  padding: 20px;
+}
+
+.ask .modal-footer {
+  padding-right: 10px;
+}
+
+.ask .modal-footer {
+  padding: 7px 10px 7px;
+}
+
+/* Full Dialog Size */
+.full .modal-dialog {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  margin-top: 0px;
+
+}
+
+.full .modal-content {
+  height: 100%;
+}
+
+.full .modal-footer {
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+  padding: 6px 20px 6px;
+}
+
+/** Full Dialog Transparent */
+.full-transparent .modal-dialog {
+  width: 100%;
+  height: 100%;
+  margin-top: 0px;
+}
+
+.full-transparent .modal-content {
+  height: 100%;
+  background-color: transparent;
+}
+
+.full-transparent .modal-footer {
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+  padding: 6px 20px 6px;
+}
+
+/* Generate Incremental Properties */
+
+.generatemodal(@name, @prop, @end, @start, @increment) when (@start <= @end) {
+  .@{name}-@{start} .modal-dialog {
+    @{prop}: (0% + @start);
+  }
+  .generatemodal(@name, @prop, @end, (@start + @increment), @increment);
+}
+/* Generate class modal-width-5, .modal-width-10, .modal-width-15, etc.. */
+ .generatemodal(modal-width, width, 100, 20, 5); 

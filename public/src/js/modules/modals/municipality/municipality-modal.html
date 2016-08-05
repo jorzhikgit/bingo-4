@@ -1,0 +1,46 @@
+<script type="text/ng-template" id="municipality-modal.html">
+	<div id="municipality-modal" tabindex="-1">
+		
+		<div jwerty="ALT+S" key-event="save()" key-name="municipality.modal.save" key-bind="#municipality-modal"></div>
+		<div jwerty="ESC" key-event="cancel()" key-name="municipality.modal.cancel" key-bind="#municipality-modal"></div>
+
+		<form name="municipalityForm" novalidate ng-submit="save()">
+			<div class="modal-header">
+				<button type="button" class="close" ng-click="cancel()">&times;</button>
+			    <h4 class="white bigger">Municipality Details</h4>
+			</div>
+
+			<div class="modal-body">
+				<div class="row">
+		    		<div class="col-xs-11">
+                        <div class="form-group">
+                            <label for="province">Province</label>
+                            <select id="province" chosen="municipalities" ng-model="municipality.province_id" chosen-option="options.province" ng-options="province.id as province.pname for province in provinces" class="chosen-select" name="province" required data-placeholder="Select a Province">
+                                <option value=""></option>
+                            </select>
+
+                        </div>
+                    </div>
+		    	</div>
+
+				<div class="row" >
+		            <div class="col-xs-11">
+						<div class="form-group">
+							<i class="tooltips col-xs-12" ng-show="municipalityForm.pname.$dirty && municipalityForm.pname.$invalid"><span>Max of 255 characters</span></i>
+	                        <label for="pname">Name</label>
+	                        <input name="pname" type="text" class="form-control" id="pname" placeholder="Enter Municipality Name" ng-model="municipality.mname" required ng-maxlength=255>
+	                    </div>
+		    		</div>
+		    	</div>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm" id="btn-close" ng-click="cancel()" tabindex="-1"><i class="fa fa-ban bigger-140"></i> &nbsp;Cancel</button>
+				<button type="submit" class="btn btn-primary btn-sm" id="btn-ok" ng-disabled="municipalityForm.$invalid || ! municipalityForm.$dirty || state.saving">
+					<i class="fa fa-save bigger-140"></i> &nbsp;<u>S</u>ave
+				</button>
+			</div>
+
+		</form>
+	</div>
+</script>

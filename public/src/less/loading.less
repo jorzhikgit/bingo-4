@@ -1,0 +1,110 @@
+.loading-mixin {
+  background-color: #000;
+  border: none;
+  cursor: wait;
+  margin: 0px;
+  opacity: 0.2;
+  padding: 0px;
+  position: fixed;
+  width: 100%;
+  z-index: 6000;
+  overflow: hidden;
+}
+
+.loading-element-mixin {
+  z-index: 6011;
+  position: absolute;
+  padding: 0px;
+  margin: auto;
+  top: 43%;
+  text-align: center;
+  color: #000000;
+  border: none;
+  background-color: transparent;
+  cursor: wait;
+  overflow: hidden;
+}
+
+.loading-overlay {
+  .loading-mixin;
+  height: 100%;
+}
+
+.loading-overlay-component {
+  .loading-mixin;
+  height: 92%;
+}
+
+
+@media screen and (min-width: 992px) {
+  .loading-overlay-component {
+     margin-left: 220px;
+     padding-left: 220px;
+  }
+
+  .loading-overlay-component.collapse-left {
+     margin-left: 0px;
+  }
+}
+
+#main-loading>.loading-overlay {
+  margin: 0;
+}
+
+  
+@media (max-width: 768px) {
+  .loading-element {
+    .loading-element-mixin;
+    left: 40%;
+  }
+  .loading-element-component {
+    .loading-element-mixin;
+    left: 45%;
+  }
+}
+
+@media (min-width: 768px) {
+  .loading-element {
+    .loading-element-mixin;
+    left: 50%;
+  }
+  .loading-element-component {
+    .loading-element-mixin;
+    left: 55%;
+  }
+}
+
+
+
+.loading-element i, .loading-element-component i{
+  color: #ffb752;
+  font-size: 100px;
+}
+.loading-element p, .loading-element-component p {
+  color: #438eb9;
+  font-size: 15px;
+  font-weight: bolder;
+}
+
+.blocker .loading {
+  position: absolute;
+  top: 35%;
+  left: 45%;
+  //width: auto;
+  z-index: 101;
+  padding: 6px;
+  margin: 5px;
+  text-align: center;
+  font-weight: bold;
+  display: none;
+  border-width: 2px !important;
+  font-size: 11px;
+}
+
+.no-overflow {
+  overflow: hidden; 
+}
+
+.loading.ui-state-default.ui-state-active {
+  background-color: transparent !important;
+}

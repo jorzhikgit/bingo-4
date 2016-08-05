@@ -1,0 +1,189 @@
+/* Overrides */
+
+/* LTE */
+.main-content {
+	padding: 0 15px;
+}
+
+.right-side, .left-side {
+	min-height: 92%;
+}
+
+.wrapper {
+	min-height: 92%;
+}
+
+.img-rounded {
+  border-radius: 12%;
+}
+
+.user-panel > .image > img {
+  width: 198px;
+  height: 198px;
+}
+
+/* .btn:focus {
+  outline: #4D90FE;
+} */
+
+/* Close Button in Modal */
+.close {
+	margin-right: 10px;
+}
+
+.form-control {
+  -webkit-border-radius: 4px !important;
+  -moz-border-radius: 4px !important;
+  border-radius: 4px !important;
+  box-shadow: none;
+}
+
+.nav-tabs-custom a {
+  cursor: pointer;
+}
+
+.nav-tabs-custom > .nav-tabs > li.active a {
+ cursor: default;
+}
+
+// Remove border on element with tabindex
+.no-outline {
+	outline: none;
+}
+
+/* Date Picker */
+.datepicker table tr td.day {
+	&:hover, &.focused {
+		background: #f39c12;
+		color: #fff;
+	}
+}
+
+
+/* Bootstrap */
+.form-control {
+	color: #000;
+	&:active, &:focus {
+  		border: 1px solid #5897fb !important;
+  		.box-shadow;
+	}
+}
+
+
+/* Defined CSS */
+.uppercase {
+	text-transform: uppercase;
+}
+
+.space-10 {
+  max-height: 1px;
+  min-height: 1px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.space-7 {
+  max-height: 1px;
+  min-height: 1px;
+  overflow: hidden;
+  margin: 7px 0;
+}
+
+.center-text {
+  text-align: center;
+}
+
+/* Placeholder, so it will not be affected by .uppercase */
+::-webkit-input-placeholder {
+   text-transform: initial;
+}
+
+:-moz-placeholder { 
+   text-transform: initial;
+}
+
+::-moz-placeholder {  
+   text-transform: initial;
+}
+
+:-ms-input-placeholder { 
+   text-transform: initial;
+}
+
+.checkbox input[type="checkbox"] 
+{
+	margin-left: 0px;
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #BBB; 
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); */
+}
+
+/* Angular */
+.ng-hide { display: none!important; }
+
+.cssFade {
+    transition: 0.5s linear all;
+    opacity: 1;
+}
+.cssFade.ng-hide {
+    opacity: 0;
+}
+
+.photo.ng-hide-remove {
+    -webkit-animation: fadeOut .5s;
+    animation: fadeOut .5s;
+}
+ 
+/* .photo.ng-hide-add {
+    -webkit-animation: fadeIn .5s;
+    animation: fadeIn .5s;
+    //display: block !important;
+} */
+
+
+.align-center {
+    text-align: center;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 50%;
+}
+.btn-circle.btn-lg {
+  width: 145px;
+  height: 145px;
+  padding: 10px 16px;
+  font-size: 85px;
+  line-height: 1.33;
+ border-radius: 50%;
+}
+.btn-circle.btn-xl {
+  width: 290px;
+  height: 290px;
+  padding: 16px 16px;
+  font-size: 170px;
+  line-height: 1.39;
+   border-radius: 50%;
+}

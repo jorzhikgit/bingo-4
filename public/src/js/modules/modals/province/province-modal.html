@@ -1,0 +1,46 @@
+<script type="text/ng-template" id="province-modal.html">
+	<div id="province-modal" tabindex="-1">
+		
+		<div jwerty="ALT+S" key-event="save()" key-name="province.modal.save" key-bind="#province-modal"></div>
+		<div jwerty="ESC" key-event="cancel()" key-name="province.modal.cancel" key-bind="#province-modal"></div>
+
+		<form name="provinceForm" novalidate ng-submit="save()">
+			<div class="modal-header">
+				<button type="button" class="close" ng-click="cancel()">&times;</button>
+			    <h4 class="white bigger">Province Details</h4>
+			</div>
+
+			<div class="modal-body">
+				<div class="row">
+		    		<div class="col-xs-11">
+                        <div class="form-group">
+                            <label for="region">Region</label>
+                            <select id="region" chosen="regions" ng-model="province.region_id" chosen-option="options.region" ng-options="region.id as region.rname for region in regions" class="chosen-select" name="region" required data-placeholder="Select a Region">
+                                <option value=""></option>
+                            </select>
+
+                        </div>
+                    </div>
+		    	</div>
+
+				<div class="row" >
+		            <div class="col-xs-11">
+						<div class="form-group">
+							<i class="tooltips col-xs-12" ng-show="provinceForm.pname.$dirty && provinceForm.pname.$invalid"><span>Max of 255 characters</span></i>
+	                        <label for="pname">Name</label>
+	                        <input name="pname" type="text" class="form-control" id="pname" placeholder="Enter Province Name" ng-model="province.pname" required ng-maxlength=255>
+	                    </div>
+		    		</div>
+		    	</div>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm" id="btn-close" ng-click="cancel()" tabindex="-1"><i class="fa fa-ban bigger-140"></i> &nbsp;Cancel</button>
+				<button type="submit" class="btn btn-primary btn-sm" id="btn-ok" ng-disabled="provinceForm.$invalid || ! provinceForm.$dirty || state.saving">
+					<i class="fa fa-save bigger-140"></i> &nbsp;<u>S</u>ave
+				</button>
+			</div>
+
+		</form>
+	</div>
+</script>

@@ -1,0 +1,50 @@
+/* Blocking Element, use in jqGrid and blockerService */
+.locking {
+    color: #ffb752;
+    display: block;
+    left: 30%;
+    background-color: transparent;
+    border: none;
+    right: 30%;
+    z-index: 6000;
+}
+
+.locking-element {
+    color: #ffb752;
+    background-color: transparent;
+    border: none;
+}
+
+
+
+@media screen and (min-width: 992px) {
+    div.locker .lock {
+        .locking;
+        margin-top: 5%;
+    }
+
+    div.locker .lock-element {
+        .locking;
+        margin-top: 21px;
+
+        & i {
+            font-size: 15px
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    div.locker .lock {
+        .locking;
+        padding-top: 17%;
+    }
+
+    div.locker .lock-element {
+        .locking;
+        margin-top: 21px;
+
+        & i {
+            font-size: 15px
+        }
+    }
+}

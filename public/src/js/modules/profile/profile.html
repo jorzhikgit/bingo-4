@@ -1,0 +1,51 @@
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Profile Configuration
+            <small>change profile picture and password</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a ui-sref="app"><i class="fa fa-home"></i> Home</a></li>
+            <li class="active">Profile</li>
+            <!-- <li><a href="#">Examples</a></li>
+            <li class="active">Blank page</li> -->
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content no-outline" tabindex="-1">
+        
+        <div class="row">
+            <!-- jwerty shortcuts -->
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="well well-sm">
+                                    <div class="media">
+                                        <a class="thumbnail pull-left" href="#">
+                                            <img class="media-object" ng-src={{profile.picture}} image-loading="imageLoaded(0)" height="55" width="55">
+                                        </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">{{profile.display_name}}</h4>
+                                            <p><span class="label label-info">{{profile.username}}</span><!--  <span class="label label-warning">150 followers</span> --></p>
+                                            <p>
+                                                <a class="btn btn-xs btn-default" ng-click="uploadImage()"><span class="fa fa-picture-o"></span> Change Picture</a>
+                                                <a href="{{baseUrl+'change_password'}}" class="btn btn-xs btn-default"><span class="fa fa-key"></span> Change Password</a>
+                                                <!-- <a href="#" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-ban-circle"></span> Unfollow</a> -->
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </section><!-- /.content -->
+    
+    <div ng-repeat="template in templates" ng-include="template"></div>

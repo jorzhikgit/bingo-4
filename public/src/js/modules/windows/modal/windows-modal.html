@@ -1,0 +1,46 @@
+<script type="text/ng-template" id="windows-modal.html">
+	<div id="windows-modal" tabindex="-1">
+		
+		<div jwerty="ALT+S" key-event="save()" key-name="windows.modal.save" key-bind="#windows-modal"></div>
+		<div jwerty="ESC" key-event="cancel()" key-name="windows.modal.cancel" key-bind="#windows-modal"></div>
+
+		<form name="windowForm" novalidate ng-submit="save()">
+			<div class="modal-header">
+				<button type="button" class="close" ng-click="cancel()">&times;</button>
+			    <h4 class="white bigger">Window Details</h4>
+			</div>
+
+			<div class="modal-body">
+				<div class="row" >
+		            <div class="col-xs-7">
+						<div class="form-group">
+							<i class="tooltips col-xs-12" ng-show="windowForm.name.$dirty && windowForm.name.$invalid"><span>Max of 40 characters</span></i>
+	                        <label for="name">Name</label>
+	                        <input name="name" type="text" class="form-control" id="name" placeholder="Enter Window Name" ng-model="windows.name" required ng-maxlength=40>
+	                    </div>
+		    		</div>
+		    	</div>
+
+		    	<div class="row" >
+		            <!-- User -->
+                    <div class="col-xs-11">
+                        <div class="form-group">
+                            <label for="old_windows">User</label>
+                            <select id="old_windows" chosen="users" ng-model="windows.user_id" ng-options="user.id as user.display_name for user in users" class="chosen-select" name="user" required selected-text="windows.display_name">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+		    	</div>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm" id="btn-close" ng-click="cancel()" tabindex="-1"><i class="fa fa-ban bigger-140"></i> &nbsp;Cancel</button>
+				<button type="submit" class="btn btn-primary btn-sm" id="btn-ok" ng-disabled="windowForm.$invalid || ! windowForm.$dirty || state.saving">
+					<i class="fa fa-save bigger-140"></i> &nbsp;<u>S</u>ave
+				</button>
+			</div>
+
+		</form>
+	</div>
+</script>

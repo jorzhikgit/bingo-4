@@ -1,0 +1,71 @@
+.border {
+	border: 1px solid @borderColor;
+}
+.box-shadow {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3) !important;  
+}
+
+/* Colors */
+
+.white {
+  color: #ffffff !important;
+}
+.red {
+  color: #dd5a43 !important;
+}
+.light-red {
+  color: #ff7777 !important;
+}
+.blue {
+  color: #478fca !important;
+}
+.light-blue {
+  color: #93cbf9 !important;
+}
+.green {
+  color: #69aa46 !important;
+}
+.light-green {
+  color: #b0d877 !important;
+}
+.orange {
+  color: #ff892a !important;
+}
+.light-orange {
+  color: #fcac6f !important;
+}
+.orange2 {
+  color: #feb902 !important;
+}
+.purple {
+  color: #a069c3 !important;
+}
+.pink {
+  color: #c6699f !important;
+}
+.pink2 {
+  color: #d6487e !important;
+}
+.brown {
+  color: #a52a2a !important;
+}
+.grey {
+  color: #777777 !important;
+}
+.light-grey {
+  color: #bbbbbb !important;
+}
+
+/* Generate Incremental Properties */
+
+.generate(@name, @prop, @end, @start, @increment) when (@start <= @end) {
+  .@{name}-@{start} {
+    @{prop}: (0% + @start);
+  }
+  .generate(@name, @prop, @end, (@start + @increment), @increment);
+}
+
+.generate(bigger, font-size, 300, 100, 10);
+.generate(bigger, font-size, 300, 125, 50);
+.generate(smaller, font-size, 90, 20, 5);
+.generate(width, width, 100, 10, 10);

@@ -1,0 +1,35 @@
+/* form input.ng-valid.ng-dirty, form select.ng-valid.ng-dirty {
+    //border-color: #ccc;
+} */
+
+form input, form select, form select+div>a {
+    &.ng-invalid.ng-invalid-required {
+    	border-color: red;
+    	.box-shadow;
+    }
+}
+
+form select+div>a:active, form select+div>a:hover, form select+div>a:focus {
+    &.ng-invalid.ng-invalid-required, .ng-invalid.ng-invalid-required{
+        .box-shadow;
+    }
+}
+
+
+/* div.select2-container.ng-invalid.ng-invalid-required > a{
+    border-color: red;
+    .box-shadow;
+} */
+
+form input, form select {
+	&.ng-valid {
+    	border-color: #ccc !important;
+	}
+}
+
+form input[type="radio"] {
+	&.ng-invalid.ng-invalid-required {
+    	color: red;
+        box-shadow: 0px 0px 0px 1px #ff0000 !important;
+    }	
+}

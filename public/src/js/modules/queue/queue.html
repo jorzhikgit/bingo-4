@@ -1,0 +1,53 @@
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Number Assignment
+            <small>assign number to client</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a ui-sref="app"><i class="fa fa-home"></i> Home</a></li>
+            <li class="active">Number Assignment</li>
+            <!-- <li><a href="#">Examples</a></li>
+            <li class="active">Blank page</li> -->
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content no-outline" tabindex="-1">
+        
+        <div jwerty="up" key-event="up()"  key-name="queue.up" key-bind=".content"></div>
+        <div jwerty="down" key-event="down()" key-name="queue.down" key-bind=".content"></div>
+        <div jwerty="ALT+S" key-event="save()" key-name="queue.save" key-bind=".content"></div>
+        <div jwerty="CTRL+ALT+D" key-event="delete()" key-name="queue.delete" key-bind=".content"></div>
+        
+        <form name="queueForm" novalidate ng-submit="assign()">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="align-center">
+                        <button type="button" class="btn btn btn-info" ng-click="up()"><i class="fa fa-arrow-up"></i></button>
+                        <button type="button" class="btn btn btn-warning" ng-click="down()"><i class="fa fa-arrow-down"></i></button>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="align-center">
+                        <span class="badge btn-circle btn-lg bg-green"><i class="text-yellow fa fa-spinner fa-spin cssFade" ng-hide="! info.loading" style="margin-top: 25px; font-size: 60px"></i><strong ng-hide="info.loading" class="cssFade">{{ queue.number }}</strong></span>
+                        
+                    </p>
+                </div>
+            </div>
+
+            <div class="row" ng-hide="info.loading">
+                <div class="col-md-12">
+                    <p class="align-center">
+                        <button id="btn-assign" class="btn btn btn-primary" ng-disabled="state.saving || info.loading"><i class="fa fa-pencil"></i> <strong>Assign</strong></button>
+                    </p>
+                </div>
+            </div>
+        </form>
+            
+    </section><!-- /.content -->
+
+    <div ng-repeat="template in templates" ng-include="template"></div>

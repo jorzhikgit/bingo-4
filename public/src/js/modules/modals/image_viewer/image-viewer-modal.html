@@ -1,0 +1,42 @@
+<script type="text/ng-template" id="image-viewer-modal.html">
+	<div id="image-viewer-modal">
+		
+		<div jwerty="→" key-event="showNext()" key-name="image-viewer.modal.next" key-bind="document"></div>
+		<div jwerty="←" key-event="showPrev()" key-name="image-viewer.modal.prev" key-bind="document"></div>
+
+		<form name="imageViewerForm" novalidate>
+			<div class="modal-body" style="background-color: transparent;">
+				<button type="button" class="close bigger-250" ng-click="cancel()">&times;</button>
+
+				<div class="row">
+                    <!-- slider container -->
+                    <div class="slider">
+
+                        <div class="col-md-12">
+                            <!-- enumerate all photos -->
+                            <p>
+                                <span ng-repeat="photo in photos">
+                                    <!-- <i ng-show="isActive($index) && ! photo.loaded" class="fa fa-spinner fa-spin blue fa-4x"></i> -->
+                                    <img class="slide" ng-swipe-right="showPrev()" ng-swipe-left="showNext()" ng-show="isActive($index)" ng-src="{{baseUrl+photo.filename}}" image-loading="imageLoaded($index)" index="{{$index}}" />    
+                                </span>
+                            </p>
+                                
+                            <!-- prev / next controls -->
+                            <a class="arrow prev" ng-click="showPrev()"><i class="fa fa-chevron-left"></i></a>
+                            <a class="arrow next" ng-click="showNext()"><i class="fa fa-chevron-right  "></i></a>
+
+                            <!-- extra navigation controls -->
+                            <ul class="nav">
+                                <li ng-repeat="photo in photos" ng-class="{'active':isActive($index)}" ng-hide=" ! photo.loaded">
+                                    <img ng-src="{{baseUrl+photo.filename}}" ng-click="showPhoto($index);" />
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+			</div>
+			
+		</form>
+	</div>
+</script>

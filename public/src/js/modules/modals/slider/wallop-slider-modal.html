@@ -1,0 +1,44 @@
+<script type="text/ng-template" id="wallop-modal.html">
+	<div id="wallop-modal" tabindex="-1">
+		
+		<div jwerty="ALT+S" key-event="save()" key-name="wallop.modal.save" key-bind="#wallop-modal"></div>
+		<div jwerty="ESC" key-event="cancel()" key-name="wallop.modal.cancel" key-bind="#wallop-modal"></div>
+
+		<form name="wallopForm" novalidate ng-submit="save()">
+			<div class="modal-header">
+				<button type="button" class="close" ng-click="cancel()">&times;</button>
+			    <h4 class="white bigger">Office Details</h4>
+			</div>
+
+			<div class="modal-body">
+				<div class="row" >
+		            <div class="col-xs-7">
+						<div class="form-group">
+							<i class="tooltips col-xs-12" ng-show="wallopForm.wallop_name.$dirty && wallopForm.wallop_name.$invalid"><span>Max of 40 characters</span></i>
+	                        <label for="wallop_name">Name</label>
+	                        <input name="wallop_name" type="text" class="form-control" id="wallop_name" placeholder="Enter Office Name" ng-model="wallop.wallop_name" required ng-maxlength=40>
+	                    </div>
+		    		</div>
+		    	</div>
+
+		    	<div class="row" >
+		            <div class="col-xs-11">
+						<div class="form-group">
+							<i class="tooltips col-xs-12" ng-show="wallopForm.wallop_address.$dirty && wallopForm.wallop_address.$invalid"><span>Max of 100 characters</span></i>
+	                        <label for="wallop_address">Address</label>
+	                        <input type="text" class="form-control" name="wallop_address" id="wallop_address" placeholder="Enter Office Address" ng-model="wallop.wallop_address" required ng-maxlength=100>
+	                    </div>
+		    		</div>
+		    	</div>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm" id="btn-close" ng-click="cancel()" tabindex="-1"><i class="fa fa-ban bigger-140"></i> &nbsp;Cancel</button>
+				<button type="submit" class="btn btn-primary btn-sm" id="btn-ok" ng-disabled="wallopForm.$invalid || ! wallopForm.$dirty || state.saving">
+					<i class="fa fa-save bigger-140"></i> &nbsp;<u>S</u>ave
+				</button>
+			</div>
+
+		</form>
+	</div>
+</script>

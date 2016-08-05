@@ -1,0 +1,88 @@
+<script type="text/ng-template" id="user-modal.html">
+	<div id="user-modal" tabindex="-1">
+		
+		<div jwerty="ALT+S" key-event="save()" key-name="user.modal.save" key-bind="#user-modal"></div>
+		<div jwerty="ESC" key-event="cancel()" key-name="user.modal.cancel" key-bind="#user-modal"></div>
+
+		<form name="userForm" novalidate ng-submit="save()">
+			<div class="modal-header">
+				<button type="button" class="close" ng-click="cancel()">&times;</button>
+			    <h4 class="white bigger">User Details</h4>
+			</div>
+
+			<div class="modal-body">
+				<div class="row" >
+		            <div class="col-xs-7">
+		            	
+						<div class="form-group">
+							<i class="tooltips col-xs-12" ng-show="userForm.username.$dirty && userForm.username.$invalid"><span>Max of 30 and Min of 6 characters</span></i>
+	                        <label for="username">User Name</label>
+	                        <input name="username" type="text" class="form-control" id="username" placeholder="Enter User Name" ng-model="user.username" required ng-maxlength=30 ng-minlength="6">
+	                    </div>
+		    		</div>
+		    	</div>
+
+		    	<div class="row" >
+		            <div class="col-xs-11">
+						<div class="form-group">
+							<i class="tooltips col-xs-12" ng-show="userForm.display_name.$dirty && userForm.display_name.$invalid"><span>Max of 80 characters</span></i>
+	                        <label for="user_address">Display Name</label>
+	                        <input type="text" class="form-control" name="display_name" id="display_name" placeholder="Enter User Address" ng-model="user.display_name" required ng-maxlength=80>
+	                    </div>
+		    		</div>
+		    	</div>
+
+		    	<div class="row" >
+		            <div class="col-xs-3">
+						<div class="form-group">
+	                        <label for="user_address">Access Level</label>
+	                        <input type="text" class="form-control align-right" name="access_level" id="access_level" ng-model="user.access_level" numeric="0" min="0" max="3"interval="1">
+	                    </div>
+		    		</div>
+		    	</div>
+
+		    	<div class="row" ng-if="user.id">
+	                <div class="col-xs-12 col-md-6">
+	                    <div class="form-group">
+	                        <div class="checkbox">
+	                            <label>
+	                                <input type="checkbox" ng-model="user.change_password" ng-true-value="1" ng-false-value="0">
+	                                &nbsp;Change Password upon Login
+	                            </label>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+
+		    	<div class="row" ng-hide="! user.change_password">
+		            <div class="col-xs-11">
+						<div class="form-group">
+							<i class="tooltips col-xs-12" ng-show="userForm.password.$dirty && userForm.password.$invalid"><span>Minimum of 6 Characters</span></i>
+	                        <label for="password">Password</label>
+	                        <input type="password" class="form-control" name="password" id="password" placeholder="Enter User Password" ng-model="user.password" required ng-minlength=6>
+	                    </div>
+		    		</div>
+		    	</div>
+
+		    	<div class="row" ng-hide="! user.change_password">
+		            <div class="col-xs-11">
+						<div class="form-group">
+							<i class="tooltips col-xs-12" ng-show="userForm.password_confirm.$dirty && userForm.password_confirm.$invalid"><span>Minimum of 6 Characters</span></i>
+	                        <label for="password_confirm">Password Confirm</label>
+	                        <input type="password" class="form-control" name="password_confirm" id="password_confirm" placeholder="Confirm User Password" ng-model="user.password_confirm" required ng-minlength=6>
+	                    </div>
+		    		</div>
+		    	</div>
+
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm" id="btn-close" ng-click="cancel()" tabindex="-1"><i class="fa fa-ban bigger-140"></i> &nbsp;Cancel</button>
+				<button type="submit" class="btn btn-primary btn-sm" id="btn-ok" ng-disabled="userForm.$invalid || ! userForm.$dirty || state.saving">
+					<i class="fa fa-save bigger-140"></i> &nbsp;<u>S</u>ave
+				</button>
+			</div>
+
+		</form>
+	</div>
+</script>
