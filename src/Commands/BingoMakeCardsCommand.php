@@ -58,7 +58,6 @@ class BingoMakeCardsCommand extends Command
 
         $cards = $this->cardMaker->make($n = $this->argument('number'), $spaces);
 
-
         $cards->each(function ($card) {
             $card->save();
         });
