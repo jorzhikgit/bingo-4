@@ -29,6 +29,7 @@
 		"files": [
 			"app/helpers.php",
 			"src/helpers/path.php"
+			"src/helpers/number.php"
 		],
 		"psr-4": {
 			"SedpMis\\Bingo\\": "src/"
