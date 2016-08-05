@@ -5,6 +5,7 @@ namespace SedpMis\Bingo\Commands;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use SedpMis\Bingo\Modules\CardMaker\CardMaker;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Command;
 
 
