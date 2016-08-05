@@ -15,11 +15,11 @@ class CreateCardsTable extends Migration {
 		Schema::create('cards', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->char('b', 20);
-			$table->char('i', 20);
-			$table->char('n', 20);
-			$table->char('g', 20);
-			$table->char('o', 20);
+			$table->char('b', 20)->comment('Comma separated numbers');
+			$table->char('i', 20)->comment('Comma separated numbers');
+			$table->char('n', 20)->comment('Comma separated numbers');
+			$table->char('g', 20)->comment('Comma separated numbers');
+			$table->char('o', 20)->comment('Comma separated numbers');
 			$table->timestamps();
 		});
 	}

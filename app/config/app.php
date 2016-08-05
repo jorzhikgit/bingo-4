@@ -191,7 +191,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 
 		'Intervention' => 'Intervention\Image\Facades\Image',
-
+		'Fk'           => 'FkAdder\Fk'
 	),
 
 );
