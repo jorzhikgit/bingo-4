@@ -6,13 +6,14 @@ class Pattern extends BaseModel
 {
     protected $fillable = ['plots'];
 
-    public function __construct($positions)
+    public function positions($column)
     {
-        $this->positions = $positions;
-    }
+        $plots = array_filter($this->attributes['plots'], function ($plot) use ($column) {
+            return $plot[0] == $column;
+        });
 
-    public function positions($key)
-    {
-        return $this->positions[$key];
+        return array_map(function ($plot) {
+            return $plot[1];
+        }, $plots);
     }
 }
