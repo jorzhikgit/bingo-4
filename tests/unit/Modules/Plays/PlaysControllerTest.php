@@ -8,7 +8,7 @@ class PlaysControllerTest extends TestCase
     {
         parent::setUp();
 
-        Artisan::call('migrate', ['--seed', '--force']);
+        Artisan::call('migrate:refresh', ['--seed']);
     }
 
     public function seedPlay()

@@ -15,5 +15,6 @@ before_script:
   - composer install
   - mysql -u root -e "CREATE USER 'homestead'@'localhost' IDENTIFIED BY 'secret'; GRANT ALL PRIVILEGES ON * . * TO 'homestead'@'localhost'; FLUSH PRIVILEGES;"
   - mysql -u root -e 'create schema `bingo`;'
+  - php artisan migrate
   
 script: ./vendor/bin/phpunit
