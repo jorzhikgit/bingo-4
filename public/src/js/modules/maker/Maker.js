@@ -10,7 +10,7 @@ define(['app', 'angular', 'html2canvas', 'canvas2image'], function(app, angular,
         'GLOBAL',
         
         function($scope, $timeout, $interval, Common, Restangular, GLOBAL) {
-            var cardsToMake = 0, workingPage = 1, totalPage = 0, cardsMade = 0;
+            var cardsToMake = 0, workingPage = 0, totalPage = 0, cardsMade = 0;
 
             var saveCard = function (filename) {
                 var element = $("#bingo"); // global variable
@@ -27,7 +27,11 @@ define(['app', 'angular', 'html2canvas', 'canvas2image'], function(app, angular,
                  });
             };
 
-            $scope.isMakingCard = false;
+            $scope.vars = {
+                start: 1,
+                end: 15,
+                isMakingCard: false
+            };
 
             $scope.bingoLetters = {
                 b: ["S"],
@@ -41,31 +45,48 @@ define(['app', 'angular', 'html2canvas', 'canvas2image'], function(app, angular,
                 Restangular.one('cards').get({page: workingPage}).then(
                     function (res) {
                         $scope.bingos = res.data;
-                        cardsToMake = res.total;
 
-                        if (workingPage > 1) {
+                        if (res.total > (($scope.vars.end - $scope.vars.start) * res.per_page)) {
+                            cardsToMake = ($scope.vars.end - $scope.vars.start + 1) * res.per_page;
+                        } else {
+                            cardsToMake = res.total;
+                        }
+
+                        if (workingPage > $scope.vars.start) {
                             $scope.start();
                         }
 
                         workingPage++;
 
                         if (!totalPage) {
-                            totalPage = res.last_page;
+                            if (res.last_page > $scope.vars.end) {
+                                totalPage = $scope.vars.end;
+                            } else {
+                                totalPage = res.last_page;
+                            }
                         }
                     }
                 );
             };
 
             $scope.startCaption = function () {
-                if ($scope.isMakingCard) {
+                if ($scope.vars.isMakingCard) {
                     return 'Making Cards ' + (cardsMade + 1) + ' of ' + cardsToMake;
                 }
 
-                return 'Start';
-            }
+                return 'Make';
+            };
 
             $scope.start = function () {
-                $scope.isMakingCard = true;
+                if (!workingPage) {
+                    workingPage = $scope.vars.start;
+                }
+
+                if (workingPage == $scope.vars.start) {
+                    getCards();
+                }
+
+                $scope.vars.isMakingCard = true;
                 var i = $interval(function () {
                     $scope.bingo = $scope.bingos.shift();
 
@@ -78,8 +99,8 @@ define(['app', 'angular', 'html2canvas', 'canvas2image'], function(app, angular,
                     }, 500);
 
                     if (!$scope.bingos.length) {
-                        $scope.isMakingCard = false;
-                        
+                        $scope.vars.isMakingCard = false;
+
                         if (workingPage <= totalPage) {
                             getCards();
                         }
@@ -89,7 +110,12 @@ define(['app', 'angular', 'html2canvas', 'canvas2image'], function(app, angular,
                 }, 1500);
             };
 
-            getCards();
+            $scope.reset = function () {
+                workingPage = 0;
+                totalPage = 0;
+                cardsToMake = 0;
+                cardsMade = 0;
+            };
         }
     ]);
 });

@@ -1,0 +1,58 @@
+<script type="text/ng-template" id="validation-form.html">
+
+<style type="text/css">
+.modal-pattern-img {
+    width: 100%;
+    height: 335px;
+}
+.validate-img{
+    margin-top:150px;
+    width: 100%;
+    height: 180px;
+    background-repeat: no-repeat;
+    background: url(/images/check_cross.png);
+    background-size: 200% 100%;
+}
+.validate-img .not-validate {   
+    background-position-x: -130px;
+}
+</style>
+
+<div id="validation-form-modal" shortcut="shortcuts" name="validation-form-modal-shortcut">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">&times;</button>
+        <h4>CARD VALIDATION</h4>
+    </div> <!-- /.modal-header -->
+
+    <div class="modal-body overflow-visible">
+        <div class="row">
+            <!-- Card Pattern -->
+            <div class=" {{(validate)?'col-md-4':'col-md-6'}}">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Pattern</h3>
+                    </div>
+                    <div class="box-body box-profile">
+                        <img class="modal-pattern-img img-responsive" src="/images/{{patternUrl}}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2" ng-show="validate">
+                <div class="validate-img {{ (validate)? 'validate': 'not-validate' }} img-responsive"></div>
+            </div>
+            <!-- Winning Card -->
+            <div class="col-md-6">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Card</h3>
+                    </div>
+                    <div class="box-body box-profile">
+                        <card numbers="bingo" letters="bingoLetters" selected="selected"></card>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End of row -->
+    </div> <!-- /.modal-body -->
+</div>
+
+</script>

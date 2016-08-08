@@ -1,4 +1,7 @@
 <style type="text/css">
+.validation-modal-window .modal-dialog {
+  width: 80%;
+}
 #play{
     border: none;
     font-size: 22px;
@@ -86,10 +89,10 @@
 .letter-P {
     background: url(/images/bingo_ball_orange.png); 
 }
-.letter-Inc {
+.letter-I {
     background: url(/images/bingo_ball_violet.png); 
 }
-.letter-S, .letter-E, .letter-D, .letter-P, .letter-Inc {
+.letter-S, .letter-E, .letter-D, .letter-P, .letter-I {
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
@@ -100,11 +103,15 @@
     <section class="content-header">
         <div class="row">
             <div class="col-md-8">
-                <select id="play" class="form-control">
-                    <option>SELECT PLAY</option>
+                <select id="play" class="form-control" 
+                    ng-options="p.id as ('Play #' + p.id) for p in plays" ng-model="playId">
+                    <option value="">SELECT PLAY</option>
                 </select>   
             </div>
         </div>
+        <ol class="breadcrumb">
+            <li><a ui-sref="app"><i class="fa fa-home"></i> Home</a></li>
+        </ol>
     </section>
 
 <!-- Main content -->
@@ -127,7 +134,9 @@
                                 </center>
                             </div>
 
-                            <button class="btn btn-primary btn-block" ng-click="drawNumber()">
+                            <button class="btn btn-primary btn-block" 
+                                ng-disabled="!playId"
+                                ng-click="drawNumber()">
                                 Draw Number
                             </button>
                         </div>
@@ -145,6 +154,16 @@
                         </div>
                         <!-- /.box-body -->
                     </div>
+                </div>
+                <div class="row">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" ng-model="cardNumber">
+                            <span class="input-group-btn">
+                              <button type="button" class="btn btn-info btn-flat" 
+                              ng-disabled="!cardNumber"
+                              ng-click="validateCard()">Validate!</button>
+                            </span>
+                      </div>
                 </div>
             </div>
             <div class="col-md-9">
@@ -166,13 +185,10 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.box-body -->
                 </div>
             </div>
         </div>
     </div>
 </section><!-- /.content -->
 
-<!-- composer update -->
-<!-- pa migrate --seed -->
-<!-- pa bingo:make_cards #number -->
+<div ng-repeat="template in templates" ng-include="template"></div>

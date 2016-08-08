@@ -52,9 +52,32 @@
 
 
     <div class="row">
-        <div class="col-md-4">
-            <button class="btn btn-primary" ng-disabled="!bingos.length || isMakingCard" ng-click="start()">{{startCaption()}}</button>
-            <div id="previewImage"></div>
+        <div class="col-md-2">
+            <div class="form-group">
+              <label for="start">Page Start</label>
+              <input type="text" class="form-control" ng-model="vars.start" ng-disabled="vars.isMakingCard" ng-change="reset()">
+            </div>
         </div>  
+
+        <div class="col-md-2">
+            <div class="form-group">
+              <label for="end">Page End</label>
+              <input type="text" class="form-control" ng-model="vars.end" ng-disabled="vars.isMakingCard" ng-change="reset()">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <button class="btn btn-primary" ng-disabled="vars.isMakingCard || (vars.start > vars.end)" ng-click="start()">{{startCaption()}}</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <small class="red" ng-show="vars.start > vars.end">Page End must be greater than Page Start.</small>
+        </div>
     </div>
 </section><!-- /.content -->
