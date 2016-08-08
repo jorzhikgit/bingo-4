@@ -5,23 +5,6 @@ define(['app', 'angular'], function(app, angular)
             function () {
                 var _this = this;
 
-                _this.toggleMenuSidebar = function () {
-                    // hide sidebar
-                    $(".navbar-btn").trigger("click");
-                };
-
-                // hide header
-                _this.toggleHeader = function () {
-                    $el = $("header");
-                    if ($el.is(":visible")) {
-                        $el.css("display", "none");
-                    } else {
-                        $el.show();
-                    }
-                };
-
-                
-
             } // end function
         ]
     );
@@ -43,13 +26,11 @@ define(['app', 'angular'], function(app, angular)
         function($scope, $timeout, $stateParams, $templateCache, Common, Modal, Gritter, Focus, Blocker, playService, GLOBAL) {
 
             var init = function() {
-                
-                playService.toggleMenuSidebar();
-                playService.toggleHeader();
+
+                $scope.state = {};
 
                 // variable to holds the drawed numbers
                 $scope.drawedNumbers = [];
-
 
                 $scope.drawNumber = function () {
                     $scope.latestDraw = {column: 'S', number: Math.floor((Math.random()*75)+1)};
@@ -57,6 +38,15 @@ define(['app', 'angular'], function(app, angular)
 
                     console.log($scope.drawedNumbers);
                 }
+
+                $scope.fullScreen = function () {
+                    console.log(10000)
+                    $scope.state.fullscreen = true;
+                };
+
+                $scope.closeFullScreen = function () {
+                    $scope.state.fullscreen = false;
+                };
 
             } // end of init
 
