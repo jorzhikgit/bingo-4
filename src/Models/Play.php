@@ -10,6 +10,11 @@ class Play extends BaseModel
 
     protected $appends = [];
 
+    public function pattern()
+    {
+        return $this->hasOne(Pattern::class);
+    }
+
     public function arrayNumbers()
     {
         if (!array_key_exists('numbers', $this->attributes) || strlen($this->attributes['numbers']) == 0) {
