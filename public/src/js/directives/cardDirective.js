@@ -26,8 +26,6 @@ define([
                 link: function (scope, element, attrs, ctrl) {
                     if (attrs.showExtension !== undefined) scope.extension = 1;
 
-                    console.log(scope.extension);
-
                     if (!scope.letters) {
                         scope.letters = {
                             b: ["S"],
