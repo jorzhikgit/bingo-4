@@ -34,7 +34,7 @@ class PlaysController extends \BaseController
         $numbers = range(1, 75);
 
         $numbers = array_filter($numbers, function ($number) use ($play) {
-            return !in_array($number, $play->arrayNumbers());
+            return !in_array($number, $play->numbers());
         });
 
         $picker = new NumberPicker($numbers);
