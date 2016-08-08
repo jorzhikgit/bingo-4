@@ -21,6 +21,7 @@ define(['app', 'angular'], function(app, angular)
     [
         '$scope',
         '$timeout',
+        '$state',
         '$stateParams',
         '$templateCache',
         'commonService',
@@ -33,7 +34,7 @@ define(['app', 'angular'], function(app, angular)
         'GLOBAL',
         'Restangular',
         
-        function($scope, $timeout, $stateParams, $templateCache, Common, Modal, Gritter, Focus, Blocker, playService, Model, GLOBAL, Restangular) {
+        function($scope, $timeout, $state, $stateParams, $templateCache, Common, Modal, Gritter, Focus, Blocker, playService, Model, GLOBAL, Restangular) {
 
             var init = function() {
 
@@ -57,20 +58,27 @@ define(['app', 'angular'], function(app, angular)
                     Restangular.one('plays').get().then(function(result){
                         $scope.plays = result.data;
                         if($stateParams.id){
-                            console.log($stateParams, 'sample');
-                            $scope.playId = $stateParams.id;
+                            $scope.playId = parseInt($stateParams.id);
                             $scope.getDrawedNumbers();
                         }
                     });
                 };
 
+                $scope.showDrawedNumbers = function () {
+                    $state.go('app.play', {id: $scope.playId}, {location: "replace", reload: false});
+                };
+
                 $scope.getDrawedNumbers = function() {
                     if(!$scope.playId) return;
 
-                    Restangular.one('plays').one($scope.playId).get().then(function(drawedNumbers){
+                    Restangular.one('plays').one(''+$scope.playId+'').get().then(function(drawedNumbers){
+                        $drawedNumbersLength = drawedNumbers.number_objects.length - 1;
                         angular.forEach(drawedNumbers.number_objects, function(drawedNumber,key){
-                            $scope.drawedNumbers.unshift(drawedNumber);
+                            if(key < $drawedNumbersLength)
+                                $scope.drawedNumbers.unshift(drawedNumber);
                         });
+                        if($drawedNumbersLength > 0)
+                            $scope.latestDraw = drawedNumbers.number_objects[$drawedNumbersLength];
                     });
                 };
 
@@ -83,10 +91,9 @@ define(['app', 'angular'], function(app, angular)
                 };
 
                 $scope.drawNumber = function () {
+                    $scope.drawedNumbers.unshift($scope.latestDraw); 
                     Model.one($scope.playId).one('pick_a_number').post().then(function(data){
-                        console.log(data, 'the data');
-                        $scope.latestDraw = data; /*{column: 'S', number: Math.floor((Math.random()*75)+1)};*/
-                        $scope.drawedNumbers.unshift($scope.latestDraw); 
+                        $scope.latestDraw = data;
                     });
                 };
 
