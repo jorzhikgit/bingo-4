@@ -53,7 +53,7 @@ class Card extends Pattern
             }
         }
 
-        $this->plots = $plots;
+        $this->plots = join(',', $plots);
 
         return $plots;
     }
