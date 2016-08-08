@@ -3,6 +3,7 @@
 namespace SedpMis\Bingo\Modules\Patterns;
 
 use SedpMis\Bingo\Models\Card;
+use SedpMis\Bingo\Models\Pattern;
 
 class PatternsController extends \BaseController
 {
@@ -10,16 +11,18 @@ class PatternsController extends \BaseController
     {
         $pattern = Pattern::findOrFail($id);
         $plotter = new PatternPlotter;
-        $pattern->plots_binary = $plotter->plot($pattern);
+        $pattern->selected_plots = $plotter->plot($pattern);
 
         return $pattern;
     }
 
     public function compare($patternId, $cardId)
     {
-        $pattern = Pattern::findOrFail($patternId);
+        $pattern = Pattern::with('play')->findOrFail($patternId);
         $card    = Card::findOrFail($cardId);
 
-        return [$pattern, $card];
+        $card->setPlotsViaNumbers($pattern->play->numbers());
+
+        return (new PatternPlotter)->compare($pattern, $card);
     }
 }
