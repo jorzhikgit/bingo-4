@@ -33,7 +33,7 @@ class PatternPlotter
 
         foreach (Card::columns() as $column) {
             for ($i = 0; $i < 5; $i++) {
-                if ($cardPlots[$column][$i] == 1 && $patternPlots[$column[$i]]) {
+                if ($cardPlots[$column][$i] == 1 && $patternPlots[$column][$i]) {
                     $cardPlots[$column][$i] = 1;
                 } else {
                     $cardPlots[$column][$i] = 0;
