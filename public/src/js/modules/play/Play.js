@@ -70,6 +70,21 @@ define(['app', 'angular'], function(app, angular)
                 $scope.getPlays = function () {
                     Restangular.one('plays').get().then(function(result){
                         $scope.plays = result.data;
+                        if($stateParams.id){
+                            console.log($stateParams, 'sample');
+                            $scope.playId = $stateParams.id;
+                            $scope.getDrawedNumbers();
+                        }
+                    });
+                };
+
+                $scope.getDrawedNumbers = function() {
+                    if(!$scope.playId) return;
+
+                    Restangular.one('plays').one($scope.playId).get().then(function(drawedNumbers){
+                        angular.forEach(drawedNumbers.number_objects, function(drawedNumber,key){
+                            $scope.drawedNumbers.unshift(drawedNumber);
+                        });
                     });
                 }
 
@@ -77,9 +92,9 @@ define(['app', 'angular'], function(app, angular)
                     Model.one($scope.playId).one('pick_a_number').post().then(function(data){
                         console.log(data, 'the data');
                         $scope.latestDraw = data; /*{column: 'S', number: Math.floor((Math.random()*75)+1)};*/
-                        $scope.drawedNumbers.unshift($scope.latestDraw);    
+                        $scope.drawedNumbers.unshift($scope.latestDraw); 
                     });
-                }
+                };
 
                 $scope.validateCard = function() {
                     var modalOptions = {
@@ -100,7 +115,7 @@ define(['app', 'angular'], function(app, angular)
                         function (res) {
                         }
                     )
-                }
+                };
 
                 $scope.getPlays();
 
