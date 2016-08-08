@@ -13,17 +13,6 @@ class Pattern extends BaseModel
         return $this->belongsTo(Play::class);
     }
 
-    public function positions($column)
-    {
-        $plots = array_filter($this->attributes['plots'], function ($plot) use ($column) {
-            return $plot[0] == $column;
-        });
-
-        return array_map(function ($plot) {
-            return $plot[1];
-        }, $plots);
-    }
-
     public function getRawPlots()
     {
         return $this->attributes['plots'];
