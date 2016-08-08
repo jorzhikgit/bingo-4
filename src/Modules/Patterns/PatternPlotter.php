@@ -19,7 +19,7 @@ class PatternPlotter
     {
         $plots = $this->plots;
 
-        foreach ($pattern->arrayPlots() as $plot) {
+        foreach ($pattern->plots() as $plot) {
             $plots[$plot[0]][$plot[1]] = 1;
         }
 
@@ -28,6 +28,6 @@ class PatternPlotter
 
     public function compare($pattern, $card)
     {
-        
+        $patternPlots = (new static)->plot($pattern);
     }
 }

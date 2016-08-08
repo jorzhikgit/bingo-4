@@ -19,7 +19,7 @@ class Pattern extends BaseModel
         }, $plots);
     }
 
-    public function arrayPlots()
+    public function plots()
     {
         return explode(static::PLOT_DELIM, $this->attributes['plots']);
     }
