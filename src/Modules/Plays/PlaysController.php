@@ -44,7 +44,7 @@ class PlaysController extends \BaseController
         $play->save();
 
         return [
-            'column' => number_column($number),
+            'column' => format_number_column($number),
             'number' => $number
         ];
     }
