@@ -29,7 +29,7 @@ class PatternsController extends \BaseController
             'card'          => $card,
             'pattern_plots' => $patternPlots = (new PatternPlotter)->plot($pattern),
             'card_plots'    => (new PatternPlotter)->plot($card),
-            'status'        => ($patternPlots == $cardPlots) ? 'Matched' : 'Mis-match'
+            'status'        => ($patternPlots == $cardPlots) ? 'Match' : 'Mis-match'
         ];
     }
 }
