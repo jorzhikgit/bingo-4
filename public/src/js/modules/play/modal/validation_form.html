@@ -16,6 +16,10 @@
 .validate-img .not-validate {   
     background-position-x: -130px;
 }
+
+.alert {
+    width: 94.5% !important;
+}
 </style>
 
 <div id="validation-form-modal" shortcut="shortcuts" name="validation-form-modal-shortcut">
@@ -33,18 +37,18 @@
                       <h3 class="box-title">Pattern</h3>
                     </div>
                     <div class="box-body box-profile">
-                        <card selected="pattern.selected_plots"></card>
+                        <card selected="pattern.selected_plots" tall></card>
                     </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div ng-show="!validate" class="alert alert-danger">
-                            <h4><i class="icon fa fa-ban"></i> {{compare.status}}</h4>
-                        </div>
 
-                        <div ng-show="  validate" class="alert alert-success">
-                            <h4><i class="icon fa fa-ban"></i> {{compare.status}}</h4>
+                    <div class="row">
+                        <div class="col-xs-12 ">
+                            <div ng-show="!validate" class="alert alert-danger">
+                                <h4><i class="icon fa fa-ban"></i> {{compare.status}}</h4>
+                            </div>
+
+                            <div ng-show="  validate" class="alert alert-success">
+                                <h4><i class="icon fa fa-ban"></i> {{compare.status}}</h4>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -59,7 +63,7 @@
                       <h3 class="box-title">Card</h3>
                     </div>
                     <div class="box-body box-profile">
-                        <card numbers="compare.card" selected="compare.card_plots"></card>
+                        <card numbers="compare.card" selected="compare.card_plots" tall></card>
                     </div>
                 </div>
             </div>
