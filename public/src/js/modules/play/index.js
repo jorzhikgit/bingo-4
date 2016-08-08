@@ -3,6 +3,9 @@
  */
 define([
 	
+	'../../directives/cardDirective',
+	'./modal/Validate',
 	'./Play',
+
 
 ], function () {});
