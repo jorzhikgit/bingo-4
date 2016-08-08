@@ -78,13 +78,14 @@ define(['app', 'angular'], function(app, angular)
                     if(!$scope.playId) return;
 
                     Restangular.one('plays').one($scope.playId.toString()).get().then(function(drawedNumbers){
-                        $drawedNumbersLength = drawedNumbers.number_objects.length - 1;
+                        $drawedNumbersLength = drawedNumbers.number_objects.length;
                         angular.forEach(drawedNumbers.number_objects, function(drawedNumber,key){
-                            if(key < $drawedNumbersLength)
+                            if(key < ($drawedNumbersLength - 1))
                                 $scope.drawedNumbers.unshift(drawedNumber);
                         });
+                        
                         if($drawedNumbersLength > 0)
-                            $scope.latestDraw = drawedNumbers.number_objects[$drawedNumbersLength];
+                            $scope.latestDraw = drawedNumbers.number_objects[$drawedNumbersLength-1];
 
                         setPattern(drawedNumbers.pattern);
                     });
