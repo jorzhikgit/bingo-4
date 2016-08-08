@@ -47,7 +47,13 @@ class Card extends Pattern
 
     public function numbers($column)
     {
-        return explode(static::NUM_DELIM, $this->attributes[$column]);
+        $numbers = explode(static::NUM_DELIM, $this->attributes[$column]);
+
+        foreach ($numbers as $key => $number) {
+            $numbers[$key] = (int) $number;
+        }
+
+        return $numbers;
     }
 
     public function allNumbers()

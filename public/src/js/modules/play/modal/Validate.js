@@ -22,7 +22,7 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                     function (res) {
                         $scope.compare = res;
 
-                        if (res.status === 'Match') {
+                        if (res.status === 'Matched') {
                             $scope.validate = true;
                             return;
                         }
