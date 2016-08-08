@@ -23,6 +23,8 @@ function number_column($number)
 
 function format_number_column($column)
 {
+    $column = is_numeric($column) ? number_column($column) : $column;
+
     $columns = [
         'b' => 'S',
         'i' => 'E',
