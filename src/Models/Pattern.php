@@ -2,6 +2,8 @@
 
 namespace SedpMis\Bingo\Models;
 
+use SedpMis\Bingo\Modules\Patterns\PatternPlotter;
+
 class Pattern extends BaseModel
 {
     protected $fillable = ['plots'];
@@ -25,5 +27,10 @@ class Pattern extends BaseModel
         }
 
         return explode(static::PLOT_DELIM, $this->getRawPlots());
+    }
+
+    public function getSelectedPlotsAttribute()
+    {
+        return (new PatternPlotter)->plot($this);
     }
 }

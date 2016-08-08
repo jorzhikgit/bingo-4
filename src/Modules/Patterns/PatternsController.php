@@ -10,8 +10,7 @@ class PatternsController extends \BaseController
     public function show($id)
     {
         $pattern = Pattern::findOrFail($id);
-        $plotter = new PatternPlotter;
-        $pattern->selected_plots = $plotter->plot($pattern);
+        $pattern->setAppends(['selected_plots']);
 
         return $pattern;
     }
