@@ -54,8 +54,10 @@ define(['app', 'angular'], function(app, angular)
                 $scope.plays = [];
 
                 $scope.drawNumber = function () {
-                    $scope.latestDraw = {column: 'S', number: Math.floor((Math.random()*75)+1)};
-                    $scope.drawedNumbers.unshift($scope.latestDraw);
+                    $scope.drawedNumbers.unshift($scope.latestDraw); 
+                    Model.one($scope.playId).one('pick_a_number').post().then(function(data){
+                        $scope.latestDraw = data;
+                    });
                 };
 
                 $scope.getPlays = function () {
@@ -75,7 +77,7 @@ define(['app', 'angular'], function(app, angular)
                 $scope.getDrawedNumbers = function() {
                     if(!$scope.playId) return;
 
-                    Restangular.one('plays').one(''+$scope.playId+'').get().then(function(drawedNumbers){
+                    Restangular.one('plays').one($scope.playId.toString()).get().then(function(drawedNumbers){
                         $drawedNumbersLength = drawedNumbers.number_objects.length - 1;
                         angular.forEach(drawedNumbers.number_objects, function(drawedNumber,key){
                             if(key < $drawedNumbersLength)
