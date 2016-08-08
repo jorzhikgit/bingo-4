@@ -18,18 +18,23 @@ define([
                     numbers: '=',
                     letters: '=',
                     selected: '=',
+                    showExtension: '@' // Letter Extension
                 },
 
                 template: cardTemplate,
 
                 link: function (scope, element, attrs, ctrl) {
+                    if (attrs.showExtension !== undefined) scope.extension = 1;
+
+                    console.log(scope.extension);
+
                     if (!scope.letters) {
                         scope.letters = {
-                            b: ["B"],
-                            i: ["I"],
-                            n: ["N"],
-                            g: ["G"],
-                            o: ["O"]
+                            b: ["S"],
+                            i: ["E"],
+                            n: ["D"],
+                            g: ["P"],
+                            o: ["I", "nc."]
                         };
                     }
 
