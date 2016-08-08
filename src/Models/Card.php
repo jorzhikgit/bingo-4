@@ -8,6 +8,8 @@ class Card extends Pattern
 
     protected $fillable = ['b', 'i', 'n', 'g', 'o'];
 
+    protected $plots;
+
     public static function columns()
     {
         return ['b', 'i', 'n', 'g', 'o'];
@@ -34,6 +36,11 @@ class Card extends Pattern
         $this->{$column} = join(static::NUM_DELIM, $numbers);
     }
 
+    public function getRawPlots()
+    {
+        return $this->plots;
+    }
+
     public function setPlotsViaNumbers($numbers)
     {
         $plots = [];
@@ -45,6 +52,8 @@ class Card extends Pattern
                 $plots[] = $column.$flipped[$number];
             }
         }
+
+        $this->plots = $plots;
 
         return $plots;
     }

@@ -48,7 +48,7 @@ class Play extends BaseModel
 
         foreach ($this->numbers() as $number) {
             $numberObjects[] = [
-                'column'  => number_column($number),
+                'column'  => format_number_column($number),
                 'number'  => $number
             ];
         };

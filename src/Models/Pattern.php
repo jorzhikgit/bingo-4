@@ -24,8 +24,13 @@ class Pattern extends BaseModel
         }, $plots);
     }
 
+    public function getRawPlots()
+    {
+        return $this->attributes['plots'];
+    }
+
     public function plots()
     {
-        return explode(static::PLOT_DELIM, $this->attributes['plots']);
+        return explode(static::PLOT_DELIM, $this->getRawPlots());
     }
 }
