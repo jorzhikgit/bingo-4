@@ -15,11 +15,6 @@ class Card extends Pattern
 
     public function numbers($column)
     {
-        return $this->arrayNumbers($column);
-    }
-
-    public function arrayNumbers($column)
-    {
         return explode(static::NUM_DELIM, $this->attributes[$column]);
     }
 
