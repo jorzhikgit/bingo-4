@@ -34,14 +34,6 @@ define(['app', 'angular', 'html2canvas', 'canvas2image'], function(app, angular,
                     isMakingCard: false
                 };
 
-                $scope.bingoLetters = {
-                    b: ["S"],
-                    i: ["E"],
-                    n: ["D"],
-                    g: ["P"],
-                    o: ["I", "nc."]
-                };
-
                 var getCards = function () {
                     Restangular.one('cards').get({page: workingPage}).then(
                         function (res) {
