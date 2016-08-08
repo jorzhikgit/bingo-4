@@ -37,6 +37,8 @@ class PlaysController extends \BaseController
             return !in_array($number, $play->numbers());
         });
 
+        $numbers = array_values($numbers);
+
         $picker = new NumberPicker($numbers);
 
         $number = $picker->pick();
