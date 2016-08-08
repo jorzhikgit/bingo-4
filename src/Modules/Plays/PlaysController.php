@@ -34,8 +34,14 @@ class PlaysController extends \BaseController
         $numbers = range(1, 75);
 
         $numbers = array_filter($numbers, function ($number) use ($play) {
-            return !in_array($number, $play->arrayNumbers());
+            return !in_array($number, $play->numbers());
         });
+
+        $numbers = array_values($numbers);
+
+        if (count($numbers) == 0) {
+            throw new \Exception("All numbers has been drawn!");
+        }
 
         $picker = new NumberPicker($numbers);
 
@@ -44,7 +50,7 @@ class PlaysController extends \BaseController
         $play->save();
 
         return [
-            'column' => number_column($number),
+            'column' => format_number_column($number),
             'number' => $number
         ];
     }

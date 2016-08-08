@@ -3,20 +3,35 @@
 function number_column($number)
 {
     if ($number <= 15) {
-        return 'S';
+        return 'b';
     }
 
     if ($number <= 30) {
-        return 'E';
+        return 'i';
     }
 
     if ($number <= 45) {
-        return 'D';
+        return 'n';
     }
 
     if ($number <= 60) {
-        return 'P';
+        return 'g';
     }
 
-    return 'I';
+    return 'o';
+}
+
+function format_number_column($column)
+{
+    $column = is_numeric($column) ? number_column($column) : $column;
+
+    $columns = [
+        'b' => 'S',
+        'i' => 'E',
+        'n' => 'D',
+        'g' => 'P',
+        'o' => 'I'
+    ];
+
+    return $columns[$column];
 }

@@ -16,6 +16,7 @@ class CreatePatternsTable extends Migration {
 		{
 			$table->increments('id');
 			Fk::make($table)->add('play_id')->nullable();
+			$table->string('name');
 			$table->string('plots')->comment('Comma separated plots');
 			$table->timestamps();
 		});

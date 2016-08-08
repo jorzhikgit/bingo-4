@@ -4,24 +4,29 @@ namespace SedpMis\Bingo\Models;
 
 class Play extends BaseModel
 {
-    const DRAW_NUM_DELIM = ',';
+    const NUM_DELIM = ',';
 
     protected $fillable = ['numbers'];
 
     protected $appends = [];
 
-    public function arrayNumbers()
+    public function pattern()
+    {
+        return $this->hasOne(Pattern::class);
+    }
+
+    public function numbers()
     {
         if (!array_key_exists('numbers', $this->attributes) || strlen($this->attributes['numbers']) == 0) {
             return [];
         }
 
-        return explode(static::DRAW_NUM_DELIM, $this->attributes['numbers']);
+        return explode(static::NUM_DELIM, $this->attributes['numbers']);
     }
 
     public function getNumbersAttribute()
     {
-        return $this->arrayNumbers();
+        return $this->numbers();
     }
 
     public function addNumber($number)
@@ -29,7 +34,7 @@ class Play extends BaseModel
         $delim = strlen($this->attributes['numbers']) ? ',' : '';
         $this->attributes['numbers'] .= $delim.$number;
 
-        return $this->arrayNumbers();
+        return $this->numbers();
     }
 
     public function rawNumbers()
@@ -41,9 +46,9 @@ class Play extends BaseModel
     {
         $numberObjects = [];
 
-        foreach ($this->arrayNumbers() as $number) {
+        foreach ($this->numbers() as $number) {
             $numberObjects[] = [
-                'column'  => number_column($number),
+                'column'  => format_number_column($number),
                 'number'  => $number
             ];
         };
