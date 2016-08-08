@@ -44,7 +44,7 @@
                 <strong>
                     <span class="badge bg-purple bigger-190">&nbsp;{{letters.o[0]}}&nbsp;</span>    
                 </strong>
-                <small>{{letters.o[1]}}</small>
+                <small ng-show="extension">{{letters.o[1]}}</small>
             </th>
         </tr>
         <tr>
@@ -86,6 +86,6 @@
             <td ng-class="{ 'bg-red': selected.g[4] }">{{numbers.g[4]}}</td>
             <td ng-class="{ 'bg-red': selected.o[4] }">{{numbers.o[4]}}</td>
         </tr>
-        <tr><td class="card-number align-right" colspan="5"><small>Card #: </small><strong>{{numbers.id}}</strong></td></tr>
+        <tr ng-show="numbers.id"><td class="card-number align-right" colspan="5"><small>Card #: </small><strong>{{numbers.id}}</strong></td></tr>
     </tbody>
 </table>
