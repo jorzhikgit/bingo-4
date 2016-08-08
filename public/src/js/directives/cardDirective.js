@@ -25,6 +25,7 @@ define([
 
                 link: function (scope, element, attrs, ctrl) {
                     if (attrs.showExtension !== undefined) scope.extension = 1;
+                    if (attrs.tall !== undefined) scope.tall = 1;
 
                     if (!scope.letters) {
                         scope.letters = {
