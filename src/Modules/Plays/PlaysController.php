@@ -39,6 +39,10 @@ class PlaysController extends \BaseController
 
         $numbers = array_values($numbers);
 
+        if (count($numbers) == 0) {
+            throw new \Exception("All numbers has been drawn!");
+        }
+
         $picker = new NumberPicker($numbers);
 
         $number = $picker->pick();
