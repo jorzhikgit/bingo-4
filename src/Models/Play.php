@@ -4,7 +4,7 @@ namespace SedpMis\Bingo\Models;
 
 class Play extends BaseModel
 {
-    const DRAW_NUM_DELIM = ',';
+    const NUM_DELIM = ',';
 
     protected $fillable = ['numbers'];
 
@@ -21,7 +21,7 @@ class Play extends BaseModel
             return [];
         }
 
-        return explode(static::DRAW_NUM_DELIM, $this->attributes['numbers']);
+        return explode(static::NUM_DELIM, $this->attributes['numbers']);
     }
 
     public function getNumbersAttribute()
