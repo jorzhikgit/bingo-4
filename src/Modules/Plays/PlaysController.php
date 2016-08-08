@@ -9,7 +9,7 @@ class PlaysController extends \BaseController
 {
     public function index()
     {
-        $q = Play::query();
+        $q = Play::with('pattern');
 
         if ($status = \Input::get('status')) {
             $q->where('status', $status);
