@@ -17,7 +17,7 @@
 }
 .bingo-ball-img {
     height: 30%;
-    background: url(/images/bingo_ball_blank.png); 
+    background: url(/images/bingo_ball_blank_gray.png); 
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
@@ -45,6 +45,15 @@
     height: 100px; 
     width: 100px;
     margin: 10;
+}
+.question {
+    font-size: 8em;
+    color: #666662;
+    float: inherit;
+    padding-top: 9px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    font-weight: bolder;
 }
 .latest-column {
     font-size: 4em;
@@ -154,7 +163,7 @@
                         <div class="row">
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
-                                    <div class="bingo-ball-img img-responsive img-circle">
+                                    <div class="bingo-ball-img {{(latestDraw.column)? 'letter-'+latestDraw.column : ''}} img-responsive img-circle">
                                         <center ng-show="latestDraw.column && latestDraw.number">
                                             <p class="latest-column">
                                                 {{latestDraw.column}}
@@ -163,10 +172,13 @@
                                                 {{latestDraw.number}}
                                             </p>
                                         </center>
+                                        <center ng-show="!latestDraw.column && !latestDraw.number">
+                                            <p class="question">?</p>
+                                        </center>
                                     </div>
 
                                     <button class="btn btn-primary btn-block" 
-                                        ng-disabled="!playId"
+                                        ng-disabled="!playId || (drawedNumbers.length  == 75) "
                                         ng-click="drawNumber()">
                                         Draw Number
                                     </button>
