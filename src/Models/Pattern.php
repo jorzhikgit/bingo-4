@@ -8,6 +8,11 @@ class Pattern extends BaseModel
 
     const PLOT_DELIM = ',';
 
+    public function play()
+    {
+        return $this->belongsTo(Play::class);
+    }
+
     public function positions($column)
     {
         $plots = array_filter($this->attributes['plots'], function ($plot) use ($column) {
