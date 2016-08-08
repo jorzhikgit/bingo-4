@@ -27,7 +27,7 @@ define([], function()
                 name: 'app'
             },
 
-            'play': {
+            'play/:id': {
                 views: {
                     'content': {
                         templateUrl: baseSourcePath + 'play/play.html?version=' + Bingo.version,
