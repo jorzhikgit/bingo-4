@@ -43,11 +43,11 @@
                     <div class="row">
                         <div class="col-xs-12 ">
                             <div ng-show="!validate" class="alert alert-danger">
-                                <h4><i class="icon fa fa-ban"></i> {{compare.status}}</h4>
+                                <h4><i class="icon fa fa-times"></i> {{compare.status}}</h4>
                             </div>
 
-                            <div ng-show="  validate" class="alert alert-success">
-                                <h4><i class="icon fa fa-ban"></i> {{compare.status}}</h4>
+                            <div ng-show="validate" class="alert alert-success">
+                                <h4><i class="icon fa fa-check-circle"></i> {{compare.status}}</h4>
                             </div>
                         </div>
                     </div>
