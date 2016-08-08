@@ -10,30 +10,12 @@ define(['app', 'angular'], function(app, angular)
     ]);
 
     app.service('playService',
-        [
-            function () {
-                var _this = this;
+    [
+        function () {
+            var _this = this;
 
-                _this.toggleMenuSidebar = function () {
-                    // hide sidebar
-                    $(".navbar-btn").trigger("click");
-                };
-
-                // hide header
-                _this.toggleHeader = function () {
-                    $el = $("header");
-                    if ($el.is(":visible")) {
-                        $el.css("display", "none");
-                    } else {
-                        $el.show();
-                    }
-                };
-
-                
-
-            } // end function
-        ]
-    );
+        }
+    ]);
 
     app.controller('PlayController',
     [
@@ -54,9 +36,8 @@ define(['app', 'angular'], function(app, angular)
         function($scope, $timeout, $stateParams, $templateCache, Common, Modal, Gritter, Focus, Blocker, playService, Model, GLOBAL, Restangular) {
 
             var init = function() {
-                
-                playService.toggleMenuSidebar();
-                playService.toggleHeader();
+
+                $scope.state = {};
 
                 // templates
                 $scope.templates  = {
@@ -66,6 +47,11 @@ define(['app', 'angular'], function(app, angular)
                 // variable to holds the drawed numbers
                 $scope.drawedNumbers = [];
                 $scope.plays = [];
+
+                $scope.drawNumber = function () {
+                    $scope.latestDraw = {column: 'S', number: Math.floor((Math.random()*75)+1)};
+                    $scope.drawedNumbers.unshift($scope.latestDraw);
+                };
 
                 $scope.getPlays = function () {
                     Restangular.one('plays').get().then(function(result){
@@ -86,7 +72,15 @@ define(['app', 'angular'], function(app, angular)
                             $scope.drawedNumbers.unshift(drawedNumber);
                         });
                     });
-                }
+                };
+
+                $scope.fullScreen = function () {
+                    $scope.state.fullscreen = true;
+                };
+
+                $scope.closeFullScreen = function () {
+                    $scope.state.fullscreen = false;
+                };
 
                 $scope.drawNumber = function () {
                     Model.one($scope.playId).one('pick_a_number').post().then(function(data){
@@ -119,14 +113,7 @@ define(['app', 'angular'], function(app, angular)
 
                 $scope.getPlays();
 
-                $scope.$on('$stateChangeStart', 
-                    function(event, toState, toParams, fromState, fromParams) {
-                        $("header").show();
-                        $(".navbar-btn").trigger("click");
-                    }
-                );
-
-            } // end of init
+            }; // end of init
 
             // Start the Controller
             Common.init($scope, init);
@@ -134,4 +121,4 @@ define(['app', 'angular'], function(app, angular)
             // Focus.on('#gbox_office input[name=grid_search]');
         }
     ]);
-}); 
+});
