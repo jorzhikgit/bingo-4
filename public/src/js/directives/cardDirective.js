@@ -15,10 +15,10 @@ define([
                 transclude: true,
 
                 scope: {
-                    numbers: '=',
-                    letters: '=',
-                    selected: '=',
-                    showExtension: '@' // Letter Extension
+                    numbers: '=?',
+                    letters: '=?',
+                    selected: '=?',
+                    showExtension: '@?' // Letter Extension
                 },
 
                 template: cardTemplate,
