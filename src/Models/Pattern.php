@@ -20,6 +20,10 @@ class Pattern extends BaseModel
 
     public function plots()
     {
+        if (!array_key_exists('plots', $this->attributes) || strlen($this->attributes['plots']) == 0) {
+            return [];
+        }
+
         return explode(static::PLOT_DELIM, $this->getRawPlots());
     }
 }
