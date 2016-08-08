@@ -23,6 +23,12 @@ class PatternsController extends \BaseController
 
         $card->setPlotsViaNumbers($pattern->play->numbers());
 
-        return (new PatternPlotter)->compare($pattern, $card);
+        return [
+            'pattern'       => $pattern->getAttributes(),
+            'card'          => $card,
+            'pattern_plots' => $patternPlots = (new PatternPlotter)->plot($pattern),
+            'card_plots'    => $cardPlots = (new PatternPlotter)->compare($pattern, $card),
+            'status'        => ($patternPlots == $cardPlots) ? 'Matched' : 'Mis-match'
+        ];
     }
 }
