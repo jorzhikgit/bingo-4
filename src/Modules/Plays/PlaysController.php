@@ -9,7 +9,7 @@ class PlaysController extends \BaseController
 {
     public function index()
     {
-        $q = Play::query(;
+        $q = Play::with('pattern');
 
         if ($status = \Input::get('status')) {
             $q->where('status', $status);
@@ -20,10 +20,11 @@ class PlaysController extends \BaseController
 
     public function show($id)
     {
-        $play = Play::findOrFail($id)->with('pattern');
+        $play = Play::with('pattern')->findOrFail($id);
 
         $play->setAppends(['number_objects']);
         $play->setHidden(['numbers']);
+        $play->pattern ? $play->pattern->setAppends(['selected_plots']) : null;
 
         return $play;
     }

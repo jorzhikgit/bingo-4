@@ -37,7 +37,11 @@ define(['app', 'angular'], function(app, angular)
         function($scope, $timeout, $state, $stateParams, $templateCache, Common, Modal, Gritter, Focus, Blocker, playService, Model, GLOBAL, Restangular) {
 
             var init = function() {
+                var setPattern = function (pattern) {
+                    $scope.pattern = pattern;
+                };
 
+                $scope.pattern = {};
                 $scope.state = {};
 
                 // templates
@@ -57,7 +61,7 @@ define(['app', 'angular'], function(app, angular)
                 $scope.getPlays = function () {
                     Restangular.one('plays').get().then(function(result){
                         $scope.plays = result.data;
-                        if($stateParams.id){
+                        if ($stateParams.id) {
                             $scope.playId = parseInt($stateParams.id);
                             $scope.getDrawedNumbers();
                         }
@@ -79,6 +83,8 @@ define(['app', 'angular'], function(app, angular)
                         });
                         if($drawedNumbersLength > 0)
                             $scope.latestDraw = drawedNumbers.number_objects[$drawedNumbersLength];
+
+                        setPattern(drawedNumbers.pattern);
                     });
                 };
 
@@ -105,8 +111,8 @@ define(['app', 'angular'], function(app, angular)
                         resolve    : {
                             fromParent : function () {
                                 return {
-                                    patternUrl : 'ns.gif',
-                                    cardId : $scope.cardId
+                                    cardId : $scope.cardId,
+                                    pattern: $scope.pattern
                                 };
                             }
                         }

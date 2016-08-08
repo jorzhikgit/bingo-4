@@ -2,6 +2,8 @@
 
 namespace SedpMis\Bingo\Models;
 
+use SedpMis\Bingo\Modules\Patterns\PatternPlotter;
+
 class Pattern extends BaseModel
 {
     protected $fillable = ['plots'];
@@ -13,17 +15,6 @@ class Pattern extends BaseModel
         return $this->belongsTo(Play::class);
     }
 
-    public function positions($column)
-    {
-        $plots = array_filter($this->attributes['plots'], function ($plot) use ($column) {
-            return $plot[0] == $column;
-        });
-
-        return array_map(function ($plot) {
-            return $plot[1];
-        }, $plots);
-    }
-
     public function getRawPlots()
     {
         return $this->attributes['plots'];
@@ -31,6 +22,15 @@ class Pattern extends BaseModel
 
     public function plots()
     {
+        if (!array_key_exists('plots', $this->attributes) || strlen($this->attributes['plots']) == 0) {
+            return [];
+        }
+
         return explode(static::PLOT_DELIM, $this->getRawPlots());
+    }
+
+    public function getSelectedPlotsAttribute()
+    {
+        return (new PatternPlotter)->plot($this);
     }
 }
