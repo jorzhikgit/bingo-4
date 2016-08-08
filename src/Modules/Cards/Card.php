@@ -13,26 +13,26 @@ class Card extends BaseCard
 
     public function getBAttribute()
     {
-        return $this->arrayNumbers('b');
+        return $this->numbers('b');
     }
 
     public function getIAttribute()
     {
-        return $this->arrayNumbers('i');
+        return $this->numbers('i');
     }
 
     public function getNAttribute()
     {
-        return $this->arrayNumbers('n');
+        return $this->numbers('n');
     }
 
     public function getGAttribute()
     {
-        return $this->arrayNumbers('g');
+        return $this->numbers('g');
     }
 
     public function getOAttribute()
     {
-        return $this->arrayNumbers('o');
+        return $this->numbers('o');
     }
 }
