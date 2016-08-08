@@ -33,4 +33,19 @@ class Card extends Pattern
     {
         $this->{$column} = join(static::NUM_DELIM, $numbers);
     }
+
+    public function setPlotsViaNumbers($numbers)
+    {
+        $plots = [];
+
+        foreach ($numbers as $number) {
+            $column = number_column($number);
+            $flipped = array_flip($this->numbers($column));
+            if (array_key_exists($number, $flipped)) {
+                $plots[] = $column.$flipped[$number];
+            }
+        }
+
+        return $plots;
+    }
 }
