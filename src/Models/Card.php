@@ -8,7 +8,7 @@ class Card extends Pattern
 
     protected $fillable = ['b', 'i', 'n', 'g', 'o'];
 
-    protected $plots;
+    protected $rawPlots = '';
 
     public static function columns()
     {
@@ -68,7 +68,7 @@ class Card extends Pattern
 
     public function getRawPlots()
     {
-        return $this->plots;
+        return $this->rawPlots;
     }
 
     public function setPlotsViaNumbers($numbers)
@@ -83,7 +83,9 @@ class Card extends Pattern
             }
         }
 
-        $this->plots = join(',', $plots);
+        if (count($plots) > 0 ) {
+            $this->rawPlots = join(',', $plots);
+        }
 
         return $plots;
     }
