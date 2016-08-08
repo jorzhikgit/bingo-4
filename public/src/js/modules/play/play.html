@@ -27,18 +27,18 @@
 }
 .drawed-balls .bingo-balls:first-child {
     /*border: 1px solid green;*/
-    height: 120px;
-    width: 120px;
-    margin-top: -20px;
+    /*height: 120px;*/
+    /*width: 120px;*/
+    /*margin-top: -20px;*/
 }
 
 .drawed-balls .bingo-balls:first-child .drawed-column {
-    font-size: 2em;
-    padding-top: 18px;
+    /*font-size: 2em;*/
+    /*padding-top: 18px;*/
 }
 .drawed-balls .bingo-balls:first-child .drawed-number {
-    font-size: 4em;
-    margin-top: -26px; 
+    /*font-size: 4em;*/
+    /*margin-top: -26px; */
 }
 
 .bingo-balls {
@@ -129,9 +129,11 @@
     <div class="row">
         <div class="col-md-8">
             <select id="play" class="form-control" 
-                ng-options="p.id as ('Play #' + p.id) for p in plays" ng-model="playId">
+                ng-options="p.id as p.pattern.name for p in plays" 
+                ng-change="showDrawedNumbers()"
+                ng-model="playId">
                 <option value="">SELECT PLAY</option>
-            </select>
+            </select>   
         </div>
     </div>
     <ol class="breadcrumb">
@@ -184,7 +186,6 @@
                                 <!-- /.box-body -->
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="input-group input-group-sm">
                                 <input type="text" class="form-control" ng-model="cardNumber">
@@ -196,7 +197,6 @@
                               </div>
                         </div>
                     </div>
-                    
                     <div class="col-md-9">
                         <div class="box box-primary">
                             <div class="box-header with-border">
@@ -205,7 +205,7 @@
                             <div class="box-body box-profile">
                                 <div class=" drawed-balls row">
                                     <div class="bingo-balls {{(n.column)? 'letter-'+n.column : ''}} col-md-2" ng-repeat="n in drawedNumbers">
-                                        <center ng-show="latestDraw.column && latestDraw.number">
+                                        <center ng-show="(latestDraw.column && latestDraw.number) || drawedNumbers">
                                             <p class="drawed-column">
                                                 {{n.column}}
                                             </p>
@@ -220,7 +220,7 @@
                     </div>
                 </div>
             </div>
-
+        </div>
     </section>
 </section>
 
