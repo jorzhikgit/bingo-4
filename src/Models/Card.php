@@ -15,6 +15,36 @@ class Card extends Pattern
         return ['b', 'i', 'n', 'g', 'o'];
     }
 
+    public function getIdAttribute($id)
+    {
+        return num_zero_pad($id, 5);
+    }
+
+    public function getBAttribute()
+    {
+        return $this->numbers('b');
+    }
+
+    public function getIAttribute()
+    {
+        return $this->numbers('i');
+    }
+
+    public function getNAttribute()
+    {
+        return $this->numbers('n');
+    }
+
+    public function getGAttribute()
+    {
+        return $this->numbers('g');
+    }
+
+    public function getOAttribute()
+    {
+        return $this->numbers('o');
+    }
+
     public function numbers($column)
     {
         return explode(static::NUM_DELIM, $this->attributes[$column]);
