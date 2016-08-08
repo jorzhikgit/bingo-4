@@ -55,7 +55,7 @@ class Card extends Pattern
         $numbers = [];
 
         foreach (static::columns() as $column) {
-            $numbers = array_merge($this->numbers($column));
+            $numbers = array_merge($numbers, $this->numbers($column));
         }
 
         return $numbers;

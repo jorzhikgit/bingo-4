@@ -1,4 +1,8 @@
 <style>
+    table.tall td {
+        height: 74px !important;
+    }
+
     td, th {
         vertical-align: middle !important;
         text-align: center !important;
@@ -21,7 +25,7 @@
         border-radius: 0px;
     }
 
-    td.card-number {
+    table td.card-number {
         font-weight: normal;
         font-size: 15px !important;
         height: 15px !important;
@@ -33,7 +37,7 @@
       background-color: #e0cf04 !important;
     }
 </style>
-<table class="table table-bordered" style="border: 1px solide #ddd">
+<table ng-class="{tall: tall}" class="table table-bordered" style="border: 1px solide #ddd">
     <tbody>
         <tr>
             <th><span class="badge bg-blue bigger-190"><strong>{{letters.b[0]}}</strong></span></th>
