@@ -139,9 +139,9 @@
     <div class="row">
         <div class="col-md-8">
             <select id="play" class="form-control" 
-                ng-options="p.id as p.pattern.name for p in plays" 
+                ng-options="p as p.pattern.name for p in plays" 
                 ng-change="showDrawedNumbers()"
-                ng-model="playId">
+                ng-model="play">
                 <option value="">SELECT PLAY</option>
             </select>   
         </div>
@@ -161,7 +161,7 @@
              <div class="row" ng-hide="vars.validating">
                 <div class="col-md-12">
                     <div class="col-md-3">
-                        <div class="row">
+                        <div class="row" ng-show="play.id">
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
                                     <div class="bingo-ball-img {{(latestDraw.column)? 'letter-'+latestDraw.column : ''}} img-responsive img-circle">
@@ -181,7 +181,7 @@
                                         <source src="/audio/drum_roll.mp3" type='audio/mpeg; codecs="mp3"'>
                                     </audio>
                                     <button class="btn btn-primary btn-block" 
-                                        ng-disabled="!playId || (drawedNumbers.length  == 74) || (latestDraw && !latestDraw.show)"
+                                        ng-disabled="!play.id || (drawedNumbers.length  == 74) || (latestDraw && !latestDraw.show)"
                                         ng-click="drawNumber()">
                                         Draw Number
                                     </button>
@@ -189,10 +189,10 @@
                                 <!-- /.box-body -->
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" ng-show="play.id">
                             <div class="box box-primary">
                                 <div class="box-header with-border">
-                                  <h3 class="box-title">Pattern</h3>
+                                  <h3 class="box-title">{{'Pattern: ' + play.pattern.name}}</h3>
                                 </div>
                                 <div class="box-body box-profile">
                                     <card selected="pattern.selected_plots" show-extension></card>
@@ -200,7 +200,7 @@
                                 <!-- /.box-body -->
                             </div>
                         </div>
-                        <div class="row" ng-show="playId && latestDraw">
+                        <div class="row" ng-show="play.id && latestDraw">
                             <div class="input-group input-group-sm">
                                 <input type="text" class="form-control" ng-model="cardId">
                                     <span class="input-group-btn">
@@ -211,7 +211,7 @@
                               </div>
                         </div>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-9" ng-show="play.id">
                         <div class="box box-primary">
                             <div class="box-header with-border">
                               <h3 class="box-title">Drawed Numbers ({{drawedNumbers.length}})</h3>

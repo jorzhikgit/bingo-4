@@ -1,4 +1,4 @@
-define(['app', 'angular'], function(app, angular)
+define(['app', 'angular', 'underscore'], function(app, angular, _)
 {
     app.factory('playModel',
     [
@@ -63,6 +63,7 @@ define(['app', 'angular'], function(app, angular)
                 $scope.vars = {};
                 $scope.pattern = {};
                 $scope.state = {};
+                $scope.play = {};
 
                 // variable to holds the drawed numbers
                 $scope.drawedNumbers = [];
@@ -73,20 +74,24 @@ define(['app', 'angular'], function(app, angular)
                     Restangular.one('plays').get().then(function(result){
                         $scope.plays = result.data;
                         if ($stateParams.id) {
-                            $scope.playId = parseInt($stateParams.id);
+                            $scope.play.id = parseInt($stateParams.id);
                             $scope.getDrawedNumbers();
                         }
                     });
                 };
 
                 $scope.showDrawedNumbers = function () {
-                    $state.go('app.play', {id: $scope.playId}, {location: "replace", reload: false});
+                    $state.go("app.play", {id: $scope.play.id}, {location: "replace", reload: false, notify: false});
                 };
 
                 $scope.getDrawedNumbers = function() {
-                    if(!$scope.playId) return;
+                    if(!$scope.play.id) return;
 
-                    Restangular.one('plays').one($scope.playId.toString()).get().then(function(drawedNumbers){
+                    Restangular.one('plays').one($scope.play.id.toString()).get().then(function(drawedNumbers){
+                        if (!$scope.play.pattern) {
+                            $scope.play = _.findWhere($scope.plays, {id: $scope.play.id});
+                        }
+
                         $drawedNumbersLength = drawedNumbers.number_objects.length;
                         angular.forEach(drawedNumbers.number_objects, function(drawedNumber,key){
                             if(key < ($drawedNumbersLength - 1))
@@ -113,7 +118,7 @@ define(['app', 'angular'], function(app, angular)
                     playService.playDrumRoll();
                     $scope.drawedNumbers.unshift($scope.latestDraw);
                     $scope.latestDraw = {};
-                    Model.one($scope.playId).one('pick_a_number').post().then(function(data){
+                    Model.one($scope.play.id).one('pick_a_number').post().then(function(data){
                         var timeout = $timeout(function() {
                             $scope.latestDraw = data;
                             playService.removeAttribute();
@@ -130,7 +135,7 @@ define(['app', 'angular'], function(app, angular)
                             Focus.on('#btn-close-validation');
 
                             $scope.vars.validating = true;
-                            
+
                             if (res.status === 'Matched') {
                                 $scope.vars.matched = true;
                                 return;
