@@ -129,9 +129,10 @@ define(['app', 'angular'], function(app, angular)
 
                             Focus.on('#btn-close-validation');
 
+                            $scope.vars.validating = true;
+                            
                             if (res.status === 'Matched') {
                                 $scope.vars.matched = true;
-                                $scope.vars.validating = true;
                                 return;
                             }
 
