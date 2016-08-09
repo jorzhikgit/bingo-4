@@ -55,9 +55,6 @@ define(['app', 'angular'], function(app, angular)
                     play: function() {
                         $state.go('app.play');
                     },
-                    validate: function() {
-                        $state.go('app.validate');
-                    },
                     maker: function() {
                         $state.go('app.maker');
                     },

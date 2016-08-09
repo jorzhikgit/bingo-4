@@ -38,7 +38,6 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a ui-sref="app.play"><i class="fa fa-play"></i> Play</a></li>
-                    <li><a ui-sref="app.validate"><i class="fa fa-pencil"></i> Process</a></li>
 
                     <li><a ui-sref="app.maker"><i class="fa fa-legal"></i> Card Maker</a></li>
                 </ul>
