@@ -14,6 +14,25 @@ define(['app', 'angular'], function(app, angular)
         function () {
             var _this = this;
 
+            _this.changeImageSrc = function() {
+                $('.bingo-ball-img').css(
+                    {
+                        'background': 'url(/images/random.gif)',
+                        'background-size' : '100% 100%',
+                        'background-repeat' : 'no-repeat',
+                    }
+                );
+            };
+
+            _this.removeAttribute = function () {
+                $('.bingo-ball-img').removeAttr('style');
+            }
+
+            _this.playDrumRoll = function () {
+                $('#drum-roll').load();
+                setTimeout($('#drum-roll')[0].play(), 100);
+            }
+
         }
     ]);
 
@@ -49,13 +68,6 @@ define(['app', 'angular'], function(app, angular)
                 $scope.drawedNumbers = [];
                 $scope.plays = [];
 
-                $scope.drawNumber = function () {
-                    $scope.drawedNumbers.unshift($scope.latestDraw); 
-                    Model.one($scope.playId).one('pick_a_number').post().then(function(data){
-                        data.show = false;
-                        $scope.latestDraw = data;
-                    });
-                };
 
                 $scope.getPlays = function () {
                     Restangular.one('plays').get().then(function(result){
@@ -97,9 +109,16 @@ define(['app', 'angular'], function(app, angular)
                 };
 
                 $scope.drawNumber = function () {
-                    $scope.drawedNumbers.unshift($scope.latestDraw); 
+                    playService.changeImageSrc();
+                    playService.playDrumRoll();
+                    $scope.drawedNumbers.unshift($scope.latestDraw);
+                    $scope.latestDraw = {};
                     Model.one($scope.playId).one('pick_a_number').post().then(function(data){
-                        $scope.latestDraw = data;
+                        var timeout = $timeout(function() {
+                            $scope.latestDraw = data;
+                            playService.removeAttribute();
+                        }, 2000);
+                        timeout.cancel();
                     });
                 };
 

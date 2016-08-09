@@ -173,13 +173,15 @@
                                                 {{latestDraw.show ? latestDraw.number : '?'}}
                                             </p>
                                         </center>
-                                        <center ng-show="!latestDraw.column && !latestDraw.number">
+                                        <center ng-show="(!latestDraw.column && !latestDraw.number)">
                                             <p class="question">?</p>
                                         </center>
                                     </div>
-
+                                    <audio controls id="drum-roll" class="hidden">
+                                        <source src="/audio/drum_roll.mp3" type='audio/mpeg; codecs="mp3"'>
+                                    </audio>
                                     <button class="btn btn-primary btn-block" 
-                                        ng-disabled="!playId || (drawedNumbers.length  == 75) || (latestDraw && !latestDraw.show)"
+                                        ng-disabled="!playId || (drawedNumbers.length  == 74) || (latestDraw && !latestDraw.show)"
                                         ng-click="drawNumber()">
                                         Draw Number
                                     </button>
