@@ -56,6 +56,7 @@ define(['app', 'angular'], function(app, angular)
                 $scope.drawNumber = function () {
                     $scope.drawedNumbers.unshift($scope.latestDraw); 
                     Model.one($scope.playId).one('pick_a_number').post().then(function(data){
+                        data.show = false;
                         $scope.latestDraw = data;
                     });
                 };

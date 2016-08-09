@@ -69,7 +69,7 @@
     margin-top: -48px;
     color: #000;
     font-weight: bolder;
-    padding-bottom: 100px;
+    /*padding-bottom: 100px;*/
 }
 
 .drawed-column {
@@ -169,8 +169,8 @@
                                             <p class="latest-column">
                                                 {{latestDraw.column}}
                                             </p>
-                                            <p class="latest-number">
-                                                {{latestDraw.number}}
+                                            <p class="latest-number" ng-click="latestDraw.show = true" style="cursor: pointer;">
+                                                {{latestDraw.show ? latestDraw.number : '?'}}
                                             </p>
                                         </center>
                                         <center ng-show="!latestDraw.column && !latestDraw.number">
@@ -179,7 +179,7 @@
                                     </div>
 
                                     <button class="btn btn-primary btn-block" 
-                                        ng-disabled="!playId || (drawedNumbers.length  == 75) "
+                                        ng-disabled="!playId || (drawedNumbers.length  == 75) || !latestDraw.show"
                                         ng-click="drawNumber()">
                                         Draw Number
                                     </button>
