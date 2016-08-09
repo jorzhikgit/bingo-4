@@ -193,12 +193,12 @@
                                   <h3 class="box-title">Pattern</h3>
                                 </div>
                                 <div class="box-body box-profile">
-                                    <card selected="pattern.selected_plots"></card>
+                                    <card selected="pattern.selected_plots" show-extension></card>
                                 </div>
                                 <!-- /.box-body -->
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" ng-show="playId">
                             <div class="input-group input-group-sm">
                                 <input type="text" class="form-control" ng-model="cardId">
                                     <span class="input-group-btn">
@@ -249,7 +249,7 @@
                               <h3 class="box-title">Pattern</h3>
                             </div>
                             <div class="box-body box-profile">
-                                <card selected="pattern.selected_plots" tall></card>
+                                <card selected="pattern.selected_plots" tall show-extension></card>
                             </div>
 
                             <div class="row">
@@ -273,7 +273,7 @@
                               <h3 class="box-title">Card</h3>
                             </div>
                             <div class="box-body box-profile">
-                                <card numbers="compare.card" selected="compare.card_plots" tall></card>
+                                <card numbers="compare.card" selected="compare.card_plots" tall show-extension></card>
                             </div>
                         </div>
 
