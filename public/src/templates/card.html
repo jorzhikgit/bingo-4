@@ -1,6 +1,7 @@
 <style>
-    table.tall td {
-        height: 74px !important;
+    table.tall td, table.tall th {
+        height: 75px !important;
+        width: 75px !important;
     }
 
     td, th {
@@ -9,6 +10,15 @@
         width: 50px !important;
         height: 50px !important;
         background-color: white !important;
+    }
+
+     table.black td, table.black th {
+        background-color: black !important;
+        color: white !important;
+    }
+
+    th {
+        font-size: 20px;
     }
 
     td {
@@ -36,8 +46,12 @@
     .bg-yellow {
       background-color: #e0cf04 !important;
     }
+
+    small.extension {
+        font-size: 25%;
+    }
 </style>
-<table ng-class="{tall: tall}" class="table table-bordered" style="border: 1px solide #ddd">
+<table ng-class="{tall: tall, black: black}" class="table table-bordered" style="border: 1px solide #ddd">
     <tbody>
         <tr>
             <th><span class="badge bg-blue bigger-190"><strong>{{letters.b[0]}}</strong></span></th>
@@ -46,9 +60,11 @@
             <th><span class="badge bg-orange bigger-190"><strong>{{letters.g[0]}}</strong></span></th>
             <th>
                 <strong>
-                    <span class="badge bg-purple bigger-190">&nbsp;{{letters.o[0]}}&nbsp;</span>    
+                    <span class="badge bg-purple bigger-190">
+                        {{letters.o[0].trim()}}<small class="extension" ng-show="extension">{{letters.o[1]}}</small>
+                    </span>    
                 </strong>
-                <small ng-show="extension">{{letters.o[1]}}</small>
+                
             </th>
         </tr>
         <tr>
@@ -70,7 +86,7 @@
         <tr>
             <td ng-class="{ 'bg-red': selected.b[2] }">{{numbers.b[2]}}</td>
             <td ng-class="{ 'bg-red': selected.i[2] }">{{numbers.i[2]}}</td>
-            <td><img src="images/logo.png"></td>
+            <td style="background-color: white !important"><img src="images/logo.png"></td>
             <td ng-class="{ 'bg-red': selected.g[2] }">{{numbers.g[2]}}</td>
             <td ng-class="{ 'bg-red': selected.o[2] }">{{numbers.o[2]}}</td>
         </tr>
