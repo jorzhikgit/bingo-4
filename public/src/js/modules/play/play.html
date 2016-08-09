@@ -136,10 +136,12 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
+    <div jwerty="ENTER" key-event="drawNumber()" key-name="draw.number" key-bind="document"></div>
+
     <div class="row">
         <div class="col-md-8">
             <select id="play" class="form-control" 
-                ng-options="p as p.pattern.name for p in plays" 
+                ng-options="p as p.pattern.name for p in plays track by p.id" 
                 ng-change="showDrawedNumbers()"
                 ng-model="play">
                 <option value="">SELECT PLAY</option>
@@ -181,8 +183,8 @@
                                         <source src="/audio/drum_roll.mp3" type='audio/mpeg; codecs="mp3"'>
                                     </audio>
                                     <button class="btn btn-primary btn-block" 
-                                        ng-disabled="!playId || (drawedNumbers.length  == 74)"
-                                        ng-click="latestDraw.show ? drawNumber() : revealNumber()">
+                                        ng-disabled="!play.id || (drawedNumbers.length  == 74)"
+                                        ng-click="drawNumber()">
                                         {{latestDraw.show ? 'Draw' : 'Reveal'}} Number
                                     </button>
                                 </div>

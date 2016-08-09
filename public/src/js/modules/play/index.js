@@ -4,6 +4,7 @@
 define([
 	
 	'../../directives/cardDirective',
+	'../../directives/jwertyDirective',
 	'./Play',
 
 

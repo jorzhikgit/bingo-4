@@ -60,6 +60,10 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                     $scope.pattern = pattern;
                 };
 
+                var revealNumber = function () {
+                    $scope.latestDraw.show = true;
+                };
+
                 $scope.vars = {};
                 $scope.pattern = {};
                 $scope.state = {};
@@ -73,19 +77,20 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 $scope.getPlays = function () {
                     Restangular.one('plays').get().then(function(result){
                         $scope.plays = result.data;
+
                         if ($stateParams.id) {
                             $scope.play.id = parseInt($stateParams.id);
                             $scope.getDrawedNumbers();
+                            return;
                         }
-                    });
-                };
 
-                $scope.revealNumber = function () {
-                    $scope.latestDraw.show = true;
+                        Focus.on('#play');
+                    });
                 };
 
                 $scope.showDrawedNumbers = function () {
                     $state.go("app.play", {id: $scope.play.id}, {location: "replace", reload: false, notify: false});
+                    $scope.getDrawedNumbers();
                 };
 
                 $scope.getDrawedNumbers = function() {
@@ -118,6 +123,15 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 };
 
                 $scope.drawNumber = function () {
+                    if (!$scope.play.id || ($scope.drawedNumbers.length  == 74)) {
+                        return;
+                    }
+
+                    if (!$scope.latestDraw.show) {
+                        revealNumber();
+                        return;
+                    }
+
                     playService.changeImageSrc();
                     playService.playDrumRoll();
                     $scope.drawedNumbers.unshift($scope.latestDraw);
