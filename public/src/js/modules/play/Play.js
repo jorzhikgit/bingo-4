@@ -60,13 +60,9 @@ define(['app', 'angular'], function(app, angular)
                     $scope.pattern = pattern;
                 };
 
+                $scope.vars = {};
                 $scope.pattern = {};
                 $scope.state = {};
-
-                // templates
-                $scope.templates  = {
-                    validation_form  : GLOBAL.baseModulePath + 'play/modal/validation_form.html',
-                };
 
                 // variable to holds the drawed numbers
                 $scope.drawedNumbers = [];
@@ -126,25 +122,30 @@ define(['app', 'angular'], function(app, angular)
                     });
                 };
 
-                $scope.validateCard = function() {
-                    var modalOptions = {
-                        template   : $templateCache.get("validation-form.html"),
-                        controller : 'ValidateController',
-                        windowClass: 'validation-modal-window',
-                        resolve    : {
-                            fromParent : function () {
-                                return {
-                                    cardId : $scope.cardId,
-                                    pattern: $scope.pattern
-                                };
-                            }
-                        }
-                    };
-
-                    Modal.showModal(modalOptions).then(
+                $scope.validateCard = function () {
+                    Restangular.one('patterns').one($scope.pattern.id.toString()).one('compare').one($scope.cardId.toString()).get().then(
                         function (res) {
+                            $scope.compare = res;
+
+                            Focus.on('#btn-close-validation');
+
+                            if (res.status === 'Matched') {
+                                $scope.vars.matched = true;
+                                $scope.vars.validating = true;
+                                return;
+                            }
+
+                            $scope.vars.matched = false;
+                        },
+
+                        function () {
+
                         }
-                    )
+                    );
+                };
+
+                $scope.closeValidation = function () {
+                    $scope.vars.validating = false;
                 };
 
                 $scope.getPlays();
@@ -153,8 +154,6 @@ define(['app', 'angular'], function(app, angular)
 
             // Start the Controller
             Common.init($scope, init);
-
-            // Focus.on('#gbox_office input[name=grid_search]');
         }
     ]);
 });
