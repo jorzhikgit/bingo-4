@@ -69,7 +69,7 @@
     margin-top: -48px;
     color: #000;
     font-weight: bolder;
-    padding-bottom: 100px;
+    padding-bottom: 10px;
 }
 
 .drawed-column {
@@ -169,17 +169,19 @@
                                             <p class="latest-column">
                                                 {{latestDraw.column}}
                                             </p>
-                                            <p class="latest-number">
-                                                {{latestDraw.number}}
+                                            <p class="latest-number" ng-click="latestDraw.show = true" style="cursor: pointer;">
+                                                {{latestDraw.show ? latestDraw.number : '?'}}
                                             </p>
                                         </center>
-                                        <center ng-show="!latestDraw.column && !latestDraw.number">
+                                        <center ng-show="(!latestDraw.column && !latestDraw.number)">
                                             <p class="question">?</p>
                                         </center>
                                     </div>
-
+                                    <audio controls id="drum-roll" class="hidden">
+                                        <source src="/audio/drum_roll.mp3" type='audio/mpeg; codecs="mp3"'>
+                                    </audio>
                                     <button class="btn btn-primary btn-block" 
-                                        ng-disabled="!playId || (drawedNumbers.length  == 75) "
+                                        ng-disabled="!playId || (drawedNumbers.length  == 74) || (latestDraw && !latestDraw.show)"
                                         ng-click="drawNumber()">
                                         Draw Number
                                     </button>
@@ -212,7 +214,7 @@
                     <div class="col-md-9">
                         <div class="box box-primary">
                             <div class="box-header with-border">
-                              <h3 class="box-title">Drawed Number</h3>
+                              <h3 class="box-title">Drawed Numbers ({{drawedNumbers.length}})</h3>
                             </div>
                             <div class="box-body box-profile">
                                 <div class=" drawed-balls row">
