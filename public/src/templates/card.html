@@ -9,12 +9,16 @@
         text-align: center !important;
         width: 50px !important;
         height: 50px !important;
-        background-color: black !important;
+        background-color: white !important;
     }
 
-     table.black td, table.black th {
+    table.black td, table.black th {
         background-color: black !important;
         color: yellow !important;
+    }
+
+    table.black .badge {
+        color: black !important;
     }
 
     th {
@@ -51,13 +55,10 @@
         font-size: 25%;
     }
 
-    .table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
+    table.black.table-bordered>thead>tr>th, table.black.table-bordered>tbody>tr>th, table.black.table-bordered>tfoot>tr>th, table.black.table-bordered>thead>tr>td, table.black.table-bordered>tbody>tr>td, table.black.table-bordered>tfoot>tr>td {
         border: 1px solid yellow;
     }
-
-    bg-red, .bg-yellow, .bg-aqua, .bg-blue, .bg-light-blue, .bg-green, .bg-navy, .bg-teal, .bg-olive, .bg-lime, .bg-orange, .bg-fuchsia, .bg-purple, .bg-maroon, .bg-black {
-        color: #000000 !important;
-    }
+    
 </style>
 <table ng-class="{tall: tall, black: black}" class="table table-bordered" style="border: 1px solide #ddd">
     <tbody>
@@ -94,7 +95,7 @@
         <tr>
             <td ng-class="{ 'bg-red': selected.b[2] }">{{numbers.b[2]}}</td>
             <td ng-class="{ 'bg-red': selected.i[2] }">{{numbers.i[2]}}</td>
-            <td style="background-color: black !important"><img src="images/logo.png"></td>
+            <td><img src="images/logo.png"></td>
             <td ng-class="{ 'bg-red': selected.g[2] }">{{numbers.g[2]}}</td>
             <td ng-class="{ 'bg-red': selected.o[2] }">{{numbers.o[2]}}</td>
         </tr>
