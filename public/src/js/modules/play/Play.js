@@ -80,6 +80,10 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                     });
                 };
 
+                $scope.revealNumber = function () {
+                    $scope.latestDraw.show = true;
+                };
+
                 $scope.showDrawedNumbers = function () {
                     $state.go("app.play", {id: $scope.play.id}, {location: "replace", reload: false, notify: false});
                 };

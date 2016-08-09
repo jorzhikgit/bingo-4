@@ -31,7 +31,7 @@ class PlaysControllerTest extends TestCase
 
             $play = Play::first();
 
-            $this->assertEquals($count, count($play->arrayNumbers()));
+            $this->assertEquals($count, count($play->numbers()));
         }
     }
 }
