@@ -179,7 +179,7 @@
                                     </div>
 
                                     <button class="btn btn-primary btn-block" 
-                                        ng-disabled="!playId || (drawedNumbers.length  == 75) "
+                                        ng-disabled="!playId || (drawedNumbers.length  == 75) || isDrawing"
                                         ng-click="drawNumber()">
                                         Draw Number
                                     </button>

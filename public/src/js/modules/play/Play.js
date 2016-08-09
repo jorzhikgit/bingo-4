@@ -14,6 +14,20 @@ define(['app', 'angular'], function(app, angular)
         function () {
             var _this = this;
 
+            _this.changeImageSrc = function() {
+                $('.bingo-ball-img').css(
+                    {
+                        'background': 'url(/images/random.gif)',
+                        'background-size' : '100% 100%',
+                        'background-repeat' : 'no-repeat',
+                    }
+                );
+            };
+
+            _this.removeAttribute = function () {
+                $('.bingo-ball-img').removeAttr('style');
+            }
+
         }
     ]);
 
@@ -43,6 +57,7 @@ define(['app', 'angular'], function(app, angular)
 
                 $scope.pattern = {};
                 $scope.state = {};
+                $scope.isDrawing=false;
 
                 // templates
                 $scope.templates  = {
@@ -53,12 +68,6 @@ define(['app', 'angular'], function(app, angular)
                 $scope.drawedNumbers = [];
                 $scope.plays = [];
 
-                $scope.drawNumber = function () {
-                    $scope.drawedNumbers.unshift($scope.latestDraw); 
-                    Model.one($scope.playId).one('pick_a_number').post().then(function(data){
-                        $scope.latestDraw = data;
-                    });
-                };
 
                 $scope.getPlays = function () {
                     Restangular.one('plays').get().then(function(result){
@@ -100,9 +109,16 @@ define(['app', 'angular'], function(app, angular)
                 };
 
                 $scope.drawNumber = function () {
+                    playService.changeImageSrc();
+                    $scope.isDrawing=true;
                     $scope.drawedNumbers.unshift($scope.latestDraw); 
                     Model.one($scope.playId).one('pick_a_number').post().then(function(data){
-                        $scope.latestDraw = data;
+                        var timeout = $timeout(function() {
+                            $scope.latestDraw = data;
+                            $scope.isDrawing=false;
+                            playService.removeAttribute();
+                        }, 2000);
+                        timeout.cancel();
                     });
                 };
 
