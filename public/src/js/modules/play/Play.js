@@ -79,6 +79,10 @@ define(['app', 'angular'], function(app, angular)
                     });
                 };
 
+                $scope.revealNumber = function () {
+                    $scope.latestDraw.show = true;
+                };
+
                 $scope.showDrawedNumbers = function () {
                     $state.go('app.play', {id: $scope.playId}, {location: "replace", reload: false});
                 };
