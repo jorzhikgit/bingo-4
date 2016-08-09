@@ -28,6 +28,11 @@ define(['app', 'angular'], function(app, angular)
                 $('.bingo-ball-img').removeAttr('style');
             }
 
+            _this.playDrumRoll = function () {
+                $('#drum-roll').load();
+                setTimeout($('#drum-roll')[0].play(), 100);
+            }
+
         }
     ]);
 
@@ -57,7 +62,6 @@ define(['app', 'angular'], function(app, angular)
 
                 $scope.pattern = {};
                 $scope.state = {};
-                $scope.isDrawing=false;
 
                 // templates
                 $scope.templates  = {
@@ -110,12 +114,12 @@ define(['app', 'angular'], function(app, angular)
 
                 $scope.drawNumber = function () {
                     playService.changeImageSrc();
-                    $scope.isDrawing=true;
-                    $scope.drawedNumbers.unshift($scope.latestDraw); 
+                    playService.playDrumRoll();
+                    $scope.drawedNumbers.unshift($scope.latestDraw);
+                    $scope.latestDraw = {};
                     Model.one($scope.playId).one('pick_a_number').post().then(function(data){
                         var timeout = $timeout(function() {
                             $scope.latestDraw = data;
-                            $scope.isDrawing=false;
                             playService.removeAttribute();
                         }, 2000);
                         timeout.cancel();

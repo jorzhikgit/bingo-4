@@ -18,7 +18,7 @@ class Pattern extends BaseModel
     public function getRawPlots()
     {
         if (!array_key_exists('plots', $this->attributes) || strlen($this->attributes['plots']) == 0) {
-            return [];
+            return;
         }
 
         return $this->attributes['plots'];
@@ -26,7 +26,11 @@ class Pattern extends BaseModel
 
     public function plots()
     {
-        return explode(static::PLOT_DELIM, $this->getRawPlots());
+        if (!$rawPlots = $this->getRawPlots()) {
+            return [];
+        }
+
+        return explode(static::PLOT_DELIM, $rawPlots);
     }
 
     public function getSelectedPlotsAttribute()
