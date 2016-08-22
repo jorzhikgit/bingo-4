@@ -127,7 +127,7 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                         return;
                     }
 
-                    if (!$scope.latestDraw.show) {
+                    if ($scope.latestDraw && !$scope.latestDraw.show) {
                         revealNumber();
                         return;
                     }
