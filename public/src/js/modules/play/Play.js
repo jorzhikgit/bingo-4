@@ -96,12 +96,14 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 $scope.getDrawedNumbers = function() {
                     if(!$scope.play.id) return;
 
+                    $scope.latestDraw = {};
                     Restangular.one('plays').one($scope.play.id.toString()).get().then(function(drawedNumbers){
                         if (!$scope.play.pattern) {
                             $scope.play = _.findWhere($scope.plays, {id: $scope.play.id});
                         }
 
                         $drawedNumbersLength = drawedNumbers.number_objects.length;
+                        $scope.drawedNumbers = [];
                         angular.forEach(drawedNumbers.number_objects, function(drawedNumber,key){
                             if(key < ($drawedNumbersLength - 1))
                                 $scope.drawedNumbers.unshift(drawedNumber);
