@@ -57,6 +57,9 @@ define(['app', 'angular'], function(app, angular)
                         $state.go('app.play');
                     },
                     maker: function() {
+                        if (GLOBAL.accessLevel < 3) {
+                            return;
+                        }
                         $state.go('app.maker');
                     },
                     logout: function() {
@@ -65,6 +68,9 @@ define(['app', 'angular'], function(app, angular)
                 };
 
                 $scope.resetPlays = function () {
+                    if (GLOBAL.accessLevel < 2) {
+                        return;
+                    }
                     Modal.ask('WARNING! ' +
                         'Resetting plays permanently delete drawed numbers from all the plays. ' +
                         'This action cannot be undone. Do you really want to reset plays?').then(function () {
