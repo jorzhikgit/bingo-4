@@ -141,7 +141,7 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                             $scope.latestDraw = data;
                             playService.removeAttribute();
                         }, 2000);
-                        timeout.cancel();
+                        $timeout.cancel();
                     });
                 };
 
