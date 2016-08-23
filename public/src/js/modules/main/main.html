@@ -10,6 +10,7 @@
 
 <div jwerty="F1" key-event="goto.play()" key-name="goto.play" key-bind="document"></div>
 <div jwerty="F2" key-event="goto.maker()" key-name="goto.maker" key-bind="document"></div>
+<div jwerty="F4" key-event="resetPlays()" key-name="resetPlays" key-bind="document"></div>
 
 <aside class="right-side" ui-view="content">
     <section class="content-header">
@@ -41,7 +42,12 @@
                         <a class="btn btn-app" ui-sref="app.maker">
                             <span class="badge bg-aqua">F2</span>
                             <i class="fa fa-legal"></i> Card Maker
-                        </a>                        
+                        </a>
+
+                        <a ng-click="resetPlays()" class="btn btn-app">
+                            <span class="badge bg-aqua">F4</span>
+                            <i class="fa fa-times"></i> Reset Plays
+                        </a>
                         
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->

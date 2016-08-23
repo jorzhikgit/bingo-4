@@ -79,7 +79,10 @@ Route::group(['before' => 'auth'], function () {
     Route::get('plays/{play}', 'SedpMis\Bingo\Modules\Plays\PlaysController@show');
     Route::post('plays/{play}/pick_a_number', 'SedpMis\Bingo\Modules\Plays\PlaysController@pickANumber');
 
+    Route::delete('plays', 'SedpMis\Bingo\Modules\Plays\PlaysController@resetPlays');
+
     Route::get('patterns/{pattern}', 'SedpMis\Bingo\Modules\Patterns\PatternsController@show');
     Route::get('patterns/{pattern}/compare/{card}', 'SedpMis\Bingo\Modules\Patterns\PatternsController@compare');
+
 
 }); // End of Authenticated get

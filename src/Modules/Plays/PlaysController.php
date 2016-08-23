@@ -55,4 +55,11 @@ class PlaysController extends \BaseController
             'number' => $number
         ];
     }
+
+    public function resetPlays()
+    {
+        Play::query()->update(['numbers' => '']);
+
+        return 'Successfully Reset!';
+    }
 }
