@@ -44,7 +44,7 @@
                             <i class="fa fa-legal"></i> Card Maker
                         </a>
 
-                        <a ng-click="resetPlays()" class="btn btn-app">
+                        <a ng-click="resetPlays()" class="btn btn-app" ng-if="accessLevel >= 2">
                             <span class="badge bg-aqua">F4</span>
                             <i class="fa fa-times"></i> Reset Plays
                         </a>
