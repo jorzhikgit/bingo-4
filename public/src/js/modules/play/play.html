@@ -185,8 +185,9 @@
                                     <button class="btn btn-primary btn-block" 
                                         ng-disabled="!play.id || (drawedNumbers.length  == 74)"
                                         ng-click="drawNumber()">
-                                        {{(!latestDraw || latestDraw.show) ? 'Draw' : 'Reveal'}} Number
+                                        {{(!latestDraw.number || latestDraw.show) ? 'Draw' : 'Reveal'}} Number
                                     </button>
+                                    --{{latestDraw}}--
                                 </div>
                                 <!-- /.box-body -->
                             </div>
