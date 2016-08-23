@@ -29,8 +29,9 @@ define(['app', 'angular'], function(app, angular)
         'notifyService',
         'blockerService',
         'GLOBAL',
+        'Restangular',
 
-        function($scope, $compile, $timeout, $state, $stateParams, Modal, Focus, Gritter, Notify, Blocker, GLOBAL) {
+        function($scope, $compile, $timeout, $state, $stateParams, Modal, Focus, Gritter, Notify, Blocker, GLOBAL, Restangular) {
         	var start = function() {
 
                 $scope.templates = {
@@ -61,6 +62,16 @@ define(['app', 'angular'], function(app, angular)
                     logout: function() {
                         window.location.replace(Bingo.baseUrl + '/logout');
                     },
+                };
+
+                $scope.resetPlays = function () {
+                    Modal.ask('WARNING! ' +
+                        'Resetting plays permanently delete drawed numbers from all the plays. ' +
+                        'This action cannot be undone. Do you really want to reset plays?').then(function () {
+                        Restangular.one('plays').remove().then(function () {
+                            Gritter.show('info', 'Successfully Reset!');
+                        });
+                    });
                 };
 
                 $scope.info = {

@@ -2,6 +2,7 @@
 
 namespace SedpMis\Bingo\Modules\Plays;
 
+use Illuminate\Filesystem\Filesystem as File;
 use SedpMis\Bingo\Models\NumberPicker;
 use SedpMis\Bingo\Models\Play;
 
@@ -54,5 +55,13 @@ class PlaysController extends \BaseController
             'column' => format_number_column($number),
             'number' => $number
         ];
+    }
+
+    public function resetPlays()
+    {
+        (new File)->put(base_path('data_plays/'.date('Y-m-d_H-i-s').'.json'), Play::all()->toJson());
+        Play::query()->update(['numbers' => '']);
+
+        return 'Successfully Reset!';
     }
 }
