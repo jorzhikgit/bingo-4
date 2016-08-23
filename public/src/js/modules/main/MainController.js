@@ -65,7 +65,9 @@ define(['app', 'angular'], function(app, angular)
                 };
 
                 $scope.resetPlays = function () {
-                    Modal.ask("Do you really want to reset plays?").then(function () {
+                    Modal.ask('WARNING! ' +
+                        'Resetting plays permanently delete drawed numbers from all the plays. ' +
+                        'This action cannot be undone. Do you really want to reset plays?').then(function () {
                         Restangular.one('plays').remove().then(function () {
                             Gritter.show('info', 'Successfully Reset!');
                         });

@@ -18,7 +18,7 @@ define(['app', 'jqueryUi'], function(app)
             var modalOptions = {
                 closeButtonText: 'Close',
                 actionButtonText: 'OK',
-                headerText: 'PaQS',
+                headerText: 'Bingo Socials',
                 bodyText: 'Perform this action?'
             };
 
