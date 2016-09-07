@@ -1,6 +1,7 @@
 <?php
 
 use SedpMis\Bingo\Models\Pattern;
+use SedpMis\Bingo\Models\Play;
 
 class PatternsTableSeeder extends Seeder
 {
@@ -10,47 +11,47 @@ class PatternsTableSeeder extends Seeder
             [
                 'name' => 'S Bingo',
                 'plots' => [
-                    'b' => '0124',
-                    'i' => '024',
+                    'b' => '',
+                    'i' => '0124',
                     'n' => '04',
-                    'g' => '024',
-                    'o' => '0234'
+                    'g' => '0234',
+                    'o' => ''
                 ]
             ],[
                 'name' => 'E Bingo',
                 'plots' => [
-                    'b' => '*',
-                    'i' => '024',
+                    'b' => '',
+                    'i' => '*',
                     'n' => '04',
                     'g' => '024',
-                    'o' => '04'
+                    'o' => ''
                 ]
             ],[
                 'name' => 'D Bingo',
                 'plots' => [
-                    'b' => '*',
-                    'i' => '04',
+                    'b' => '',
+                    'i' => '*',
                     'n' => '04',
-                    'g' => '04',
-                    'o' => '123'
+                    'g' => '123',
+                    'o' => ''
                 ]
             ],[
                 'name' => 'P Bingo',
                 'plots' => [
-                    'b' => '*',
-                    'i' => '03',
+                    'b' => '',
+                    'i' => '*',
                     'n' => '03',
-                    'g' => '03',
-                    'o' => '12'
+                    'g' => '12',
+                    'o' => ''
                 ]
             ],[
                 'name' => 'L Bingo',
                 'plots' => [
-                    'b' => '*',
-                    'i' => '4',
+                    'b' => '',
+                    'i' => '*',
                     'n' => '4',
                     'g' => '4',
-                    'o' => '4'
+                    'o' => ''
                 ]
             ],[
                 'name' => 'S & E Bingo',
@@ -232,7 +233,12 @@ class PatternsTableSeeder extends Seeder
 
 	public function run()
 	{
+        if (Play::count() == 0) {
+            $this->call('PlaysTableSeeder');
+        }
+
         Pattern::unguard();
+        Pattern::truncate();
 
 		foreach($this->patterns() as $i => $pattern)
 		{
