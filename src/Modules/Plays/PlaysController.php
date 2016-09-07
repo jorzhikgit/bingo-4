@@ -25,7 +25,7 @@ class PlaysController extends \BaseController
 
         $play->setAppends(['number_objects']);
         $play->setHidden(['numbers']);
-        $play->pattern ? $play->pattern->setAppends(['selected_plots']) : null;
+        $play->pattern ? $play->pattern->setAppends(['max_numbers', 'selected_plots']) : null;
 
         return $play;
     }
