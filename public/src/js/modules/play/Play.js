@@ -125,6 +125,10 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 };
 
                 $scope.drawNumber = function () {
+                    if ($scope.isDrawingNumber) {
+                        return;
+                    }
+
                     if (!$scope.play.id || ($scope.drawedNumbers.length  == 74)) {
                         return;
                     }
