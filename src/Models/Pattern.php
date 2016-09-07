@@ -8,6 +8,8 @@ class Pattern extends BaseModel
 {
     protected $fillable = ['plots'];
 
+    protected $appends = ['max_numbers'];
+
     const PLOT_DELIM = ',';
 
     public function play()
@@ -47,5 +49,10 @@ class Pattern extends BaseModel
         }
 
         return array_keys($columns);
+    }
+
+    public function getMaxNumbersAttribute()
+    {
+        return count($this->plotColumns()) * 15;
     }
 }
