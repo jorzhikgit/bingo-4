@@ -8,8 +8,6 @@ class Pattern extends BaseModel
 {
     protected $fillable = ['plots'];
 
-    protected $appends = ['max_numbers'];
-
     const PLOT_DELIM = ',';
 
     public function play()
