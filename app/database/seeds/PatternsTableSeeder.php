@@ -254,7 +254,9 @@ class PatternsTableSeeder extends Seeder
             }
 
             foreach (str_split($indexStr) as $index) {
-                $plots[] = $column.$index;
+                if (is_numeric($index)) {
+                    $plots[] = $column.$index;
+                }
             }
         }
 
