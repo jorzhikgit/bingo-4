@@ -138,10 +138,12 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                     playService.playDrumRoll();
                     $scope.drawedNumbers.unshift($scope.latestDraw);
                     $scope.latestDraw = {};
+                    $scope.isDrawingNumber = true;
                     Model.one($scope.play.id).one('pick_a_number').post().then(function(data){
                         var timeout = $timeout(function() {
                             $scope.latestDraw = data;
                             playService.removeAttribute();
+                            $scope.isDrawingNumber = false;
                         }, 2000);
                         $timeout.cancel();
                     });
