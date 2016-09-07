@@ -69,7 +69,12 @@ class Card extends Pattern
 
     public function setColumn($column, $numbers)
     {
-        $this->{$column} = join(static::NUM_DELIM, $numbers);
+        $this->{$column} = static::stringifyNumbers($numbers);
+    }
+
+    public static function stringifyNumbers(array $numbers)
+    {
+        return join(static::NUM_DELIM, $numbers);
     }
 
     public function getRawPlots()
