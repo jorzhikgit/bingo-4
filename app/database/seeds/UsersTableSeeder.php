@@ -23,7 +23,6 @@ class UsersTableSeeder extends Seeder
             'change_password' => 0
         ]);
 
-
         User::create([
             'username' => 'trial',
             'password' => 'trial',
