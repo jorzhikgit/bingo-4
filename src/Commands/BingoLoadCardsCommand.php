@@ -50,7 +50,7 @@ class BingoLoadCardsCommand extends Command
         $cards = json_decode((new File)->get($filepath), true);
 
         if (($count = Card::count()) > 0 && !$this->confirm("Cards database has {$count} records. Do you wish to truncate table to load new cards? [Y/n]")) {
-            $this->comment("Transaction cancelled!");
+            $this->comment("Operation cancelled!");
             return;
         }
 

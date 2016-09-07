@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputOption;
 use SedpMis\Bingo\Modules\CardMaker\CardMaker;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Command;
-
+use SedpMis\Bingo\Models\Card;
 
 class BingoMakeCardsCommand extends Command
 {
@@ -57,8 +57,14 @@ class BingoMakeCardsCommand extends Command
 
         DB::beginTransaction();
 
+        if (($count = Card::count()) > 0 && !$this->confirm("Card has {$count} records. Do you wish to truncate cards to make a new set of cards? y/N", false)) {
+            $this->comment('Operation cancelled!');
+            return;
+        }
+
         $cards = $this->cardMaker->make($n = $this->argument('number'), $spaces);
 
+        Card::truncate();
         $cards->each(function ($card) {
             $card->save();
         });
