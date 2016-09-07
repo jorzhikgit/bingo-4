@@ -4,6 +4,8 @@ class DatabaseSeeder extends Seeder {
 
 	private $tables = [
 		'users',
+		'plays',
+		'patterns',
 	];
 
 	/**
