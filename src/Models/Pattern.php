@@ -37,4 +37,15 @@ class Pattern extends BaseModel
     {
         return (new PatternPlotter)->plot($this);
     }
+
+    public function plotColumns()
+    {
+        $columns = [];
+
+        foreach ($this->plots() as $plot) {
+            $columns[$plot[0]] = 1;
+        }
+
+        return array_keys($columns);
+    }
 }
