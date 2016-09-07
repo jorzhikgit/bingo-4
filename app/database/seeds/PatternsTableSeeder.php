@@ -232,8 +232,11 @@ class PatternsTableSeeder extends Seeder
 
 	public function run()
 	{
+        Pattern::unguard();
+
 		foreach($this->patterns() as $i => $pattern)
 		{
+            $pattern['id']      = $i+1;
             $pattern['play_id'] = $i+1;
             $pattern['plots']   = $this->parsePlots($pattern['plots']);
 

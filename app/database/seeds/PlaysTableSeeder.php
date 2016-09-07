@@ -6,10 +6,13 @@ class PlaysTableSeeder extends Seeder {
 
 	public function run()
 	{
-		foreach(range(1, count((new PatternsTableSeeder)->patterns())) as $index)
+		Play::unguard();
+
+		foreach(range(1, count((new PatternsTableSeeder)->patterns())) as $i => $index)
 		{
 			Play::create([
-                'status' => 'o',
+				'id'      => $i+1,
+                'status'  => 'o',
                 'numbers' => ''
 			]);
 		}
