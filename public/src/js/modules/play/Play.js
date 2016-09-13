@@ -11,7 +11,9 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
 
     app.service('playService',
     [
-        function () {
+        '$timeout',
+
+        function ($timeout) {
             var _this = this;
 
             _this.changeImageSrc = function() {
@@ -30,7 +32,10 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
 
             _this.playDrumRoll = function () {
                 $('#drum-roll').load();
-                setTimeout($('#drum-roll')[0].play(), 100);
+                var t = $timeout(function () {
+                    $('#drum-roll')[0].play();
+                    $timeout.cancel(t);
+                });
             }
 
         }
