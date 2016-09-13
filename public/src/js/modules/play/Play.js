@@ -134,13 +134,13 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                     }
 
                     if ($scope.latestDraw.number && !$scope.latestDraw.show) {
+                        $scope.drawedNumbers.unshift($scope.latestDraw);
                         revealNumber();
                         return;
                     }
 
                     playService.changeImageSrc();
                     playService.playDrumRoll();
-                    $scope.drawedNumbers.unshift($scope.latestDraw);
                     $scope.latestDraw = {};
                     $scope.isDrawingNumber = true;
                     Model.one($scope.play.id).one('pick_a_number').post().then(function(data){
@@ -174,6 +174,50 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
 
                         }
                     );
+                };
+
+
+                $scope.parseInt = function (number) {
+                    return parseInt(number);
+                };
+
+                $scope.isDrawn = function (number) {
+                    var isDrawn = false;
+                    angular.forEach($scope.drawedNumbers, function (numObj) {
+                        if (parseInt(numObj.number) === number) {
+                            isDrawn = true;
+                        }
+                    });
+
+                    return isDrawn;
+                };
+
+                $scope.columnStart = function (column) {
+                    var starts = {
+                        S: 0,
+                        E: 15,
+                        D: 30,
+                        P: 45,
+                        I: 60,
+                    };
+
+                    return starts[column]
+                };
+
+                $scope.range = function (start, end) {
+                    var arr = [];
+                    arr.push(start);
+                    while (start != end) {
+                        if (start < end) {
+                            start++;
+                        } else {
+                            start--;
+                        }
+
+                        arr.push(start);
+                    }
+
+                    return arr;
                 };
 
                 $scope.closeValidation = function () {

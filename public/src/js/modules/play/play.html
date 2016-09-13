@@ -134,6 +134,16 @@
         z-index: 999;
     }
 
+    table#drawed-numbers td {
+        font-size: 34px !important;
+        height: 5px !important;
+        /*color: #000 !important;*/
+    }
+
+    .drawn-number {
+        background-color: rgb(161, 246, 161) !important;
+    }
+
 </style>
 
 <!-- Content Header (Page header) -->
@@ -217,12 +227,9 @@
                     </div>
                     <div class="col-md-9" ng-show="play.id">
                         <div class="box box-primary">
-                            <div class="box-header with-border">
-                              <h3 class="box-title">Drawed Numbers ({{drawedNumbers.length}})</h3>
-                            </div>
                             <div class="box-body box-profile">
                                 
-                                <table width="100%" border="0">
+                                <table id="drawed-numbers" width="100%" border="1">
                                     <thead>
                                         <th ng-repeat="column in ['S', 'E', 'D', 'P', 'I']"
                                             width="20%"
@@ -238,20 +245,13 @@
                                             {{column}}
                                         </th>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td ng-repeat="column in ['S', 'E', 'D', 'P', 'I']" align="center" style="vertical-align: top !important;">
-                                                <div ng-repeat="n in (drawedNumbers | filter:{column: column} | orderBy:'number')"
-                                                    class="bingo-balls {{(n.column)? 'letter-'+n.column : ''}}">
-                                                    <center>
-                                                        <!-- <p class="drawed-column">
-                                                            {{n.column}}
-                                                        <p> -->
-                                                        <p class="drawed-number">
-                                                            {{n.number}}
-                                                        </p>
-                                                    </center>
-                                                </div>
+                                    <tbody style="">
+                                        <tr ng-repeat="number in range(1, 15)">
+                                            <td ng-repeat="column in ['S', 'E', 'D', 'P', 'I']"
+                                                ng-class="{
+                                                    'drawn-number': isDrawn(parseInt(number) + columnStart(column)),
+                                                }">
+                                                {{number + columnStart(column)}} 
                                             </td>
                                         </tr>
                                     </tbody>
