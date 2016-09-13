@@ -113,6 +113,11 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                             $scope.latestDraw = drawedNumbers.number_objects[$drawedNumbersLength-1];
 
                         setPattern(drawedNumbers.pattern);
+
+                        // call drawNumber to automatically reveal number on page reload
+                        if ($scope.latestDraw.number) {
+                            $scope.drawNumber();
+                        }
                     });
                 };
 
