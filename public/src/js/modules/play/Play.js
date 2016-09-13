@@ -60,8 +60,11 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 };
 
                 var revealNumber = function () {
+                    $scope.drawedNumbers.unshift($scope.latestDraw);
                     $scope.latestDraw.show = true;
                 };
+
+                $scope.revealNumber = revealNumber;
 
                 $scope.vars = {};
                 $scope.pattern = {};
@@ -138,7 +141,6 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                     }
 
                     if ($scope.latestDraw.number && !$scope.latestDraw.show) {
-                        $scope.drawedNumbers.unshift($scope.latestDraw);
                         revealNumber();
                         return;
                     }
