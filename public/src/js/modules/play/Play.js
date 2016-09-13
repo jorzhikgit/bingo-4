@@ -11,9 +11,7 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
 
     app.service('playService',
     [
-        '$timeout',
-
-        function ($timeout) {
+        function () {
             var _this = this,
                 audio = new Audio('../../audio/drum_roll.mp3');
 
@@ -29,12 +27,11 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
 
             _this.removeAttribute = function () {
                 $('.bingo-ball-img').removeAttr('style');
-            }
+            };
 
             _this.playDrumRoll = function () {
                 audio.play();
-            }
-
+            };
         }
     ]);
 
