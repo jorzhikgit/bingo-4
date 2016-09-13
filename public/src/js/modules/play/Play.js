@@ -134,7 +134,7 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                         return;
                     }
 
-                    if (!$scope.play.id || ($scope.drawedNumbers.length  == 74)) {
+                    if (!$scope.play.id || ($scope.drawedNumbers.length  == $scope.pattern.max_numbers)) {
                         return;
                     }
 

@@ -195,7 +195,7 @@
                                         <source src="/audio/drum_roll.mp3" type='audio/mpeg; codecs="mp3"'>
                                     </audio>
                                     <button class="btn btn-primary btn-block" 
-                                        ng-disabled="isDrawingNumber || !play.id || (drawedNumbers.length  == (pattern.max_numbers-1))"
+                                        ng-disabled="isDrawingNumber || !play.id || (drawedNumbers.length  == (pattern.max_numbers))"
                                         ng-click="drawNumber()">
                                         {{(!latestDraw.number || latestDraw.show) ? 'Draw' : 'Reveal'}} Number
                                     </button>
