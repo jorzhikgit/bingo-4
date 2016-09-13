@@ -42,11 +42,9 @@
 /*}*/
 
 .bingo-balls {
-    height: 60px;
-    margin-left: 60px;
-    margin-top: 30;
-    margin-right: -60px;
-    width: 40% !important;
+    height: 100px; 
+    width: 100px;
+    margin: 10;
 }
 .question {
     font-size: 8em;
@@ -75,7 +73,7 @@
 }
 
 .drawed-column {
-    font-size: 40px;
+    font-size: 2em;
     color: #000;
     float: inherit;
     padding-top: 9px;
@@ -84,7 +82,7 @@
     font-weight: bolder;
 }
 .drawed-number {
-    font-size: 50px;
+    font-size: 3.5em;
     margin-top: -26px;
     color: #000;
     font-weight: bolder;
@@ -134,6 +132,13 @@
         z-index: 999;
     }
 
+    .numbers-view-button {
+        right: 35px;
+        font-size: 20px;
+        position: absolute;
+        z-index: 999;
+    }
+
     table#drawed-numbers td {
         font-size: 34px !important;
         height: 5px !important;
@@ -170,6 +175,7 @@
 <section class="content no-outline" tabindex="-1">
     <section id="labels" ng-class="{ fullscreen: state.fullscreen }">
         <a href="" ng-hide="!state.fullscreen" ng-click="closeFullScreen()"><i class="fa fa-times close-button"></i></a>
+        <a href="" ng-click="numbersView = !numbersView"><i class="fa fa-eye numbers-view-button"></i></a>
 
         <div class="back" ng-class="{ 'container-preview': state.fullscreen }">
              <div class="row" ng-hide="vars.validating">
@@ -223,7 +229,28 @@
                         </div>
                     </div>
                     <div class="col-md-9" ng-show="play.id">
-                        <div class="box box-primary">
+
+                        <div ng-show="numbersView" class="box box-primary">
+                            <div class="box-header with-border">
+                            <h3 class="box-title">Drawed Numbers ({{drawedNumbers.length}})</h3>
+                            </div>
+                            <div class="box-body box-profile">
+                                <div class="drawed-balls row">
+                                  <div ng-repeat="n in drawedNumbers" class="bingo-balls {{(n.column)? 'letter-'+n.column : ''}} col-md-2">
+                                      <center ng-show="(latestDraw.column && latestDraw.number) || drawedNumbers">
+                                          <p class="drawed-column">
+                                              {{n.column}}
+                                          </p>
+                                          <p class="drawed-number">
+                                              {{n.number}}
+                                          </p>
+                                      </center>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-show="!numbersView" class="box box-primary">
                             <div class="box-body box-profile">
                                 
                                 <table id="drawed-numbers" width="100%" border="1">
