@@ -42,10 +42,11 @@
 /*}*/
 
 .bingo-balls {
-    /*height: 100px; */
-    margin-left: 20;
-    margin-right: -20;
-    width: 70% !important;
+    height: 60px;
+    margin-left: 60px;
+    margin-top: 30;
+    margin-right: -60px;
+    width: 40% !important;
 }
 .question {
     font-size: 8em;
@@ -221,7 +222,7 @@
                             </div>
                             <div class="box-body box-profile">
                                 
-                                <table width="100%" border="1">
+                                <table width="100%" border="0">
                                     <thead>
                                         <th ng-repeat="column in ['S', 'E', 'D', 'P', 'I']"
                                             width="20%"
@@ -243,9 +244,9 @@
                                                 <div ng-repeat="n in (drawedNumbers | filter:{column: column} | orderBy:'number')"
                                                     class="bingo-balls {{(n.column)? 'letter-'+n.column : ''}}">
                                                     <center>
-                                                        <p class="drawed-column">
+                                                        <!-- <p class="drawed-column">
                                                             {{n.column}}
-                                                        <p>
+                                                        <p> -->
                                                         <p class="drawed-number">
                                                             {{n.number}}
                                                         </p>
