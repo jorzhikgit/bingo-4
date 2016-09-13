@@ -14,7 +14,8 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
         '$timeout',
 
         function ($timeout) {
-            var _this = this;
+            var _this = this,
+                audio = new Audio('../../audio/drum_roll.mp3');
 
             _this.changeImageSrc = function() {
                 $('.bingo-ball-img').css(
@@ -31,11 +32,7 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
             }
 
             _this.playDrumRoll = function () {
-                $('#drum-roll').load();
-                var t = $timeout(function () {
-                    $('#drum-roll')[0].play();
-                    $timeout.cancel(t);
-                });
+                audio.play();
             }
 
         }
