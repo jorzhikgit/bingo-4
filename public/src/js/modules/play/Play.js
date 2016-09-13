@@ -12,8 +12,12 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
     app.service('playService',
     [
         function () {
-            var _this = this,
-                audio = new Audio('../../audio/drum_roll.mp3');
+            var _this = this;
+            var audio = {
+                draw: new Audio('../../audio/drum_roll.mp3'),
+                reveal: new Audio('../../audio/triangle_hit.mp3'),
+                match: new Audio('../../audio/tada.mp3'),
+            };
 
             _this.changeImageSrc = function() {
                 $('.bingo-ball-img').css(
@@ -29,8 +33,8 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 $('.bingo-ball-img').removeAttr('style');
             };
 
-            _this.playDrumRoll = function () {
-                audio.play();
+            _this.audio = function (name) {
+                return audio[name];
             };
         }
     ]);
@@ -60,6 +64,7 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 };
 
                 var revealNumber = function () {
+                    playService.audio('reveal').play();
                     $scope.drawedNumbers.unshift($scope.latestDraw);
                     $scope.latestDraw.show = true;
                 };
@@ -146,7 +151,7 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                     }
 
                     playService.changeImageSrc();
-                    playService.playDrumRoll();
+                    playService.audio('draw').play();
                     $scope.latestDraw = {};
                     $scope.isDrawingNumber = true;
                     Model.one($scope.play.id).one('pick_a_number').post().then(function(data){
