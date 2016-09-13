@@ -105,27 +105,19 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                     if(!$scope.play.id) return;
 
                     $scope.latestDraw = {};
-                    Restangular.one('plays').one($scope.play.id.toString()).get().then(function(drawedNumbers){
+                    Restangular.one('plays').one($scope.play.id.toString()).get().then(function(play){
                         if (!$scope.play.pattern) {
                             $scope.play = _.findWhere($scope.plays, {id: $scope.play.id});
                         }
 
-                        $drawedNumbersLength = drawedNumbers.number_objects.length;
-                        $scope.drawedNumbers = [];
-                        angular.forEach(drawedNumbers.number_objects, function(drawedNumber,key){
-                            if(key < ($drawedNumbersLength - 1))
-                                $scope.drawedNumbers.unshift(drawedNumber);
-                        });
+                        $scope.drawedNumbers = play.number_objects.reverse();
                         
-                        if($drawedNumbersLength > 0)
-                            $scope.latestDraw = drawedNumbers.number_objects[$drawedNumbersLength-1];
-
-                        setPattern(drawedNumbers.pattern);
-
-                        // call drawNumber to automatically reveal number on page reload
-                        if ($scope.latestDraw.number) {
-                            $scope.drawNumber();
+                        if (play.number_objects.length) {
+                            $scope.latestDraw = $scope.drawedNumbers[0];
+                            $scope.latestDraw.show = true;
                         }
+
+                        setPattern(play.pattern);
                     });
                 };
 
