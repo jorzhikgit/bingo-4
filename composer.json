@@ -7,7 +7,7 @@
 		"laravel/framework": "4.2.11",
 		"laracasts/utilities": "1.0.1",
 		"vlucas/phpdotenv": "^2.3",
-		"sedp-mis/lib": "dev-master",
+		"sedp-mis/lib": "1.*",
 		"ajcastro/fk-adder": "dev-master"
 	},
 	"require-dev": {
