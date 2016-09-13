@@ -16,7 +16,8 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
             var audio = {
                 draw: new Audio('../../audio/drum_roll.mp3'),
                 reveal: new Audio('../../audio/triangle_hit.mp3'),
-                match: new Audio('../../audio/tada.mp3'),
+                matched: new Audio('../../audio/tada.mp3'),
+                mis_matched: new Audio('../../audio/wrong_buzzer.mp3'),
             };
 
             _this.changeImageSrc = function() {
@@ -175,9 +176,11 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
 
                             if (res.status === 'Matched') {
                                 $scope.vars.matched = true;
+                                playService.audio('matched').play()
                                 return;
                             }
 
+                            playService.audio('mis_matched').play();
                             $scope.vars.matched = false;
                         },
 
