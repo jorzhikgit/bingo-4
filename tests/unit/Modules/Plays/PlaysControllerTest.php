@@ -8,7 +8,8 @@ class PlaysControllerTest extends TestCase
     {
         parent::setUp();
 
-        Artisan::call('migrate:refresh', ['--seed']);
+        Artisan::call('migrate:refresh');
+        $this->seed();
     }
 
     public function testPickANumber()
