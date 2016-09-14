@@ -10,7 +10,7 @@ class PatternsControllerTest/* extends TestCase*/
     {
         parent::setUp();
 
-        Artisan::call('migrate:refresh', ['--seed']);
+        Artisan::call('migrate:refresh');
 
         Card::create([
             'b' => '1,2,3,4,5', 
