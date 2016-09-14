@@ -29,6 +29,6 @@ class PatternsControllerTest/* extends TestCase*/
     {
         $pattern = Pattern::with('play')->first();
 
-        $this->call('GET', 'patterns/1/compare/1');
+        $this->call('GET', "patterns/{$pattern->id}/compare/1");
     }
 }
