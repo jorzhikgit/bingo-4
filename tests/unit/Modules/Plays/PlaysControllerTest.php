@@ -11,14 +11,8 @@ class PlaysControllerTest extends TestCase
         Artisan::call('migrate:refresh', ['--seed']);
     }
 
-    public function seedPlay()
-    {
-        $play = Play::create([]);
-    }
-
     public function testPickANumber()
     {
-        $this->seedPlay();
         $play = Play::first();
         $this->assertEquals(1, $play->id);
 
