@@ -4,6 +4,7 @@ namespace SedpMis\Bingo\Modules\Plays;
 
 use Illuminate\Filesystem\Filesystem as File;
 use SedpMis\Bingo\Models\NumberPicker;
+use SedpMis\Bingo\Models\WinningPattern;
 use SedpMis\Bingo\Models\Play;
 
 class PlaysController extends \BaseController
@@ -64,5 +65,19 @@ class PlaysController extends \BaseController
         Play::query()->update(['numbers' => '']);
 
         return 'Successfully Reset!';
+    }
+
+    public function winnerCount($id)
+    {
+        $play = Play::findOrFail($id);
+        $drawedNumbers = $play->numbers;
+        sort($drawedNumbers);
+        $compare = '%'.join(',%', $drawedNumbers).'%';
+
+        dd($compare);
+
+        return [
+            'count' => WinningPattern::where('numbers', '=', $compare)->count()
+        ];
     }
 }

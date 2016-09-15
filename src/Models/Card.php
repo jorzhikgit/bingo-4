@@ -100,4 +100,10 @@ class Card extends Pattern
 
         return $plots;
     }
+
+    public function getNumberAtPlot($plot)
+    {
+        $numbers = $this->numbers($plot[0]);
+        return $numbers[$plot[1]];
+    }
 }

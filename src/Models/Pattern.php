@@ -24,6 +24,16 @@ class Pattern extends BaseModel
         return $this->attributes['plots'];
     }
 
+    public function plotCount($column = null)
+    {
+        
+    }
+
+    public function getPlotCountAttribute($value='')
+    {
+        
+    }
+
     public function plots()
     {
         if (!$rawPlots = $this->getRawPlots()) {
