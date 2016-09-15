@@ -162,7 +162,7 @@
                 ng-change="showDrawedNumbers()"
                 ng-model="play">
                 <option value="">SELECT PLAY</option>
-            </select>   
+            </select>
         </div>
     </div>
     <ol class="breadcrumb">
@@ -175,7 +175,7 @@
 <section class="content no-outline" tabindex="-1">
     <section id="labels" ng-class="{ fullscreen: state.fullscreen }">
         <a href="" ng-hide="!state.fullscreen" ng-click="closeFullScreen()"><i class="fa fa-times close-button"></i></a>
-        <a href="" ng-click="numbersView = !numbersView"><i class="fa fa-eye numbers-view-button"></i></a>
+        <a href="" ng-show="play.id" ng-click="numbersView = !numbersView"><i class="fa fa-eye numbers-view-button"></i></a>
 
         <div class="back" ng-class="{ 'container-preview': state.fullscreen }">
              <div class="row" ng-hide="vars.validating">
@@ -209,7 +209,13 @@
                         <div class="row" ng-show="play.id">
                             <div class="box box-primary">
                                 <div class="box-header with-border">
-                                  <h3 class="box-title">{{'Pattern: ' + play.pattern.name}}</h3>
+                                    <h3 class="box-title">Pattern: </h3>
+                                    <select id="play" class="form-control" 
+                                        ng-options="p as p.pattern.name for p in plays track by p.id" 
+                                        ng-change="showDrawedNumbers()"
+                                        ng-model="play">
+                                        <option value="">SELECT PLAY</option>
+                                    </select>
                                 </div>
                                 <div class="box-body box-profile">
                                     <card selected="pattern.selected_plots" show-extension></card>
