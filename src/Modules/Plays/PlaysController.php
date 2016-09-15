@@ -35,7 +35,7 @@ class PlaysController extends \BaseController
 
     public function pickANumber($playId)
     {
-        $play = Play::findOrFail($playId);
+        $play = Play::with('pattern')->findOrFail($playId);
 
         $numbers = (new NumbersFactory)->make($play->pattern);
 
@@ -56,8 +56,11 @@ class PlaysController extends \BaseController
         $play->save();
 
         return [
-            'column' => format_number_column($number),
-            'number' => $number
+            'number_object' => [
+                'column' => format_number_column($number),
+                'number' => $number
+            ],
+            'winners' => $this->getWinners($play)
         ];
     }
 
@@ -69,9 +72,8 @@ class PlaysController extends \BaseController
         return 'Successfully Reset!';
     }
 
-    public function winners($id)
+    public function getWinners($play)
     {
-        $play = Play::with('pattern')->findOrFail($id);
         $drawedNumbers = $play->numbers;
         sort($drawedNumbers);
         $compare = "'".join(',', $drawedNumbers)."'";
@@ -86,8 +88,13 @@ class PlaysController extends \BaseController
             $query->whereBetween('card_id', [$startCardId, $endCardId]);
         }
 
+        return $query->lists('card_id');
+    }
+
+    public function winners($id)
+    {
         return [
-            'winners' => $query->lists('card_id')
+            'winners' => $this->getWinners(Play::with('pattern')->findOrFail($id))
         ];
     }
 }
