@@ -17,7 +17,7 @@ class CreateWinningPatternsTable extends Migration {
 			$table->increments('id');
 			Fk::make($table)->add('pattern_id');
 			Fk::make($table)->add('card_id');
-			$table->char('numbers', 255);
+			$table->char('numbers', 255)->index();
 			$table->timestamps();
 		});
 	}

@@ -6,6 +6,8 @@ use Illuminate\Filesystem\Filesystem as File;
 use SedpMis\Bingo\Models\NumberPicker;
 use SedpMis\Bingo\Models\WinningPattern;
 use SedpMis\Bingo\Models\Play;
+use Config;
+use DB;
 
 class PlaysController extends \BaseController
 {
@@ -67,17 +69,25 @@ class PlaysController extends \BaseController
         return 'Successfully Reset!';
     }
 
-    public function winnerCount($id)
+    public function winners($id)
     {
-        $play = Play::findOrFail($id);
+        $play = Play::with('pattern')->findOrFail($id);
         $drawedNumbers = $play->numbers;
         sort($drawedNumbers);
-        $compare = '%'.join(',%', $drawedNumbers).'%';
+        $compare = "'".join(',', $drawedNumbers)."'";
 
-        dd($compare);
+        $query = WinningPattern::where(DB::raw($compare), 'like', DB::raw('CONCAT("%", REPLACE(numbers, ",", "%"), "%")'))
+            ->where('pattern_id', $play->pattern->id);
+
+        $startCardId = Config::get('bingo.start_card_id');
+        $endCardId   = Config::get('bingo.end_card_id');
+
+        if (!is_null($startCardId) && !is_null($endCardId)) {
+            $query->whereBetween('card_id', [$startCardId, $endCardId]);
+        }
 
         return [
-            'count' => WinningPattern::where('numbers', '=', $compare)->count()
+            'winners' => $query->lists('card_id')
         ];
     }
 }
