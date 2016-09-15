@@ -5,5 +5,7 @@
  * For simple fk datatype column creation.
  */
 return [
-    'play_id' => 'unsignedInteger',
+    'play_id'    => 'unsignedInteger',
+    'card_id'    => 'unsignedInteger',
+    'pattern_id' => 'unsignedInteger',
 ];
