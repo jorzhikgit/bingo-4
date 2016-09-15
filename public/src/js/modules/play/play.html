@@ -287,8 +287,23 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                
                             </div>
+                        </div>
+                        <div class="col-md-12">
+                            <H3>
+                                No of Winners 
+                                &nbsp;
+                                <a href="" ng-if='winners.length' ng-click="showWinners = !showWinners"><i class="fa fa-eye numbers-view-button"></i></a>
+                                : 
+                                <span class="label {{ winners.length ? 'label-warning':'label-info'}} ">
+                                    {{winners.length}}
+                                </span>
+                            </H3>
+                            <p>
+                                <span class="label label-info" ng-repeat="winner in winners">
+                                    {{winner}}
+                                </span>
+                            </p>
                         </div>
                     </div>
                 </div>

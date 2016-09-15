@@ -76,6 +76,7 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 $scope.pattern = {};
                 $scope.state = {};
                 $scope.play = {};
+                $scope.winners = [];
 
                 // variable to holds the drawed numbers
                 $scope.drawedNumbers = [];
@@ -149,7 +150,8 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                     $scope.isDrawingNumber = true;
                     Model.one($scope.play.id).one('pick_a_number').post().then(function(data){
                         var timeout = $timeout(function() {
-                            $scope.latestDraw = data;
+                            $scope.latestDraw = data.number_object;
+                            $scope.winners = data.winners;
                             playService.removeAttribute();
                             $scope.isDrawingNumber = false;
                             $timeout.cancel(timeout);
