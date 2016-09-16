@@ -10,4 +10,20 @@ class Parish extends BaseModel
     {
         return $query->where('is_active', 1);
     }
+
+    public function cardRanges()
+    {
+        if (!array_key_exists('card_ranges', $this->attributes)) {
+            return [];
+        }
+
+        $strRanges = explode(',', $this->attributes['card_ranges']);
+        $ranges  = [];
+
+        foreach ($strRanges as $strRange) {
+            $ranges[] = array_map(function ($id) { return (int) $id;}, explode('-', $strRange));
+        }
+
+        return $ranges;
+    }
 }
