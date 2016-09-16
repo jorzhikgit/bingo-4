@@ -86,4 +86,7 @@ Route::group(['before' => 'auth'], function () {
 
     Route::get('plays/{play}/winners', 'SedpMis\Bingo\Modules\Plays\PlaysController@winners');
 
+    Route::get('parishes', 'SedpMis\Bingo\Modules\Parishes\ParishesController@index');
+    Route::put('parishes/{parish}', 'SedpMis\Bingo\Modules\Parishes\ParishesController@update');
+
 }); // End of Authenticated get
