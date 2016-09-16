@@ -24,6 +24,8 @@ class Parish extends BaseModel
             $ranges[] = array_map(function ($id) { return (int) $id;}, explode('-', $strRange));
         }
 
-        return $ranges;
+        return array_filter($ranges, function ($range) {
+            return count($range) > 1;
+        });
     }
 }
