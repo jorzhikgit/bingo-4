@@ -13,7 +13,7 @@ class Parish extends BaseModel
 
     public function cardRanges()
     {
-        if (!array_key_exists('card_ranges', $this->attributes)) {
+        if (!array_key_exists('card_ranges', $this->attributes) || empty($this->attributes['card_ranges'])) {
             return [];
         }
 
