@@ -24,4 +24,9 @@ class ParishesController extends \BaseController
 
         return new Response('', Response::HTTP_NO_CONTENT);
     }
+
+    public function active()
+    {
+        return Parish::where('is_active', 1)->first();
+    }
 }

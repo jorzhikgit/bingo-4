@@ -72,6 +72,7 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 $scope.revealNumber = revealNumber;
 
                 $scope.vars = {};
+                $scope.parish = {};
                 $scope.pattern = {};
                 $scope.state = {};
                 $scope.play = {};
@@ -239,6 +240,10 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 };
 
                 $scope.getPlays();
+
+                Restangular.service('parishes').one('active').get().then(function (parish) {
+                    $scope.parish = parish;
+                })
 
             }; // end of init
 
