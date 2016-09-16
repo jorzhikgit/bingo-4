@@ -120,6 +120,10 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
 
                         setPattern(play.pattern);
                     });
+
+                    Restangular.one('plays').one($scope.play.id.toString()).one('winners').get().then(function (res) {
+                        $scope.winners = res.winners;
+                    });
                 };
 
                 $scope.fullScreen = function () {
