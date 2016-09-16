@@ -7,6 +7,7 @@ use SedpMis\Bingo\Models\NumberPicker;
 use SedpMis\Bingo\Models\WinningPattern;
 use SedpMis\Bingo\Models\Play;
 use SedpMis\Bingo\Models\Card;
+use SedpMis\Bingo\Models\Parish;
 use Config;
 use DB;
 
@@ -82,11 +83,17 @@ class PlaysController extends \BaseController
         $query = WinningPattern::where(DB::raw($compare), 'like', DB::raw('CONCAT("%", REPLACE(numbers, ",", "%"), "%")'))
             ->where('pattern_id', $play->pattern->id);
 
-        $startCardId = Config::get('bingo.start_card_id');
-        $endCardId   = Config::get('bingo.end_card_id');
-
-        if (!is_null($startCardId) && !is_null($endCardId)) {
-            $query->whereBetween('card_id', [$startCardId, $endCardId]);
+        if ($parish = Parish::active()->first()) {
+            if (count($parish->cardRanges())) {
+                $betweens = [];
+                foreach ($parish->cardRanges() as $range) {
+                    if (count($range) > 1) {
+                        $betweens[] = "id between {$range[0]} and {$range[1]}";
+                    }
+                }
+                $sql = '('.join(' or ', $betweens).')';
+                $query->whereRaw($sql);
+            }
         }
 
         $cards = Card::find($query->lists('card_id'));
