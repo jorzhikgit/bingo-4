@@ -4,7 +4,11 @@ namespace SedpMis\Bingo\Modules\Plays;
 
 use Illuminate\Filesystem\Filesystem as File;
 use SedpMis\Bingo\Models\NumberPicker;
+use SedpMis\Bingo\Models\WinningPattern;
 use SedpMis\Bingo\Models\Play;
+use SedpMis\Bingo\Models\Card;
+use Config;
+use DB;
 
 class PlaysController extends \BaseController
 {
@@ -32,7 +36,7 @@ class PlaysController extends \BaseController
 
     public function pickANumber($playId)
     {
-        $play = Play::findOrFail($playId);
+        $play = Play::with('pattern')->findOrFail($playId);
 
         $numbers = (new NumbersFactory)->make($play->pattern);
 
@@ -53,8 +57,11 @@ class PlaysController extends \BaseController
         $play->save();
 
         return [
-            'column' => format_number_column($number),
-            'number' => $number
+            'number_object' => [
+                'column' => format_number_column($number),
+                'number' => $number
+            ],
+            'winners' => $this->getWinners($play)->lists('id')
         ];
     }
 
@@ -64,5 +71,36 @@ class PlaysController extends \BaseController
         Play::query()->update(['numbers' => '']);
 
         return 'Successfully Reset!';
+    }
+
+    public function getWinners($play)
+    {
+        $drawedNumbers = $play->numbers;
+        sort($drawedNumbers);
+        $compare = "'".join(',', $drawedNumbers)."'";
+
+        $query = WinningPattern::where(DB::raw($compare), 'like', DB::raw('CONCAT("%", REPLACE(numbers, ",", "%"), "%")'))
+            ->where('pattern_id', $play->pattern->id);
+
+        $startCardId = Config::get('bingo.start_card_id');
+        $endCardId   = Config::get('bingo.end_card_id');
+
+        if (!is_null($startCardId) && !is_null($endCardId)) {
+            $query->whereBetween('card_id', [$startCardId, $endCardId]);
+        }
+
+        $cards = Card::find($query->lists('card_id'));
+
+        return $cards->filter(function ($card) use ($play) {
+            $card->setPlotsViaNumbers($play->numbers());
+            return $play->pattern->isMatch($card);
+        });
+    }
+
+    public function winners($id)
+    {
+        return [
+            'winners' => $this->getWinners(Play::with('pattern')->findOrFail($id))->lists('id')
+        ];
     }
 }

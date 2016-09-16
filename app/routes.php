@@ -84,5 +84,6 @@ Route::group(['before' => 'auth'], function () {
     Route::get('patterns/{pattern}', 'SedpMis\Bingo\Modules\Patterns\PatternsController@show');
     Route::get('patterns/{pattern}/compare/{card}', 'SedpMis\Bingo\Modules\Patterns\PatternsController@compare');
 
+    Route::get('plays/{play}/winners', 'SedpMis\Bingo\Modules\Plays\PlaysController@winners');
 
 }); // End of Authenticated get

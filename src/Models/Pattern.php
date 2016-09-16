@@ -24,6 +24,16 @@ class Pattern extends BaseModel
         return $this->attributes['plots'];
     }
 
+    public function plotCount($column = null)
+    {
+        
+    }
+
+    public function getPlotCountAttribute($value='')
+    {
+        
+    }
+
     public function plots()
     {
         if (!$rawPlots = $this->getRawPlots()) {
@@ -52,5 +62,13 @@ class Pattern extends BaseModel
     public function getMaxNumbersAttribute()
     {
         return count($this->plotColumns()) * 15;
+    }
+
+    public function isMatch($card)
+    {
+        $patternPlots = (new PatternPlotter)->plot($this);
+        $cardPlots = (new PatternPlotter)->compare($this, $card);
+
+        return $patternPlots == $cardPlots;
     }
 }
