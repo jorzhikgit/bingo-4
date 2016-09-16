@@ -63,4 +63,12 @@ class Pattern extends BaseModel
     {
         return count($this->plotColumns()) * 15;
     }
+
+    public function isMatch($card)
+    {
+        $patternPlots = (new PatternPlotter)->plot($this);
+        $cardPlots = (new PatternPlotter)->compare($this, $card);
+
+        return $patternPlots == $cardPlots;
+    }
 }

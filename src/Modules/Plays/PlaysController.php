@@ -6,6 +6,7 @@ use Illuminate\Filesystem\Filesystem as File;
 use SedpMis\Bingo\Models\NumberPicker;
 use SedpMis\Bingo\Models\WinningPattern;
 use SedpMis\Bingo\Models\Play;
+use SedpMis\Bingo\Models\Card;
 use Config;
 use DB;
 
@@ -60,7 +61,7 @@ class PlaysController extends \BaseController
                 'column' => format_number_column($number),
                 'number' => $number
             ],
-            'winners' => $this->getWinners($play)
+            'winners' => $this->getWinners($play)->lists('id')
         ];
     }
 
@@ -88,13 +89,18 @@ class PlaysController extends \BaseController
             $query->whereBetween('card_id', [$startCardId, $endCardId]);
         }
 
-        return $query->lists('card_id');
+        $cards = Card::find($query->lists('card_id'));
+
+        return $cards->filter(function ($card) use ($play) {
+            $card->setPlotsViaNumbers($play->numbers());
+            return $play->pattern->isMatch($card);
+        });
     }
 
     public function winners($id)
     {
         return [
-            'winners' => $this->getWinners(Play::with('pattern')->findOrFail($id))
+            'winners' => $this->getWinners(Play::with('pattern')->findOrFail($id))->lists('id')
         ];
     }
 }
