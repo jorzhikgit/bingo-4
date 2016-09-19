@@ -60,7 +60,7 @@ class BingoWinningPatternsCommand extends Command
         $perPage    = (int) ($this->option('per_page') ?: 500);
         $totalPages = $total / $perPage;
         $createdAt  = date('Y-m-d H:i:s');
-        $id         = 1;
+        $id         = WinningPattern::count() > 0 ? WinningPattern::max('id') + 1 : 1;
 
         while ($page <= $totalPages) {
             \Paginator::setCurrentPage($page);
