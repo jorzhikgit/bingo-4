@@ -261,7 +261,8 @@ class PatternsTableSeeder extends Seeder
             if ($indexStr === '*') {
                 $indexStr = '01234';
             } 
-            elseif ($indexStr === '*' && $column === 'n') {
+            
+            if ($indexStr === '*' && $column === 'n') {
                 $indexStr = '0134';
             }
 
