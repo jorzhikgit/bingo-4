@@ -305,17 +305,24 @@
                             <h3>
                                 No. of Winners 
                                 &nbsp;
-                                <a href ng-if="winners.length" ng-click="showWinners()"><i class="fa fa-eye numbers-view-button"></i></a>
+                                <span>
+                                    <a href="" ng-show="winners.length" ng-click="showWinners = !showWinners" title="Show Winners">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                </span>
                                 : 
                                 <span class="label {{ winners.length ? 'label-warning':'label-info'}}">
                                     {{winners.length}}
                                 </span>
                             </h3>
-                            <div class="row" ng-hide="!vars.showWinners">
+                            <div ng-show="showWinners" class="row">
                                 <div class="col-xs-12">
-                                    <span class="winner-label label label-info" ng-repeat="winner in winners">
-                                        {{winner}}
-                                    </span>
+                                    <h3>
+                                        Winner/s : 
+                                        <span class="winner-label label label-info" ng-repeat="winner in winners">
+                                            {{winner}}
+                                        </span>
+                                    </h3>
                                 </div>
                             </div>
                         </div>
