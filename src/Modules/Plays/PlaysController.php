@@ -86,7 +86,6 @@ class PlaysController extends \BaseController
         $parish = Parish::active()->first();
 
         if ($parish && count($parish->cardRanges())) {
-            dd(1);
             $betweens = [];
             foreach ($parish->cardRanges() as $range) {
                 if (count($range) > 1) {
