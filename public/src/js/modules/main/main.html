@@ -53,6 +53,20 @@
                 </div><!-- /.box -->
             </div><!-- /.col -->
         </div><!-- /.row -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Parish Selection -->
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Parish Selection</h3>
+                    </div>
+                    <div class="box-body">
+                        <select ng-model="selected.parish_id" ng-change="setActiveParish(selected.parish_id)" ng-options="p.id as p.name+': '+p.card_ranges  for p in parishes"></select>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div>
+        </div><!-- /.row -->
     </section><!-- /.content -->
 </aside>
 

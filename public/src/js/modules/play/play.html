@@ -151,6 +151,8 @@
 
     .winner-label {
         margin-right: 3px;
+        white-space: normal;
+        line-height: 2;
     }
 
 </style>
@@ -181,8 +183,14 @@
     <section id="labels" ng-class="{ fullscreen: state.fullscreen }">
         <a href="" ng-hide="!state.fullscreen" ng-click="closeFullScreen()"><i class="fa fa-times close-button"></i></a>
         <a href="" ng-show="play.id" ng-click="numbersView = !numbersView"><i class="fa fa-eye numbers-view-button"></i></a>
-
+        
         <div class="back" ng-class="{ 'container-preview': state.fullscreen }">
+            <div class="row">
+                <div class="col-md-12">
+                    Playing Parish: <strong>{{parish.name}}</strong>
+                </div>
+            </div>
+            <br>
              <div class="row" ng-hide="vars.validating">
                 <div class="col-md-12">
                     <div class="col-md-3">

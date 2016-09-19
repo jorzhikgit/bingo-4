@@ -39,6 +39,9 @@ define(['app', 'angular'], function(app, angular)
                     report: GLOBAL.baseSourcePath + 'templates/report.html?version=' + GLOBAL.version
                 };
 
+                $scope.parishes = [];
+                $scope.selected = {};
+
                 $scope.accessLevel = GLOBAL.accessLevel;
 
                 // Initialize the global Focus service
@@ -88,6 +91,12 @@ define(['app', 'angular'], function(app, angular)
 
                 };
 
+                $scope.setActiveParish = function (parishId) {
+                    Restangular.service('parishes').one(parishId).put({is_active: 1}).then(function (res) {
+                        console.log(res);
+                    });
+                };
+
                 if ($state.current.name === 'app') {
                     var getDashboardInfo = function() {
                         queueModel.one().get().then(
@@ -105,6 +114,16 @@ define(['app', 'angular'], function(app, angular)
                         );
                     };
                 }
+
+                Restangular.all('parishes').getList().then(function (res) {
+                    $scope.parishes = res.plain();
+
+                    angular.forEach($scope.parishes, function (parish) {
+                        if (parish.is_active == 1) {
+                            $scope.selected.parish_id = parish.id;
+                        }
+                    });
+                });
         	} // end of start
 
         	$scope.$on('$stateChangeSuccess', 

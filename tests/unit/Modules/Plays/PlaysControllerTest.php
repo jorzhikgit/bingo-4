@@ -22,7 +22,7 @@ class PlaysControllerTest extends TestCase
 
             $response = $this->call('POST', "plays/{$play->id}/pick_a_number");
 
-            $this->assertEquals(['column', 'number'], array_keys($response->getOriginalContent()));
+            $this->assertEquals(['column', 'number'], array_keys($response->getOriginalContent()['number_object']));
 
             $play = Play::first();
 

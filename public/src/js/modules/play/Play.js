@@ -58,7 +58,6 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
         'Restangular',
         
         function($scope, $timeout, $state, $stateParams, $templateCache, Common, Modal, Gritter, Focus, Blocker, playService, Model, GLOBAL, Restangular) {
-
             var init = function() {
                 var setPattern = function (pattern) {
                     $scope.pattern = pattern;
@@ -73,6 +72,7 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 $scope.revealNumber = revealNumber;
 
                 $scope.vars = {};
+                $scope.parish = {};
                 $scope.pattern = {};
                 $scope.state = {};
                 $scope.play = {};
@@ -82,6 +82,9 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 $scope.drawedNumbers = [];
                 $scope.plays = [];
 
+                $scope.showWinners = function () {
+                    $scope.vars.showWinners = !$scope.vars.showWinners;
+                };
 
                 $scope.getPlays = function () {
                     Restangular.one('plays').get().then(function(result){
@@ -237,6 +240,10 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 };
 
                 $scope.getPlays();
+
+                Restangular.service('parishes').one('active').get().then(function (parish) {
+                    $scope.parish = parish;
+                })
 
             }; // end of init
 
