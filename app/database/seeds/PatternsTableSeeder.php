@@ -258,13 +258,13 @@ class PatternsTableSeeder extends Seeder
                 continue;
             }
 
-            if ($indexStr === '*') {
-                $indexStr = '01234';
-            } 
-            
             if ($indexStr === '*' && $column === 'n') {
                 $indexStr = '0134';
             }
+
+            if ($indexStr === '*') {
+                $indexStr = '01234';
+            } 
 
             foreach (str_split($indexStr) as $index) {
                 if (is_numeric($index)) {
