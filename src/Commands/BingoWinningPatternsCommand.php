@@ -56,8 +56,9 @@ class BingoWinningPatternsCommand extends Command
             throw new \Exception('No cards available in database.');
         }
 
-        $page = 1;
-        $perPage = 500;
+        $page       = $this->option('page') ?: 1;
+        $page       = intval($page);
+        $perPage    = 500;
         $totalPages = $total / $perPage;
 
         while ($page <= $totalPages) {
@@ -102,5 +103,17 @@ class BingoWinningPatternsCommand extends Command
         sort($numbers);
 
         return $numbers;
+    }
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return array(
+            array('page', 'p', InputOption::VALUE_REQUIRED, 'Page to start.', null),
+        );
     }
 }
