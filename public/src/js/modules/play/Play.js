@@ -124,8 +124,12 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                         setPattern(play.pattern);
                     });
 
+                    $scope.loadWinners();
+                };
+
+                $scope.loadWinners = function () {
                     Restangular.one('plays').one($scope.play.id.toString()).one('winners').get().then(function (res) {
-                        $scope.winners = res.winners;
+                        $scope.winners = res.plain().winners;
                     });
                 };
 
@@ -155,12 +159,12 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                     playService.audio('draw').play();
                     $scope.latestDraw = {};
                     $scope.isDrawingNumber = true;
-                    Model.one($scope.play.id).one('pick_a_number').post().then(function(data){
+                    Model.one($scope.play.id).one('pick_a_number').post().then(function(latestDraw){
                         var timeout = $timeout(function() {
-                            $scope.latestDraw = data.number_object;
-                            $scope.winners = data.winners;
+                            $scope.latestDraw = latestDraw;
                             playService.removeAttribute();
                             $scope.isDrawingNumber = false;
+                            $scope.loadWinners();
                             $timeout.cancel(timeout);
                         }, 2000);
                     });

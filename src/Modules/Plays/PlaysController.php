@@ -58,11 +58,8 @@ class PlaysController extends \BaseController
         $play->save();
 
         return [
-            'number_object' => [
-                'column' => format_number_column($number),
-                'number' => $number
-            ],
-            'winners' => $this->getWinners($play)->lists('id')
+            'column' => format_number_column($number),
+            'number' => $number
         ];
     }
 
