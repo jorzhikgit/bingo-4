@@ -57,28 +57,35 @@ class BingoWinningPatternsCommand extends Command
         }
 
         $page = 1;
-        $perPage = 1000;
+        $perPage = 500;
         $totalPages = $total / $perPage;
 
         while ($page < $totalPages) {
             \Paginator::setCurrentPage($page);
             $cards = Card::paginate($perPage);
-            $this->line("Generating winning patterns for cards {$cards->first()->id}...{$cards->last()->id}.");
-            $this->line("Page {$page} of {$totalPages}...");
+            $this->info("Page {$page} of {$totalPages}...");
+            $this->info("Generating winning patterns for cards {$cards->first()->id}-{$cards->last()->id}, ({$cards->count()})...");
+            $this->info("Pattern count: {$patterns->count()}...");
+
+            $inserts = [];
 
             foreach ($patterns as $pattern) {
                 foreach ($cards as $card) {
-                    $winningPattern = new WinningPattern([
-                        'card_id' => $card->id,
+                    $inserts[] = [
+                        'card_id'    => $card->id,
                         'pattern_id' => $pattern->id,
-                        'numbers' => join(',', $this->generateWinningNumbers($pattern, $card))
-                    ]);
-
-                    $winningPattern->save();
+                        'numbers'    => join(',', $this->generateWinningNumbers($pattern, $card))
+                    ];
                 }
             }
 
-            $this->info("...Successfully generated!");
+            DB::beginTransaction();
+            DB::table('winning_patterns')->insert($inserts);
+            DB::commit();
+
+            $insertedCount = count($inserts);
+
+            $this->info("...Successfully inserted {$insertedCount} rows!");
 
             $page++;
         }
