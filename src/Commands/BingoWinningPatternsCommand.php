@@ -61,6 +61,7 @@ class BingoWinningPatternsCommand extends Command
         $perPage    = 500;
         $totalPages = $total / $perPage;
         $createdAt  = date('Y-m-d H:i:s');
+        $id         = 1;
 
         while ($page <= $totalPages) {
             \Paginator::setCurrentPage($page);
@@ -74,6 +75,7 @@ class BingoWinningPatternsCommand extends Command
             foreach ($patterns as $pattern) {
                 foreach ($cards as $card) {
                     $inserts[] = [
+                        'id'         => $id++,
                         'card_id'    => $card->id,
                         'pattern_id' => $pattern->id,
                         'numbers'    => join(',', $this->generateWinningNumbers($pattern, $card)),
