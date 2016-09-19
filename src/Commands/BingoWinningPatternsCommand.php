@@ -52,25 +52,36 @@ class BingoWinningPatternsCommand extends Command
             throw new \Exception('No patterns available in database.');
         }
 
-        $cards = Card::all();
-
-        if ($cards->count() == 0) {
+        if (($total = Card::count()) == 0) {
             throw new \Exception('No cards available in database.');
         }
 
-        foreach ($patterns as $pattern) {
-            foreach ($cards as $card) {
-                $winningPattern = new WinningPattern([
-                    'card_id' => $card->id,
-                    'pattern_id' => $pattern->id,
-                    'numbers' => join(',', $this->generateWinningNumbers($pattern, $card))
-                ]);
+        $page = 1;
+        $perPage = 1000;
+        $totalPages = $total / $perPage;
 
-                $winningPattern->save();
+        while ($page < $totalPages) {
+            \Paginator::setCurrentPage($page);
+            $cards = Card::paginate($perPage);
+            $this->line("Generating winning patterns for cards {$cards->first()->id}...{$cards->last()->id}.");
+            $this->line("Page {$page} of {$totalPages}...");
+
+            foreach ($patterns as $pattern) {
+                foreach ($cards as $card) {
+                    $winningPattern = new WinningPattern([
+                        'card_id' => $card->id,
+                        'pattern_id' => $pattern->id,
+                        'numbers' => join(',', $this->generateWinningNumbers($pattern, $card))
+                    ]);
+
+                    $winningPattern->save();
+                }
             }
-        }
 
-        $this->info("Successfully generated winning patterns for {$patterns->count()} patterns and {$cards->count()} cards.");
+            $this->info("...Successfully generated!");
+
+            $page++;
+        }
     }
 
     public function generateWinningNumbers($pattern, $card)
