@@ -60,7 +60,7 @@ class BingoWinningPatternsCommand extends Command
         $perPage = 500;
         $totalPages = $total / $perPage;
 
-        while ($page < $totalPages) {
+        while ($page <= $totalPages) {
             \Paginator::setCurrentPage($page);
             $cards = Card::paginate($perPage);
             $this->info("Page {$page} of {$totalPages}...");
