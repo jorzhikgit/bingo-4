@@ -83,17 +83,18 @@ class PlaysController extends \BaseController
         $query = WinningPattern::where(DB::raw($compare), 'like', DB::raw('CONCAT("%", REPLACE(numbers, ",", "%"), "%")'))
             ->where('pattern_id', $play->pattern->id);
 
-        if ($parish = Parish::active()->first()) {
-            if (count($parish->cardRanges())) {
-                $betweens = [];
-                foreach ($parish->cardRanges() as $range) {
-                    if (count($range) > 1) {
-                        $betweens[] = "id between {$range[0]} and {$range[1]}";
-                    }
+        $parish = Parish::active()->first();
+
+        if ($parish && count($parish->cardRanges())) {
+            dd(1);
+            $betweens = [];
+            foreach ($parish->cardRanges() as $range) {
+                if (count($range) > 1) {
+                    $betweens[] = "id between {$range[0]} and {$range[1]}";
                 }
-                $sql = '('.join(' or ', $betweens).')';
-                $query->whereRaw($sql);
             }
+            $sql = '('.join(' or ', $betweens).')';
+            $query->whereRaw($sql);
         }
 
         $cards = Card::find($query->lists('card_id'));
