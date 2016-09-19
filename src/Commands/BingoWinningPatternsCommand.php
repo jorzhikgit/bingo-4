@@ -56,9 +56,8 @@ class BingoWinningPatternsCommand extends Command
             throw new \Exception('No cards available in database.');
         }
 
-        $page       = $this->option('page') ?: 1;
-        $page       = intval($page);
-        $perPage    = 500;
+        $page       = (int) ($this->option('page') ?: 1);
+        $perPage    = (int) ($this->option('per_page') ?: 500);
         $totalPages = $total / $perPage;
         $createdAt  = date('Y-m-d H:i:s');
         $id         = 1;
@@ -119,6 +118,7 @@ class BingoWinningPatternsCommand extends Command
     {
         return array(
             array('page', 'p', InputOption::VALUE_REQUIRED, 'Page to start.', null),
+            array('per_page', 'g', InputOption::VALUE_REQUIRED, 'Per page in paginate.', null),
         );
     }
 }
