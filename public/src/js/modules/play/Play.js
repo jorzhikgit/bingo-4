@@ -150,6 +150,8 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 };
 
                 $scope.drawNumber = function () {
+                    if (abortLoadWinners) abortLoadWinners.resolve();
+
                     if ($scope.isDrawingNumber) {
                         return;
                     }
