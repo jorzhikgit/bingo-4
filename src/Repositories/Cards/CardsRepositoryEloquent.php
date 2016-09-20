@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class CardsRepositoryEloquent implements CardsRepositoryInterface
 {
-    public function getPossibleWinningCards($patternId, array $drawedNumbers)
+    public function getPossibleWinningCards($patternId, array $numbers)
     {
-        sort($drawedNumbers);
+        sort($numbers);
 
-        $compare = "'".join(',', $drawedNumbers)."'";
+        $compare = "'".join(',', $numbers)."'";
 
         $query = WinningPattern::where(DB::raw($compare), 'like', DB::raw('CONCAT("%", REPLACE(numbers, ",", "%"), "%")'))
             ->where('pattern_id', $patternId);
