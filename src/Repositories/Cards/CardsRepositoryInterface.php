@@ -4,5 +4,5 @@ namespace SedpMis\Bingo\Repositories\Cards;
 
 interface CardsRepositoryInterface
 {
-    public function getPossibleWinningCards($patternId, array $drawedNumbers);
+    public function getPossibleWinningCards($patternId, array $numbers);
 }

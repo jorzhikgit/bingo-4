@@ -9,18 +9,17 @@ use Illuminate\Support\Facades\DB;
 
 class CardsRepositoryEloquent implements CardsRepositoryInterface
 {
-    public function getPossibleWinningCards($patternId, array $drawedNumbers)
+    public function getPossibleWinningCards($patternId, array $numbers)
     {
-        sort($drawedNumbers);
+        $query = Card::query();
 
-        $compare = "'".join(',', $drawedNumbers)."'";
-
-        $query = WinningPattern::where(DB::raw($compare), 'like', DB::raw('CONCAT("%", REPLACE(numbers, ",", "%"), "%")'))
-            ->where('pattern_id', $patternId);
+        foreach ($numbers as $number) {
+            $query->orWhere(number_column($number), 'like', "%{$number}%");
+        }
 
         $this->queryCardRanges($query);
 
-        return $cards = Card::find($query->lists('card_id'));
+        return $query->get();
     }
 
     protected function queryCardRanges($query)
@@ -31,7 +30,7 @@ class CardsRepositoryEloquent implements CardsRepositoryInterface
             $betweens = [];
             foreach ($parish->cardRanges() as $range) {
                 if (count($range) > 1) {
-                    $betweens[] = "card_id between {$range[0]} and {$range[0]}";
+                    $betweens[] = "id between {$range[0]} and {$range[0]}";
                 }
             }
             $sql = '('.join(' or ', $betweens).')';
