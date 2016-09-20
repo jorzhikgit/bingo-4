@@ -123,6 +123,8 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Laracasts\Utilities\UtilitiesServiceProvider',
+		// Add service providers here...
+		'SedpMis\Bingo\Providers\RepositoryServiceProvider',
 	),
 
 	/*

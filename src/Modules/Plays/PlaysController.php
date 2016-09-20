@@ -8,11 +8,23 @@ use SedpMis\Bingo\Models\WinningPattern;
 use SedpMis\Bingo\Models\Play;
 use SedpMis\Bingo\Models\Card;
 use SedpMis\Bingo\Models\Parish;
+use SedpMis\Bingo\Repositories\Cards\CardsRepositoryInterface;
 use Config;
 use DB;
 
 class PlaysController extends \BaseController
 {
+    /**
+     * Cards repository.
+     * @var \SedpMis\Bingo\Repositories\Cards\CardsRepositoryInterface
+     */
+    protected $cards;
+
+    public function __construct(CardsRepositoryInterface $cards)
+    {
+        $this->cards = $cards;
+    }
+
     public function index()
     {
         $q = Play::with('pattern');
@@ -73,27 +85,7 @@ class PlaysController extends \BaseController
 
     public function getWinners($play)
     {
-        $drawedNumbers = $play->numbers;
-        sort($drawedNumbers);
-        $compare = "'".join(',', $drawedNumbers)."'";
-
-        $query = WinningPattern::where(DB::raw($compare), 'like', DB::raw('CONCAT("%", REPLACE(numbers, ",", "%"), "%")'))
-            ->where('pattern_id', $play->pattern->id);
-
-        $parish = Parish::active()->first();
-
-        if ($parish && count($parish->cardRanges())) {
-            $betweens = [];
-            foreach ($parish->cardRanges() as $range) {
-                if (count($range) > 1) {
-                    $betweens[] = "id between {$range[0]} and {$range[1]}";
-                }
-            }
-            $sql = '('.join(' or ', $betweens).')';
-            $query->whereRaw($sql);
-        }
-
-        $cards = Card::find($query->lists('card_id'));
+        $cards = $this->cards->getPossibleWinningCards($play->pattern->id, $play->numbers);
 
         return $cards->filter(function ($card) use ($play) {
             $card->setPlotsViaNumbers($play->numbers());
