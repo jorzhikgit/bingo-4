@@ -24,7 +24,7 @@ class CardsRepositoryEloquent implements CardsRepositoryInterface
             $betweens = [];
             foreach ($parish->cardRanges() as $range) {
                 if (count($range) > 1) {
-                    $betweens[] = "id between {$range[0]} and {$range[1]}";
+                    $betweens[] = "card_id between {$range[0]} and {$range[1]}";
                 }
             }
             $sql = '('.join(' or ', $betweens).')';
