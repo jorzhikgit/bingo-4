@@ -24,6 +24,10 @@ class CardsRepositoryEloquent implements CardsRepositoryInterface
     {
         $conds = [];
 
+        if (count($numbers) === 0) {
+            return $query;
+        }
+
         foreach ($numbers as $number) {
             $conds[] = number_column($number)." like '%{$number}%' ";
         }
