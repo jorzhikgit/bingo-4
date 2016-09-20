@@ -47,6 +47,7 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
         '$state',
         '$stateParams',
         '$templateCache',
+        '$q',
         'commonService',
         'modalService',
         'gritterService',
@@ -57,7 +58,9 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
         'GLOBAL',
         'Restangular',
         
-        function($scope, $timeout, $state, $stateParams, $templateCache, Common, Modal, Gritter, Focus, Blocker, playService, Model, GLOBAL, Restangular) {
+        function($scope, $timeout, $state, $stateParams, $templateCache, $q, Common, Modal, Gritter, Focus, Blocker, playService, Model, GLOBAL, Restangular) {
+            var abortLoadWinners;
+
             var init = function() {
                 var setPattern = function (pattern) {
                     $scope.pattern = pattern;
@@ -128,8 +131,13 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 };
 
                 $scope.loadWinners = function () {
-                    Restangular.one('plays').one($scope.play.id.toString()).one('winners').get().then(function (res) {
+                    if (abortLoadWinners) abortLoadWinners.resolve();
+
+                    abortLoadWinners = $q.defer();
+                    
+                    Restangular.one('plays').one($scope.play.id.toString()).one('winners').withHttpConfig({timeout: abortLoadWinners.promise}).get().then(function (res) {
                         $scope.winners = res.plain().winners;
+                        abortLoadWinners.resolve();
                     });
                 };
 
