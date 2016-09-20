@@ -97,8 +97,6 @@ Route::get('make_parishes', function () {
     $filepath = base_path('parishes.csv');
 
     $parishes = [];
-
-    $row = 1;
     
     $branch = '';
     $parish = [];
@@ -135,9 +133,10 @@ Route::get('make_parishes', function () {
             ) {
                 $parish['no_of_members'] .= ' + ' .$data[3];
             }
-
-
         }
+
+        $parishes[] = $parish;
+
         fclose($handle);
     }
 
