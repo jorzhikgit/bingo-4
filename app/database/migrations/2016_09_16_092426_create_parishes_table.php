@@ -18,6 +18,7 @@ class CreateParishesTable extends Migration {
 			$table->string('name');
 			$table->smallInteger('branch_no')->unsigned();
 			$table->enum('category', ['big', 'small'])->comment('Big or small parish.');
+			$table->date('date');
 			$table->string('card_ranges')->comment('Format: start_1-end_1,start_2-end_2,...');
 			$table->boolean('is_active')->default(0);
 			$table->timestamps();
