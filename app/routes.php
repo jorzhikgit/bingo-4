@@ -91,3 +91,55 @@ Route::group(['before' => 'auth'], function () {
     Route::put('parishes/{parish}', 'SedpMis\Bingo\Modules\Parishes\ParishesController@update');
 
 }); // End of Authenticated get
+
+
+Route::get('make_parishes', function () {
+    $filepath = base_path('parishes.csv');
+
+    $parishes = [];
+
+    $row = 1;
+    
+    $branch = '';
+    $parish = [];
+
+    if (($handle = fopen($filepath, "r")) !== false) {
+        while (($data = fgetcsv($handle, /*100*/0, ",")) !== false) {
+            // var_dump($data);
+            // echo "\n\n";
+
+            if (strlen($data[0]) > 0) {
+                $branch = $data[0];
+            } 
+
+            if (strlen($data[1]) > 0) {
+                if ($parish) {
+                    $parishes[] = $parish;
+                }
+
+                $parish = [
+                    'name'               => $data[1],
+                    'branch'             => $branch,
+                    'date'               => carbon($data[2])->format('Y-m-d'),
+                    'no_of_members'      => $data[3],
+                    'additional_members' => $data[4],
+                ];
+            }
+
+            if (
+                strlen($data[0]) == 0 && 
+                strlen($data[1]) == 0 && 
+                strlen($data[2]) == 0 && 
+                strlen($data[4]) == 0 && 
+                strlen($data[3]) > 0
+            ) {
+                $parish['no_of_members'] .= ' + ' .$data[3];
+            }
+
+
+        }
+        fclose($handle);
+    }
+
+    return $parishes;
+});
