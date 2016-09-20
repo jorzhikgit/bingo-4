@@ -4,7 +4,7 @@ namespace SedpMis\Bingo\Models;
 
 class Parish extends BaseModel
 {
-	protected $fillable = ['name', 'branch', 'category', 'date', 'is_active', 'card_ranges'];
+	protected $fillable = ['name', 'branch', 'category', 'date', 'is_active', 'card_ranges', 'no_of_members', 'additional_members'];
 
     public function scopeActive($query)
     {
