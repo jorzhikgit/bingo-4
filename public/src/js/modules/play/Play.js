@@ -150,8 +150,6 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 };
 
                 $scope.drawNumber = function () {
-                    if (abortLoadWinners) abortLoadWinners.resolve();
-
                     if ($scope.isDrawingNumber) {
                         return;
                     }
@@ -165,6 +163,8 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                         return;
                     }
 
+                    if (abortLoadWinners) abortLoadWinners.resolve();
+                    
                     playService.changeImageSrc();
                     playService.audio('draw').play();
                     $scope.latestDraw = {};
