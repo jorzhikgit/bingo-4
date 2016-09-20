@@ -8,10 +8,19 @@ class ParishesTableSeeder extends Seeder
 {
     public function run()
     {
+        $startCard = 1;
+
         foreach ($this->parishes() as $parish) {
             $parish['no_of_members'] = explode(' + ', $parish['no_of_members']);
             $parish['no_of_members'] = array_sum($parish['no_of_members']);
+
+            $totalMembers = $parish['no_of_members'] + $parish['additional_members'];
+
+            $endCard = $startCard + $totalMembers - 1;
+            $parish['card_ranges'] = "{$startCard}-{$endCard}";
+
             Parish::create($parish);
+            $startCard = $endCard + 1;
         }
     }
 
