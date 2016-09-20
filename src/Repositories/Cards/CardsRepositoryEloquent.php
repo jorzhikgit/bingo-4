@@ -18,19 +18,26 @@ class CardsRepositoryEloquent implements CardsRepositoryInterface
         $query = WinningPattern::where(DB::raw($compare), 'like', DB::raw('CONCAT("%", REPLACE(numbers, ",", "%"), "%")'))
             ->where('pattern_id', $patternId);
 
+        $this->queryCardRanges($query);
+
+        return $cards = Card::find($query->lists('card_id'));
+    }
+
+    protected function queryCardRanges($query)
+    {
         $parish = Parish::active()->first();
 
         if ($parish && count($parish->cardRanges())) {
             $betweens = [];
             foreach ($parish->cardRanges() as $range) {
                 if (count($range) > 1) {
-                    $betweens[] = "card_id between {$range[0]} and {$range[1]}";
+                    $betweens[] = "card_id between {$range[0]} and {$range[0]}";
                 }
             }
             $sql = '('.join(' or ', $betweens).')';
             $query->whereRaw($sql);
         }
 
-        return $cards = Card::find($query->lists('card_id'));
+        return $query;
     }
 }
