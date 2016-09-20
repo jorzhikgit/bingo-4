@@ -273,6 +273,12 @@ class ParishesTableSeeder extends Seeder
                 'date'               => '2016-12-11',
                 'no_of_members'      => '440 + 633 + 975 + 160 + 141',
                 'additional_members' => '15',
+            ], [
+                'name'               => '23. St.Raphael the Archangel -Pantao',
+                'branch'             => 'LIBON',
+                'date'               => '2016-12-10',
+                'no_of_members'      => '116 + 141 + 246',
+                'additional_members' => '15',
             ],
         ];
     }
