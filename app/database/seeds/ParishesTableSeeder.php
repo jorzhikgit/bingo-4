@@ -16,7 +16,7 @@ class ParishesTableSeeder extends Seeder
 
             $totalMembers = $parish['no_of_members'] + $parish['additional_members'];
 
-            $addPercent = $totalMembers * 0.20;
+            $addPercent = intval($totalMembers * 0.25);
 
             $endCard               = $startCard + (($totalMembers + $addPercent) * 2) - 1;
             $parish['card_ranges'] = "{$startCard}-{$endCard}";
