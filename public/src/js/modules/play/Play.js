@@ -39,6 +39,7 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
             };
 
             _this.isInCardRanges = function (id, strCardRanges) {
+                id = parseInt(id);
                 var ranges = strCardRanges.split(',');
 
                 var qualified = false;
