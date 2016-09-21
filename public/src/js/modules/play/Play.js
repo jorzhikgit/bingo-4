@@ -37,6 +37,26 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
             _this.audio = function (name) {
                 return audio[name];
             };
+
+            _this.isInCardRanges = function (id, strCardRanges) {
+                var ranges = strCardRanges.split(',');
+
+                var qualified = false;
+
+                angular.forEach(ranges, function (range) {
+                    if (qualified) {
+                        return;
+                    }
+
+                    range = range.split('-');
+
+                    if (id >= range[0] && id <= range[1]) {
+                        qualified  = true;
+                    }
+                });
+
+                return qualified;
+            };
         }
     ]);
 
@@ -181,6 +201,11 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
                 };
 
                 $scope.validateCard = function () {
+                    if (!playService.isInCardRanges($scope.cardId, $scope.parish.card_ranges)) {
+                        alert(`Card ID ${$scope.cardId} does not belong to card range(s) ${$scope.parish.card_ranges}`);
+                        return;
+                    }
+
                     Restangular.one('patterns').one($scope.pattern.id.toString()).one('compare').one($scope.cardId.toString()).get().then(
                         function (res) {
                             $scope.compare = res;
@@ -257,7 +282,7 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
 
                 Restangular.service('parishes').one('active').get().then(function (parish) {
                     $scope.parish = parish;
-                })
+                });
 
             }; // end of init
 
