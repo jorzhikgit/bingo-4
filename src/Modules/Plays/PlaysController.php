@@ -4,7 +4,6 @@ namespace SedpMis\Bingo\Modules\Plays;
 
 use Illuminate\Filesystem\Filesystem as File;
 use SedpMis\Bingo\Models\NumberPicker;
-use SedpMis\Bingo\Models\WinningPattern;
 use SedpMis\Bingo\Models\Play;
 use SedpMis\Bingo\Models\Card;
 use SedpMis\Bingo\Models\Parish;

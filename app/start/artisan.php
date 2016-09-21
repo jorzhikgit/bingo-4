@@ -14,4 +14,3 @@
 Artisan::resolve('SedpMis\Bingo\Commands\BingoMakeCardsCommand');
 Artisan::resolve('SedpMis\Bingo\Commands\BingoDumpCardsCommand');
 Artisan::resolve('SedpMis\Bingo\Commands\BingoLoadCardsCommand');
-Artisan::resolve('SedpMis\Bingo\Commands\BingoWinningPatternsCommand');

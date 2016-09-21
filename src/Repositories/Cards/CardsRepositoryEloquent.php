@@ -3,7 +3,6 @@
 namespace SedpMis\Bingo\Repositories\Cards;
 
 use SedpMis\Bingo\Models\Parish;
-use SedpMis\Bingo\Models\WinningPattern;
 use SedpMis\Bingo\Models\Card;
 use Illuminate\Support\Facades\DB;
 
