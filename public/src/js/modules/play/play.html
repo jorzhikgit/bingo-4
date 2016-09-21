@@ -306,7 +306,7 @@
                                 No. of Winners 
                                 &nbsp;
                                 <span>
-                                    <a href="" ng-show="winners.length" ng-click="showWinners = !showWinners" title="Show Winners">
+                                    <a href="" ng-show="winners.length" ng-click="showWinners()" title="Show Winners">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </span>
@@ -315,7 +315,7 @@
                                     {{winners.length}}
                                 </span>
                             </h3>
-                            <div ng-show="showWinners" class="row">
+                            <div ng-show="vars.showWinners" class="row">
                                 <div class="col-xs-12">
                                     <h3>
                                         Winner/s : 
