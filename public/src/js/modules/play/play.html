@@ -274,14 +274,14 @@
                                 
                                 <table id="drawed-numbers" width="100%" border="1">
                                     <thead>
-                                        <th ng-repeat="column in ['S', 'E', 'D', 'P', 'I']"
+                                        <th ng-repeat="column in ['D', 'C', 'O', 'L', 'V']"
                                             width="20%"
                                             ng-class="{
-                                                'bg-blue': column == 'S',
-                                                'bg-green': column == 'E',
-                                                'bg-yellow': column == 'D',
-                                                'bg-orange': column == 'P',
-                                                'bg-purple': column == 'I',
+                                                'bg-blue': column == 'D',
+                                                'bg-green': column == 'C',
+                                                'bg-yellow': column == 'O',
+                                                'bg-orange': column == 'L',
+                                                'bg-purple': column == 'V',
                                             }"
                                             style="font-size: 40px;"
                                             >
@@ -290,7 +290,7 @@
                                     </thead>
                                     <tbody style="">
                                         <tr ng-repeat="number in range(1, 15)">
-                                            <td ng-repeat="column in ['S', 'E', 'D', 'P', 'I']"
+                                            <td ng-repeat="column in ['D', 'C', 'O', 'L', 'V']"
                                                 ng-class="{
                                                     'drawn-number': isDrawn(parseInt(number) + columnStart(column)),
                                                 }">

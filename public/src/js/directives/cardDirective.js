@@ -30,11 +30,11 @@ define([
 
                     if (!scope.letters) {
                         scope.letters = {
-                            b: ["S"],
-                            i: ["E"],
-                            n: ["D"],
-                            g: ["P"],
-                            o: ["I", "nc."]
+                            b: ["D"],
+                            i: ["C"],
+                            n: ["O"],
+                            g: ["L"],
+                            o: ["V"]
                         };
                     }
 
