@@ -22,7 +22,7 @@ class ParishesTableSeeder extends Seeder
                 'date'               => '2016-12-25',
                 'no_of_members'      => '0',
                 'additional_members' => '0',
-                'card_ranges'        => '1-100000',
+                'card_ranges'        => '1-1000',
                 'is_active'          => 1
             ],
         ];
