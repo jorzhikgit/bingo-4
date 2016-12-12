@@ -249,11 +249,11 @@ define(['app', 'angular', 'underscore'], function(app, angular, _)
 
                 $scope.columnStart = function (column) {
                     var starts = {
-                        S: 0,
-                        E: 15,
-                        D: 30,
-                        P: 45,
-                        I: 60,
+                        D: 0,
+                        C: 15,
+                        O: 30,
+                        L: 45,
+                        V: 60,
                     };
 
                     return starts[column]
