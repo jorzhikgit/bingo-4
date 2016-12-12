@@ -51,11 +51,11 @@ function format_number_column($column)
     $column = is_numeric($column) ? number_column($column) : $column;
 
     $columns = [
-        'b' => 'S',
-        'i' => 'E',
-        'n' => 'D',
-        'g' => 'P',
-        'o' => 'I'
+        'b' => 'D',
+        'i' => 'C',
+        'n' => 'O',
+        'g' => 'L',
+        'o' => 'V'
     ];
 
     return $columns[$column];
