@@ -6,6 +6,7 @@ class DatabaseSeeder extends Seeder {
 		'users',
 		'plays',
 		'patterns',
+		'parishes',
 	];
 
 	/**
