@@ -47,6 +47,15 @@
         padding: 0 2px 0 0 !important;
     }
 
+
+    table td.powered-by {
+        font-weight: normal;
+        font-size: 12px !important;
+        height: 15px !important;
+        text-align: left !important;
+        padding: 0 2px 0 0 !important;
+    }
+
     .bg-yellow {
       background-color: #e0cf04 !important;
     }
@@ -119,6 +128,9 @@
             <td ng-class="{ 'bg-red': selected.g[4] }">{{numbers.g[4]}}</td>
             <td ng-class="{ 'bg-red': selected.o[4] }">{{numbers.o[4]}}</td>
         </tr>
-        <tr ng-show="numbers.id"><td class="card-number align-right" colspan="5"><small>Card #: </small><strong>{{numbers.id}}</strong></td></tr>
+        <tr ng-show="numbers.id">
+            <td class="powered-by align-left" colspan="3">SEDP-MIS © 2016</td>
+            <td class="card-number align-right" colspan="2"><small>Card #: </small><strong>{{numbers.id}}</strong></td>
+            </tr>
     </tbody>
 </table>
